@@ -5,9 +5,9 @@ const port = 3001;
 
 app.use(express.static(__dirname + '/../client/dist'));
 
-// app.get('/', (req, res) => {
-//   res.send('Hello world');
-// });
+app.get('/', (req, res) => {
+  //code
+});
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
