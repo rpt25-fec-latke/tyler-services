@@ -1,5 +1,7 @@
 DROP DATABASE IF EXISTS review_data;
 
+CREATE DATABASE review_data;
+
 USE review_data;
 
 DROP TABLE IF EXISTS users;
@@ -20,7 +22,7 @@ CREATE TABLE reviews (
   id int NOT NULL AUTO_INCREMENT,
   userId int NOT NULL,
   gameId int NOT NULL,
-  reviewText varchar(255) NOT NULL,
+  reviewText varchar(1000) NOT NULL,
   isRecommended boolean NOT NULL,
   commentCount int NOT NULL,
   isHelpfulCount int NOT NULL,
@@ -52,7 +54,7 @@ CREATE TABLE reviews (
   isPurchasedViaSteamKey boolean NOT NULL,
   isActivatedViaSteamKey boolean NOT NULL,
   userHoursOnRecordAtTimeOfReview float(10, 1) NOT NULL,
-  reviewLanguage varchar (50) NOT NULL,
+  reviewLanguage varchar (25) NOT NULL,
   reviewDate datetime NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (userId) REFERENCES users (id)
