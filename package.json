@@ -12,7 +12,8 @@
     "dev-server": "webpack serve --mode development --port 3001",
     "react-dev": "webpack --watch",
     "db-setup": "mysql -u root < schema.sql",
-    "seed": "node ./seedingscript.js"
+    "seed": "node ./seedingscript.js",
+    "test": "jest"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
@@ -31,6 +32,9 @@
     "webpack-dev-server": "^3.11.2"
   },
   "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "jest": "^26.6.3",
     "webpack": "^5.14.0",
     "webpack-cli": "^4.3.1"
   }
