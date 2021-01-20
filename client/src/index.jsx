@@ -14,15 +14,12 @@ class App extends React.Component {
   componentDidMount() {
     $.ajax({
       method: 'GET',
-      url: '/reviews',
-      data: {
-        gameId: this.state.currentGameId
-      },
+      url: `/reviews?id=${this.state.currentGameId}`,
       success: (data) => {
+        console.log(data);
         this.setState({
           reviews: data
         });
-        console.log(this.state);
       },
       error: (err) => {
         console.log(err);

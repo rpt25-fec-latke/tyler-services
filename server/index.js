@@ -9,7 +9,11 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/reviews', (req, res) => {
 
-  let gameId = req.query.gameId;
+  let gameId = req.query.id;
+
+  if (gameId < 1 || gameId > 100) {
+    res.status(500);
+  }
 
   db.getAllReviewsForAGame(gameId, (err, data) => {
     if (err) {
