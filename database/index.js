@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
 });
 
 let getAllReviewsForAGame = (gameId, cb) => {
-  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.id WHERE reviews.gameId = ${gameId};`, (err, data) => {
+  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId};`, (err, data) => {
     if (err) {
       cb(err, null);
     } else {
