@@ -28,8 +28,6 @@ app.get('/review_counts', (req, res) => {
 
   let gameId = req.query.id;
 
-  console.log(gameId);
-
   if (gameId < 1 || gameId > 100) {
     res.status(500);
   }

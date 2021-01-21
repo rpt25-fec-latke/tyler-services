@@ -30,8 +30,6 @@ describe('API Endpoints', () => {
   it('Should return a status code of 500 when the query parameter ID is an out of bounds ID for endpoint \'/review_counts\'', async (done) => {
     let res = await request.get('/review_counts?id=150');
 
-    console.log(res);
-
     expect(res.status).toBe(500);
     done();
   });
