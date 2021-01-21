@@ -1,7 +1,6 @@
 var path = require('path');
 var SRC_DIR = path.join(__dirname, '/client/src');
 var DIST_DIR = path.join(__dirname, '/client/dist');
-
 module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
   output: {
@@ -13,8 +12,23 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
+        loader: 'babel-loader'
+        options: {
+          presets: [
+            '@babel/preset-env',
+            '@babel/preset-react'
+          ],
+          plugins: [
+            '@babel/plugin-transform-runtime',
+            {
+              "absoluteRuntime": false,
+              "corejs": false,
+              "helpers": true,
+              "regenerator": true,
+              "useESModules": false,
+              "version": "7.0.0-beta.0"
+            }
+          ]
         }
       }
     ],

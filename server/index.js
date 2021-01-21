@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const port = 3001;
 const db = require('../database');
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -15,7 +14,7 @@ app.get('/reviews', (req, res) => {
     res.status(500);
   }
 
-  db.getAllReviewsForAGame(gameId, (err, data) => {
+  db.getAllReviewsForGame(gameId, (err, data) => {
     if (err) {
       res.send(`Error getting reviews for game ${gameId}`, err);
     } else {
@@ -25,6 +24,24 @@ app.get('/reviews', (req, res) => {
 
 });
 
-app.listen(port, () => {
-  console.log(`Listening on ${port}`);
+app.get('/review_counts', (req, res) => {
+
+  let gameId = req.query.id;
+
+  console.log(gameId);
+
+  if (gameId < 1 || gameId > 100) {
+    res.status(500);
+  }
+
+  db.getReviewStatsForGame(gameId, (err, data) => {
+    if (err) {
+      res.send(`Error getting review stats for game ${gameId}`, err);
+    } else {
+      res.send(data);
+    }
+  });
+
 });
+
+module.exports = app;
