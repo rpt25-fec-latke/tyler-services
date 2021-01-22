@@ -14,11 +14,31 @@ app.get('/reviews', (req, res) => {
     res.status(500);
   }
 
+  let responseData = {};
+
   db.getAllReviewsForGame(gameId, (err, data) => {
     if (err) {
-      res.send(`Error getting reviews for game ${gameId}`, err);
+      console.log(err);
+      res.send(`Error getting all reviews for game ${gameId}`, err);
     } else {
-      res.send(data);
+      responseData.allReviews = data;
+      db.getTopTenMostHelpfulLastThirtyDays(gameId, (err, data) => {
+        if (err) {
+          console.log(err);
+          res.send(`Error getting top 10 most help last 30 days for game ${gameId}`);
+        } else {
+          responseData.mostHelpfulLastThirty = data;
+          db.getTenMostRecentLastThirtyDays(gameId, (err, data) => {
+            if (err) {
+              console.log(err);
+              res.send(`Error getting top 10 most recent last 30 days for game ${gameId}`);
+            } else {
+              responseData.mostRecentLastThirty = data;
+              res.send(responseData);
+            }
+          });
+        }
+      });
     }
   });
 

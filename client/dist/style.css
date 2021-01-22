@@ -1,0 +1,11 @@
+.customer_review_header {
+  text-transform: uppercase
+}
+
+div {
+  border: 1px solid black
+}
+
+.reviews_breakdown {
+  display: flex;
+}

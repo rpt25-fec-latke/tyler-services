@@ -4,7 +4,9 @@
   "description": "",
   "jest": {
     "testEnvironment": "node",
-    "setupFilesAfterEnv": ["./tests/setup.js"]
+    "setupFilesAfterEnv": [
+      "./tests/setup.js"
+    ]
   },
   "author": "",
   "license": "",
@@ -31,6 +33,7 @@
     "mongoose": "^5.11.12",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
+    "path": "^0.12.7",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "webpack-dev-server": "^3.11.2"

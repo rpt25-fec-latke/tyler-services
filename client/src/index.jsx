@@ -30,7 +30,15 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <button>Submit</button>
+        <h2 className="customer_review_header">Customer Reviews</h2>
+        <div className="reviews_breakdown">
+          <div className="overall_reviews_summary">
+            Overall Reviews:
+          </div>
+          <div className="recent_reviews_summary">
+            Recent Reviews:
+          </div>
+        </div>
       </div>
     );
   }
