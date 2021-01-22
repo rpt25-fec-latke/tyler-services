@@ -13,6 +13,8 @@ CREATE TABLE users (
   reviewCount int NOT NULL,
   profilePictureUrl varchar(255) NOT NULL,
   hoursOnRecord float(10, 1) NOT NULL,
+  steamLevel int NOT NULL,
+  isOnline boolean NOT NULL,
   PRIMARY KEY (userId)
 );
 

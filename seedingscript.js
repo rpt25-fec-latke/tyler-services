@@ -75,7 +75,9 @@ let seedUsers = (numUsers) => {
       productsCount: Math.floor(Math.random() * 251),
       reviewCount: Math.floor(Math.random() * 71),
       profilePictureUrl: `'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/images+(${startingUserId}).jpeg'`,
-      hoursOnRecord: ((Math.random() * 100) + 5).toFixed(1)
+      hoursOnRecord: ((Math.random() * 100) + 5).toFixed(1),
+      steamLevel: Math.ceil(Math.random() * 1050),
+      isOnline: Math.floor(Math.random() * 11) > 5 ? true : false
     }
 
     userHoursOnRecord[startingUserId] = data.hoursOnRecord;
