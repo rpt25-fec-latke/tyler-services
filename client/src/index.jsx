@@ -7,8 +7,15 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentGameId: 1,
-      reviews: []
+      reviews: [],
+      totalReviews: 0,
+      totalReviewsLastThirty: 0,
+
     }
+  }
+
+  calculateReviewStats() {
+    //code
   }
 
   componentDidMount() {
@@ -16,10 +23,10 @@ class App extends React.Component {
       method: 'GET',
       url: `/reviews?id=${this.state.currentGameId}`,
       success: (data) => {
-        console.log(data);
         this.setState({
           reviews: data
         });
+        console.log(this.state);
       },
       error: (err) => {
         console.log(err);
@@ -29,14 +36,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="review_section">
         <h2 className="customer_review_header">Customer Reviews</h2>
         <div className="reviews_breakdown">
-          <div className="overall_reviews_summary">
-            Overall Reviews:
+          <div className="overall_reviews_summary">Overall Reviews:
+            <div>
+              1800
+            </div>
           </div>
-          <div className="recent_reviews_summary">
-            Recent Reviews:
+          <div className="recent_reviews_summary">Recent Reviews:
+          <div>
+            1900
+          </div>
           </div>
         </div>
       </div>
