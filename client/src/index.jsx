@@ -46,9 +46,6 @@ class App extends React.Component {
           </div>
           <div className="recent_reviews_summary">Recent Reviews:
           <div>
-            1900
-          </div>
-          </div>
         </div>
       </div>
     );
