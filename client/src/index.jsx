@@ -23,10 +23,10 @@ class App extends React.Component {
       method: 'GET',
       url: `/reviews?id=${this.state.currentGameId}`,
       success: (data) => {
+        console.log(data.reviews.allReviews);
         this.setState({
           reviews: data
         });
-        console.log(this.state);
       },
       error: (err) => {
         console.log(err);
