@@ -1,13 +1,21 @@
 body {
   background-color: #1b2837;
+  font-family: "Motiva Sans", Sans-serif;
+  color: white;
 }
 
-.review_section {
+div {
+  border: 1px solid lightblue;
+  padding: 5px;
+  margin: 5px;
+}
+
+.reviews_section {
   border-top: 1px solid black;
   margin-top: 0px;
 }
 
-.customer_review_header {
+.customer_reviews_header {
   font-family: "Motiva Sans", Sans-serif;
   text-transform: uppercase;
   font-size: 14px;
@@ -18,17 +26,10 @@ body {
   padding-top: 2px;
 }
 
-.reviews_breakdown {
-  border: 1px solid black;
-  display: flex;
-}
-
 .overall_reviews_summary {
-  border-right: 1px solid black;
   background-color: #2a475e;
 }
 
 .recent_reviews_summary {
-  border-left: 1px solid black;
   background-color: #416781;
 }
