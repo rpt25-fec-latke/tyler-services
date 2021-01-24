@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const db = require('../database');
+const stats = require('./reviewStatCalculations');
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(express.urlencoded({ extended: true }));
@@ -35,7 +36,16 @@ app.get('/reviews', (req, res) => {
               res.send(`Error getting top 10 most recent last 30 days for game ${gameId}`);
             } else {
               responseData.mostRecentLastThirty = data3;
-              res.send(responseData);
+              db.getReviewStatsForGame(gameId, (err4, data4) => {
+                if (err4) {
+                  res.send(`Error getting review stats for game ${gameId}`);
+                  console.log(err);
+                } else {
+                  const reviewStats = stats.calculateReviewStats(data4[0]);
+                  responseData.reviewStats = reviewStats;
+                  res.send(responseData);
+                }
+              });
             }
           });
         }

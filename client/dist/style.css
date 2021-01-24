@@ -33,3 +33,7 @@ div {
 .recent_reviews_summary {
   background-color: #416781;
 }
+
+#no-border {
+  border: hidden;
+}

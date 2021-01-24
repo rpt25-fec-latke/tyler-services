@@ -11,24 +11,27 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentGameId: 1,
-      reviews: [],
-      reviewStats: [],
+      currentGameId: 68,
+      reviews: {
+        reviewStats: {
+          overallRatingGroup: null,
+          recentRatingGroup: null,
+          totalReviewCount: 0,
+          totalRecentReviewCount: 0,
+        },
+      },
     };
-    this.calculateReviewStats = this.calculateReviewStats.bind(this);
   }
 
   componentDidMount() {
-    const { currentGameId } = this.state;
     $.ajax({
       method: 'GET',
-      url: `/reviews?id=${currentGameId}`,
+      url: `/reviews?id=${this.state.currentGameId}`,
       success: (data) => {
-        console.log(data);
-        const reviewStats = this.calculateReviewStats(data);
         this.setState({
           reviews: data,
         });
+        console.log(this.state);
       },
       error: (err) => {
         console.log(err);
@@ -36,19 +39,11 @@ class App extends React.Component {
     });
   }
 
-  calculateReviewStats(reviews) {
-    const reviewStats = [];
-    const { allReviews } = reviews;
-    const { mostRecentLastThirty } = reviews;
-    reviewStats.totalReviewCount = allReviews.length;
-    reviewStats.lastThirtyCount = 0;
-  }
-
   render() {
     return (
       <div className="reviews_section">
         <h2 className="customer_reviews_header">Customer Reviews</h2>
-        <ReviewsBreakdown />
+        <ReviewsBreakdown reviewStats={this.state.reviews.reviewStats} />
         <ReviewFilters />
         <HelpfulReviewList />
         <RecentReviewList />

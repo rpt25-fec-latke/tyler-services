@@ -1,23 +1,21 @@
 const mysql = require('mysql');
 const faker = require('faker');
 
-let db = mysql.createConnection({
+const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'review_data'
+  database: 'review_data',
 });
 
-let userHoursOnRecord = {};
-
+const userHoursOnRecord = {};
 
 //----------------------------------------
-//Helper functions
+// Helper functions
 //----------------------------------------
 
-
-let generateReleaseDates = (numGames) => {
-  let releaseDates = {};
+const generateReleaseDates = (numGames) => {
+  const releaseDates = {};
   let startingGameId = 1;
 
   while (startingGameId <= numGames) {
@@ -26,10 +24,10 @@ let generateReleaseDates = (numGames) => {
   }
 
   return releaseDates;
-}
+};
 
-let generateArrayOfUserIds = (numUsers) => {
-  let arrayOfUserIds = [];
+const generateArrayOfUserIds = (numUsers) => {
+  const arrayOfUserIds = [];
 
   while (numUsers > 0) {
     arrayOfUserIds.unshift(numUsers);
@@ -37,28 +35,23 @@ let generateArrayOfUserIds = (numUsers) => {
   }
 
   return arrayOfUserIds;
-}
+};
 
-let deleteAllFromTable = (tableName) => {
-
+const deleteAllFromTable = (tableName) => {
   db.query(`DELETE FROM ${tableName};`, (err) => {
     if (err) {
       console.log(`Error deleting all from table '${tableName}': `, err);
-      return;
+    } else {
+      console.log(`All rows from table ${tableName} successfully deleted`);
     }
   });
-  console.log(`All rows from table ${tableName} successfully deleted`);
-
-}
-
+};
 
 //----------------------------------------
-//Seeding functions
+// Seeding functions
 //----------------------------------------
 
-
-let seedUsers = (numUsers) => {
-
+const seedUsers = (numUsers) => {
   if (numUsers === 0) {
     console.log('No users to seed');
     return;
@@ -69,33 +62,30 @@ let seedUsers = (numUsers) => {
   let startingUserId = 1;
 
   while (startingUserId <= numUsers) {
-
-    let data = {
+    const data = {
       userName: `'${faker.internet.userName()}'`,
       productsCount: Math.floor(Math.random() * 251),
       reviewCount: Math.floor(Math.random() * 71),
       profilePictureUrl: `'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/images+(${startingUserId}).jpeg'`,
       hoursOnRecord: ((Math.random() * 100) + 5).toFixed(1),
       steamLevel: Math.ceil(Math.random() * 1050),
-      isOnline: Math.floor(Math.random() * 11) > 5 ? true : false
-    }
+      isOnline: Math.floor(Math.random() * 11) > 5,
+    };
 
     userHoursOnRecord[startingUserId] = data.hoursOnRecord;
 
     db.query(`INSERT INTO users (${Object.keys(data).join(', ')}) VALUES (${Object.values(data).join(', ')});`, (err) => {
       if (err) {
         console.log(`Error seeding user number ${startingUserId} into table 'users': `, err);
-        return;
       }
     });
     startingUserId++;
   }
 
   console.log(`All ${numUsers} users seeded successfully into 'users' table`);
-}
+};
 
-let seedReviews = (numGames, numUsers) => {
-
+const seedReviews = (numGames, numUsers) => {
   if (numGames === 0) {
     console.log('No games to seed for');
     return;
@@ -103,30 +93,28 @@ let seedReviews = (numGames, numUsers) => {
 
   deleteAllFromTable('reviews');
 
-  //have to generate release dates since don't have access to that data yet. When assemble to proxy, can query for it so that review dates don't precede release date of game
-  let releaseDates = generateReleaseDates(numGames);
-  let otherLanguages = ["'ZH'", "'ES'", "'AR'", "'HI'", "'BN'", "'PT'", "'RU'", "'JA'"];
+  // have to generate release dates since don't have access to that data yet. When assemble to proxy, can query for it so that review dates don't precede release date of game
+  const releaseDates = generateReleaseDates(numGames);
+  const otherLanguages = ["'ZH'", "'ES'", "'AR'", "'HI'", "'BN'", "'PT'", "'RU'", "'JA'"];
   let startingGameId = 1;
 
   while (startingGameId <= numGames) {
-
     let numReviews = Math.floor(Math.random() * 16);
-    let arrayOfUserIds = generateArrayOfUserIds(numUsers);
+    const arrayOfUserIds = generateArrayOfUserIds(numUsers);
 
     while (numReviews > 0) {
-
-      let userId = arrayOfUserIds[Math.floor(Math.random() * arrayOfUserIds.length)];
+      const userId = arrayOfUserIds[Math.floor(Math.random() * arrayOfUserIds.length)];
       arrayOfUserIds.splice(userId - 1, 1);
-      let date = faker.date.between(releaseDates[startingGameId], '2021-01-18');
-      let year = date.getFullYear();
-      let month = (date.getMonth() + 1).toString().length === 1 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
-      let day = (date.getDay() + 1).toString().length === 1 ? `0${date.getDay() + 1}` : date.getDay() + 1;
+      const date = faker.date.between(releaseDates[startingGameId], '2021-01-18');
+      const year = date.getFullYear();
+      const month = (date.getMonth() + 1).toString().length === 1 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+      const day = (date.getDay() + 1).toString().length === 1 ? `0${date.getDay() + 1}` : date.getDay() + 1;
 
-      let data = {
+      const data = {
         userId: userId,
         gameId: startingGameId,
-        reviewText: Math.floor(Math.random() * 11) > 5 ? "'" + faker.lorem.paragraphs() + "'" : "'" + faker.lorem.paragraph() + "'",
-        isRecommended: Math.floor(Math.random() * 11) > 5 ? true : false,
+        reviewText: Math.floor(Math.random() * 11) > 5 ? `'${faker.lorem.paragraphs()}'` : `'${faker.lorem.paragraph()}'`,
+        isRecommended: Math.floor(Math.random() * 11) > 5,
         commentCount: Math.floor(Math.random() * 11),
         isHelpfulCount: Math.floor(Math.random() * 11),
         isFunnyCount: Math.floor(Math.random() * 11),
@@ -153,18 +141,17 @@ let seedReviews = (numGames, numUsers) => {
         gottaHaveItAwardCount: Math.floor(Math.random() * 6),
         michelangeloAwardCount: Math.floor(Math.random() * 6),
         madScinetistAwardCount: Math.floor(Math.random() * 6),
-        isEarlyAccessReview: Math.floor(Math.random() * 11) > 5 ? true : false,
-        isPurchasedViaSteamKey: Math.floor(Math.random() * 11) > 5 ? true : false,
-        isActivatedViaSteamKey: Math.floor(Math.random() * 11) > 5 ? true : false,
+        isEarlyAccessReview: Math.floor(Math.random() * 11) > 5,
+        isPurchasedViaSteamKey: Math.floor(Math.random() * 11) > 5,
+        isActivatedViaSteamKey: Math.floor(Math.random() * 11) > 5,
         userHoursOnRecordAtTimeOfReview: (Math.random() * userHoursOnRecord[userId]).toFixed(1),
         reviewLanguage: Math.floor(Math.random() * 11) > 8 ? otherLanguages[Math.floor(Math.random() * otherLanguages.length)] : "'EN'",
         reviewDate: `'${year}-${month}-${day} 00:00:00'`,
-      }
+      };
 
       db.query(`INSERT INTO reviews (${Object.keys(data).join(', ')}) VALUES (${Object.values(data).join(', ')});`, (err) => {
         if (err) {
           console.log(`Error seeding review for gameId ${startingGameId} into table 'reviews': `, err);
-          return;
         }
       });
       numReviews--;
@@ -173,15 +160,13 @@ let seedReviews = (numGames, numUsers) => {
   }
 
   console.log(`Reviews for all ${numGames}  seeded successfully into 'reviews' table`);
-}
-
+};
 
 //----------------------------------------
-//Actual seeding
+// Actual seeding
 //----------------------------------------
 
-
-let seedDatabase = () => {
+const seedDatabase = () => {
   seedUsers(252);
   seedReviews(100, 252);
 };

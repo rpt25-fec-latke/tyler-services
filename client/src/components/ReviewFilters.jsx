@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReviewFilters = () => (
+const ReviewFilters = (props) => (
   <div className="review_filters">
     <span>Filters Section</span>
   </div>
