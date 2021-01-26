@@ -19,14 +19,19 @@ const calculateRatingGroup = (percentPositive) => {
 const calculateReviewStats = (initialReviewStats) => {
   const reviewStats = {};
 
+  const total = initialReviewStats.totalReviewCount;
+  const totalPositive = initialReviewStats.totalPositiveReviewCount;
+  const totalRecent = initialReviewStats.totalRecentReviewCount;
+  const totalPositiveRecent = initialReviewStats.totalPositiveRecentReviewCount;
+
   const hasOverallReviews = initialReviewStats.totalReviewCount > 0;
   const hasRecentReviews = initialReviewStats.totalRecentReviewCount > 0;
 
   let percentPositiveOverall;
   let percentPositiveRecent;
 
-  hasOverallReviews ? percentPositiveOverall = (initialReviewStats.totalPositiveReviewCount / initialReviewStats.totalReviewCount).toFixed(2) : percentPositiveOverall = null;
-  hasRecentReviews ? percentPositiveRecent = (initialReviewStats.totalPositiveRecentReviewCount / initialReviewStats.totalRecentReviewCount).toFixed(2) : percentPositiveRecent = null;
+  hasOverallReviews ? percentPositiveOverall = (totalPositive / total).toFixed(2) : percentPositiveOverall = null;
+  hasRecentReviews ? percentPositiveRecent = (totalPositiveRecent / totalRecent).toFixed(2) : percentPositiveRecent = null;
 
   let overallRatingGroup;
   let recentRatingGroup;
@@ -34,10 +39,10 @@ const calculateReviewStats = (initialReviewStats) => {
   hasOverallReviews ? overallRatingGroup = calculateRatingGroup(percentPositiveOverall) : overallRatingGroup = null;
   hasRecentReviews ? recentRatingGroup = calculateRatingGroup(percentPositiveRecent) : recentRatingGroup = null;
 
-  reviewStats.totalReviewCount = initialReviewStats.totalReviewCount;
-  reviewStats.totalPositiveReviewCount = initialReviewStats.totalPositiveReviewCount;
-  reviewStats.totalRecentReviewCount = initialReviewStats.totalRecentReviewCount;
-  reviewStats.totalPositiveRecentReviewCount = initialReviewStats.totalPositiveRecentReviewCount;
+  reviewStats.totalReviewCount = total;
+  reviewStats.totalPositiveReviewCount = totalPositive;
+  reviewStats.totalRecentReviewCount = totalRecent;
+  reviewStats.totalPositiveRecentReviewCount = totalPositiveRecent;
   reviewStats.percentPositiveOverall = percentPositiveOverall;
   reviewStats.overallRatingGroup = overallRatingGroup;
   reviewStats.percentPositiveRecent = percentPositiveRecent;

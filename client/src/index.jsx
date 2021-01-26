@@ -7,7 +7,7 @@ import ReviewFilters from './components/ReviewFilters.jsx';
 import HelpfulReviewList from './components/HelpfulReviewList.jsx';
 import RecentReviewList from './components/RecentReviewList.jsx';
 
-class App extends React.Component {
+class CustomerReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,16 +40,25 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div className="reviews_section">
-        <h2 className="customer_reviews_header">Customer Reviews</h2>
-        <ReviewsBreakdown reviewStats={this.state.reviews.reviewStats} />
-        <ReviewFilters />
-        <HelpfulReviewList />
-        <RecentReviewList />
-      </div>
-    );
+    if (this.state.reviews.allReviews) {
+      return (
+        <div className="reviews_section">
+          <h2 className="customer_reviews_header">Customer Reviews</h2>
+          <ReviewsBreakdown reviewStats={this.state.reviews.reviewStats} />
+          <ReviewFilters />
+          <HelpfulReviewList />
+          <RecentReviewList />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div>Loading...</div>
+          <img src="https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/loading.gif" alt="loading gif"></img>
+        </div>
+      );
+    }
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<CustomerReviews />, document.getElementById('app'));
