@@ -7,19 +7,21 @@ USE review_data;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
-  id int NOT NULL AUTO_INCREMENT,
+  userId int NOT NULL AUTO_INCREMENT,
   userName varchar(100) NOT NULL,
   productsCount int NOT NULL,
   reviewCount int NOT NULL,
   profilePictureUrl varchar(255) NOT NULL,
   hoursOnRecord float(10, 1) NOT NULL,
-  PRIMARY KEY (id)
+  steamLevel int NOT NULL,
+  isOnline boolean NOT NULL,
+  PRIMARY KEY (userId)
 );
 
 DROP TABLE IF EXISTS reviews;
 
 CREATE TABLE reviews (
-  id int NOT NULL AUTO_INCREMENT,
+  reviewId int NOT NULL AUTO_INCREMENT,
   userId int NOT NULL,
   gameId int NOT NULL,
   reviewText varchar(1000) NOT NULL,
@@ -56,6 +58,6 @@ CREATE TABLE reviews (
   userHoursOnRecordAtTimeOfReview float(10, 1) NOT NULL,
   reviewLanguage varchar (25) NOT NULL,
   reviewDate datetime NOT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (userId) REFERENCES users (id)
+  PRIMARY KEY (reviewId),
+  FOREIGN KEY (userId) REFERENCES users (userId)
 );

@@ -1,0 +1,19 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "no-console": "off",
+    "no-undef": "off",
+    "no-plusplus": "off",
+    "no-unused-vars": "off",
+    "react/no-unused-state": "off",
+    "class-methods-use-this": "off",
+    "react/self-closing-comp": "off",
+    "import/extensions": "off",
+    "react/destructuring-assignment": "off",
+    "max-len": "off",
+    "no-loop-func": "off",
+    "no-param-reassign": "off",
+    "object-shorthand": "off",
+    "no-unused-expressions": "off"
+  }
+}
