@@ -8,7 +8,6 @@ describe('API Endpoints', () => {
     const res = await request.get('/reviews?id=1');
 
     expect(res.status).toBe(200);
-    expect(res.body.allReviews.length).toBeGreaterThan(0);
     done();
   });
 
@@ -16,6 +15,24 @@ describe('API Endpoints', () => {
     const res = await request.get('/reviews?id=150');
 
     expect(res.status).toBe(500);
+    done();
+  });
+
+  it('Should respond with 4 properties each related to review data after a request is sent to the \'/reviews\' endpoint for a valid id', async (done) => {
+    const res = await request.get('/reviews?id=1');
+
+    expect(res.body).toBeDefined();
+    expect(res.body.mostHelpfulLastThirty).toBeDefined();
+    expect(res.body.mostRecentLastThirty).toBeDefined();
+    expect(res.body.allReviews).toBeDefined();
+    expect(res.body.reviewStats).toBeDefined();
+    done();
+  });
+
+  it('Should respond with a correct review rating group after a request is sent to the \'/reviews\' endpoint for a valid id', async (done) => {
+    const res = await request.get('/reviews?id=50');
+
+    expect(res.body.reviewStats.overallRatingGroup).toBeDefined();
     done();
   });
 
