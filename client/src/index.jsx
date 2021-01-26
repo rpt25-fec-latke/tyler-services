@@ -11,15 +11,8 @@ class CustomerReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentGameId: 68,
-      reviews: {
-        reviewStats: {
-          overallRatingGroup: null,
-          recentRatingGroup: null,
-          totalReviewCount: 0,
-          totalRecentReviewCount: 0,
-        },
-      },
+      currentGameId: 3,
+      reviews: {},
     };
   }
 

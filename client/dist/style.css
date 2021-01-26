@@ -34,6 +34,85 @@ div {
   background-color: #416781;
 }
 
-#no-border {
+#no_border {
   border: hidden;
+}
+
+.overall_reviews_title {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.recent_reviews_title {
+  margin-left: 0px;
+  padding-left: 0px;
+}
+
+.rating_group {
+  cursor: help;
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 9px;
+  text-shadow: 1px 1px rgba( 0, 0, 0, 0.2 );
+  color: #929396;
+  cursor: help;
+}
+
+#overwhelmingly_positive, #very_positive, #mostly_positive {
+  color: #66C0F4;
+}
+
+#mixed {
+  color: #a8926a;
+}
+
+#overwhelmingly_negative, #very_negative, #mostly_negative {
+  color: #c35c2c;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 275px;
+  height: auto;
+  width: max-content;
+  max-width: 275px;
+  padding: 5px;
+  left: 2px;
+  bottom: 25px;
+  background-color:#c2c2c2;
+  color: #3d3d3f;
+  box-shadow: 0 0 5px #000;
+  opacity: 0;
+  position: absolute;
+  z-index: 1500;
+  pointer-events: auto;
+  font-size: 11px;
+  text-shadow: none;
+  font-weight: normal;
+  border-radius: 3px;
+  white-space: normal;
+  transition: opacity .5s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.review_count {
+  color: rgb(139, 166, 182);
+  font-family: Arial, Helvetica, sans-serif ;
+  font-size: 12px;
+}
+
+.recent_reviews_title, .overall_reviews_title {
+  color: rgb(229, 229, 229);
+  font-family: "Motiva Sans", sans-serif;
+  font-size: 15px;
+  font-weight: normal;
 }

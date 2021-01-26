@@ -99,7 +99,7 @@ const seedReviews = (numGames, numUsers) => {
   let startingGameId = 1;
 
   while (startingGameId <= numGames) {
-    let numReviews = Math.floor(Math.random() * 16);
+    let numReviews = Math.floor(Math.random() * 51);
     const arrayOfUserIds = generateArrayOfUserIds(numUsers);
 
     while (numReviews > 0) {

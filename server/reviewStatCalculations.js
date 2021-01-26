@@ -1,16 +1,20 @@
 const calculateRatingGroup = (percentPositive) => {
-  let ratingGroup = '';
+  let ratingGroup;
 
-  if (percentPositive > 0.8 && percentPositive <= 1) {
+  if (percentPositive > 0.9 && percentPositive <= 1) {
+    ratingGroup = 'Overwhelmingly Positive';
+  } else if (percentPositive > 0.8 && percentPositive < 0.9) {
     ratingGroup = 'Very Positive';
-  } else if (percentPositive > 0.6 && percentPositive < 0.8) {
+  } else if (percentPositive > 0.65 && percentPositive < 0.8) {
     ratingGroup = 'Mostly Positive';
-  } else if (percentPositive > 0.4 && percentPositive < 0.6) {
+  } else if (percentPositive > 0.35 && percentPositive < 0.65) {
     ratingGroup = 'Mixed';
-  } else if (percentPositive > 0.2 && percentPositive < 0.4) {
+  } else if (percentPositive > 0.2 && percentPositive < 0.35) {
     ratingGroup = 'Mostly Negative';
-  } else if (percentPositive >= 0 && percentPositive < 0.2) {
+  } else if (percentPositive > 0.1 && percentPositive < 0.2) {
     ratingGroup = 'Very Negative';
+  } else if (percentPositive >= 0 && percentPositive < 0.1) {
+    ratingGroup = 'Overwhelmingly Negative';
   }
 
   return ratingGroup;
@@ -47,6 +51,23 @@ const calculateReviewStats = (initialReviewStats) => {
   reviewStats.overallRatingGroup = overallRatingGroup;
   reviewStats.percentPositiveRecent = percentPositiveRecent;
   reviewStats.recentRatingGroup = recentRatingGroup;
+
+  reviewStats.enoughTotalReviews = total >= 1;
+  reviewStats.enoughRecentReviews = totalRecent >= 1;
+
+  const notEnoughReviewsMessage = 'Need more user reviews to generate a score';
+
+  if (reviewStats.enoughTotalReviews) {
+    reviewStats.overallReviewsRatingGroupHoverMessage = `${reviewStats.percentPositiveOverall * 100}% of the ${reviewStats.totalReviewCount.toLocaleString()} user reviews for this game are positive.`;
+  } else {
+    reviewStats.overallReviewsRatingGroupHoverMessage = notEnoughReviewsMessage;
+  }
+
+  if (reviewStats.enoughRecentReviews) {
+    reviewStats.recentReviewsRatingGroupHoverMessage = `${reviewStats.percentPositiveRecent * 100}% of the ${reviewStats.totalRecentReviewCount.toLocaleString()} user reviews for this game are positive.`;
+  } else {
+    reviewStats.recentReviewsRatingGroupHoverMessage = notEnoughReviewsMessage;
+  }
 
   return reviewStats;
 };
