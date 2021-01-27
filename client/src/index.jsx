@@ -1,17 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import styled from 'styled-components';
 
 import ReviewsBreakdown from './components/ReviewsBreakdown.jsx';
 import ReviewFilters from './components/ReviewFilters.jsx';
 import HelpfulReviewList from './components/HelpfulReviewList.jsx';
 import RecentReviewList from './components/RecentReviewList.jsx';
 
+const Reviews = styled.div`
+  border-top: 1px solid black;
+  margin-top: 0px;
+`;
+
+const ReviewsTitle = styled.h2`
+  font-family: "Motiva Sans", Sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin: 0 0 10px;
+  color: white;
+  letter-spacing: 2px;
+  font-weight: normal;
+  padding-top: 2px;
+`;
+
 class CustomerReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentGameId: 3,
+      currentGameId: 1,
       reviews: {},
     };
   }
@@ -19,9 +36,8 @@ class CustomerReviews extends React.Component {
   componentDidMount() {
     $.ajax({
       method: 'GET',
-      url: `/reviews?id=${this.state.currentGameId}`,
+      url: `http://localhost:3000/?id=${this.state.currentGameId}`,
       success: (data) => {
-        console.log(data);
         this.setState({
           reviews: data,
         });
@@ -34,14 +50,15 @@ class CustomerReviews extends React.Component {
 
   render() {
     if (this.state.reviews.allReviews) {
+      const { reviews } = this.state;
       return (
-        <div className="reviews_section">
-          <h2 className="customer_reviews_header">Customer Reviews</h2>
-          <ReviewsBreakdown reviewStats={this.state.reviews.reviewStats} />
+        <Reviews>
+          <ReviewsTitle>Customer Reviews</ReviewsTitle>
+          <ReviewsBreakdown reviewStats={reviews.reviewStats} totalType={reviews.reviewStats.overallRatingGroup.type} recentType={reviews.reviewStats.recentRatingGroup.type} />
           <ReviewFilters />
           <HelpfulReviewList />
           <RecentReviewList />
-        </div>
+        </Reviews>
       );
     } else {
       return (
@@ -54,4 +71,4 @@ class CustomerReviews extends React.Component {
   }
 }
 
-ReactDOM.render(<CustomerReviews />, document.getElementById('app'));
+ReactDOM.render(<CustomerReviews />, document.getElementById('customerReviews'));

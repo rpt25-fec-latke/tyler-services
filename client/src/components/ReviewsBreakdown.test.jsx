@@ -26,8 +26,8 @@ describe('ReviewsBreakdown component', () => {
     expect(component.find('.review_count#total').text()).toEqual(' (149 reviews) ');
     expect(component.find('.review_count#recent').text()).toEqual(' (0 reviews) ');
 
-    component.find('#total_rating').simulate('mouseover');
-    component.find('#total rating').prop('style').toHaveProperty('opacity', '1');
+    component.find('.total_rating_group').simulate('mouseover');
+    expect(component.find('.total_rating_group').prop('style')).toHaveProperty('opacity', '1');
   });
 });
 

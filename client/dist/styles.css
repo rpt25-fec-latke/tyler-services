@@ -48,7 +48,7 @@ div {
   padding-left: 0px;
 }
 
-.rating_group {
+.recent_rating_group, .total_rating_group {
   cursor: help;
   font-weight: bold;
   font-size: 17px;
