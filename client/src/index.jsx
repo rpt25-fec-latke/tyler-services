@@ -4,7 +4,7 @@ import $ from 'jquery';
 import styled from 'styled-components';
 
 import ReviewsBreakdown from './components/ReviewsBreakdown/ReviewsBreakdown.jsx';
-import ReviewFilters from './components/ReviewFilters.jsx';
+import ReviewFilters from './components/ReviewFilters/ReviewFilters.jsx';
 import HelpfulReviewList from './components/HelpfulReviewList.jsx';
 import RecentReviewList from './components/RecentReviewList.jsx';
 
@@ -36,9 +36,17 @@ class CustomerReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentGameId: 23,
+      currentGameId: 12,
       reviews: {},
+      reviewDisplayStatus: 'default',
+      reviewFilters: {
+        type: 'all',
+        language: 'EN',
+      },
     };
+    this.updateRatingTypeFilters = this.updateRatingTypeFilters.bind(this);
+    this.updatePurchaseTypeFilters = this.updatePurchaseTypeFilters.bind(this);
+    this.updateLanguageTypeFilters = this.updateLanguageTypeFilters.bind(this);
   }
 
   componentDidMount() {
@@ -46,7 +54,7 @@ class CustomerReviews extends React.Component {
       method: 'GET',
       url: `http://localhost:3000/?id=${this.state.currentGameId}`,
       success: (data) => {
-        console.log(data.reviewStats);
+        console.log(data);
         this.setState({
           reviews: data,
         });
@@ -57,6 +65,18 @@ class CustomerReviews extends React.Component {
     });
   }
 
+  updateRatingTypeFilters(e) {
+    console.log(e.target.value);
+  }
+
+  updatePurchaseTypeFilters(e) {
+    console.log(e.target.value);
+  }
+
+  updateLanguageTypeFilters(e) {
+    console.log(e.target.value);
+  }
+
   render() {
     if (this.state.reviews.allReviews) {
       const { reviews } = this.state;
@@ -64,7 +84,7 @@ class CustomerReviews extends React.Component {
         <Reviews>
           <ReviewsTitle>Customer Reviews</ReviewsTitle>
           <ReviewsBreakdown reviewStats={reviews.reviewStats} totalType={reviews.reviewStats.overallRatingGroup.type} recentType={reviews.reviewStats.recentRatingGroup.type} />
-          <ReviewFilters />
+          <ReviewFilters reviewStats={reviews.reviewStats} updateRatingTypeFilters={this.updateRatingTypeFilters} updatePurchaseTypeFilters={this.updatePurchaseTypeFilters} updateLanguageTypeFilters={this.updateLanguageTypeFilters} />
           <HelpfulReviewList />
           <RecentReviewList />
         </Reviews>

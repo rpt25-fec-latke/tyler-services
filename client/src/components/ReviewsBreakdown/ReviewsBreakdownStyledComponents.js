@@ -7,6 +7,7 @@ const OverallReviews = styled.div`
   border-bottom-color: rgb(0, 0, 0);
   border-bottom-style: solid;
   border-bottom-width: 1px;
+  width: 585px;
 `;
 
 const RecentReviews = styled.div`
@@ -16,6 +17,7 @@ const RecentReviews = styled.div`
   border-bottom-color: rgb(0, 0, 0);
   border-bottom-style: solid;
   border-bottom-width: 1px;
+  width: 320px;
 `;
 
 const SectionTitle = styled.div`

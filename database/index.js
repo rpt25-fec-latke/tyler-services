@@ -38,7 +38,7 @@ const getTenMostRecentLastThirtyDays = (gameId, cb) => {
 };
 
 const getReviewStatsForGame = (gameId, cb) => {
-  connection.query(`SELECT COUNT(reviewId) AS 'totalReviewCount', COUNT(CASE WHEN isRecommended = 1 THEN reviewId END) AS 'totalPositiveReviewCount', COUNT(CASE WHEN reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) THEN reviewId END) AS 'totalRecentReviewCount', COUNT(CASE WHEN reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) AND isRecommended = 1 THEN reviewId END) AS 'totalPositiveRecentReviewCount' FROM reviews WHERE gameId = ${gameId};`, (err, data) => {
+  connection.query(`SELECT COUNT(reviewId) AS 'totalReviewCount', COUNT(CASE WHEN isRecommended = 1 THEN reviewId END) AS 'totalPositiveReviewCount', COUNT(CASE WHEN reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) THEN reviewId END) AS 'totalRecentReviewCount', COUNT(CASE WHEN reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) AND isRecommended = 1 THEN reviewId END) AS 'totalPositiveRecentReviewCount', COUNT(CASE WHEN isPurchasedOrActivatedViaSteamFlags = 'purchased' THEN isPurchasedOrActivatedViaSteamFlags END) AS 'isPurchasedViaSteamCount', COUNT(CASE WHEN reviewLanguage = 'EN' THEN reviewLanguage END) AS 'englishLanguageReviewCount' FROM reviews WHERE gameId = ${gameId};`, (err, data) => {
     if (err) {
       cb(err, null);
     } else {
