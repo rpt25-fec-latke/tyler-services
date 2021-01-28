@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import styled from 'styled-components';
 
-import ReviewsBreakdown from './components/ReviewsBreakdown.jsx';
+import ReviewsBreakdown from './components/ReviewsBreakdown/ReviewsBreakdown.jsx';
 import ReviewFilters from './components/ReviewFilters.jsx';
 import HelpfulReviewList from './components/HelpfulReviewList.jsx';
 import RecentReviewList from './components/RecentReviewList.jsx';
+
+//----------------------------------------
+// Styled Components
+//----------------------------------------
 
 const Reviews = styled.div`
   border-top: 1px solid black;
@@ -24,11 +28,15 @@ const ReviewsTitle = styled.h2`
   padding-top: 2px;
 `;
 
+//----------------------------------------
+// Component
+//----------------------------------------
+
 class CustomerReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentGameId: 1,
+      currentGameId: 52,
       reviews: {},
     };
   }
@@ -38,6 +46,7 @@ class CustomerReviews extends React.Component {
       method: 'GET',
       url: `http://localhost:3000/?id=${this.state.currentGameId}`,
       success: (data) => {
+        console.log(data.reviewStats);
         this.setState({
           reviews: data,
         });
