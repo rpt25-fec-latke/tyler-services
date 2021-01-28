@@ -36,7 +36,7 @@ class CustomerReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentGameId: 52,
+      currentGameId: 23,
       reviews: {},
     };
   }

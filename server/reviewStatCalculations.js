@@ -65,13 +65,13 @@ const calculateReviewStats = (initialReviewStats) => {
   const notEnoughReviewsMessage = 'Need more user reviews to generate a score';
 
   if (reviewStats.enoughTotalReviews) {
-    reviewStats.overallReviewsRatingGroupHoverMessage = `${reviewStats.percentPositiveOverall * 100}% of the ${reviewStats.totalReviewCount.toLocaleString()} user reviews for this game are positive.`;
+    reviewStats.overallReviewsRatingGroupHoverMessage = `${Math.round(reviewStats.percentPositiveOverall * 100)}% of the ${reviewStats.totalReviewCount.toLocaleString()} user reviews for this game are positive.`;
   } else {
     reviewStats.overallReviewsRatingGroupHoverMessage = notEnoughReviewsMessage;
   }
 
   if (reviewStats.enoughRecentReviews) {
-    reviewStats.recentReviewsRatingGroupHoverMessage = `${reviewStats.percentPositiveRecent * 100}% of the ${reviewStats.totalRecentReviewCount.toLocaleString()} user reviews for this game are positive.`;
+    reviewStats.recentReviewsRatingGroupHoverMessage = `${Math.round(reviewStats.percentPositiveRecent * 100)}% of the ${reviewStats.totalRecentReviewCount.toLocaleString()} user reviews for this game are positive.`;
   } else {
     reviewStats.recentReviewsRatingGroupHoverMessage = notEnoughReviewsMessage;
   }

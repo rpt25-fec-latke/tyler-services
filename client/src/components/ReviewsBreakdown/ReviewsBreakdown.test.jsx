@@ -51,14 +51,4 @@ describe('ReviewsBreakdown component', () => {
     expect(component.find('.total_review_count').text()).toEqual(' (149 reviews) ');
     expect(component.find('.recent_review_count').text()).toEqual(' (12 reviews) ');
   });
-
-  it('Should correctly display the color of the rating group based on rating group type', () => {
-    // code
-  });
 });
-
-// https://stackoverflow.com/questions/40795850/how-to-test-style-for-a-react-component-attribute-with-enzyme
-// https://medium.com/@NbilzDy/adding-unit-test-to-your-react-application-jest-enzyme-fc2152d979e1
-
-// component.find('.total_rating_group').simulate('mouseover');
-// expect(component.find('.total_rating_group').prop('style')).toHaveProperty('opacity', '1');
