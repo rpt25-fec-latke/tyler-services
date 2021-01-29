@@ -36,7 +36,7 @@ class CustomerReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentGameId: 12,
+      currentGameId: 16,
       reviews: {},
       reviewDisplayStatus: 'default',
       reviewFilters: {
