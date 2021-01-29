@@ -99,7 +99,7 @@ const seedReviews = (numGames, numUsers) => {
   let startingGameId = 1;
 
   while (startingGameId <= numGames) {
-    let numReviews = Math.floor(Math.random() * 16);
+    let numReviews = Math.floor(Math.random() * 51);
     const arrayOfUserIds = generateArrayOfUserIds(numUsers);
 
     while (numReviews > 0) {
@@ -142,8 +142,7 @@ const seedReviews = (numGames, numUsers) => {
         michelangeloAwardCount: Math.floor(Math.random() * 6),
         madScinetistAwardCount: Math.floor(Math.random() * 6),
         isEarlyAccessReview: Math.floor(Math.random() * 11) > 5,
-        isPurchasedViaSteamKey: Math.floor(Math.random() * 11) > 5,
-        isActivatedViaSteamKey: Math.floor(Math.random() * 11) > 5,
+        isPurchasedOrActivatedViaSteamFlags: `'${['purchased', 'activated'][Math.floor(Math.random() * 2)]}'`,
         userHoursOnRecordAtTimeOfReview: (Math.random() * userHoursOnRecord[userId]).toFixed(1),
         reviewLanguage: Math.floor(Math.random() * 11) > 8 ? otherLanguages[Math.floor(Math.random() * otherLanguages.length)] : "'EN'",
         reviewDate: `'${year}-${month}-${day} 00:00:00'`,

@@ -27,6 +27,7 @@
     "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^5.1.0",
     "jquery": "^3.5.1",
@@ -36,6 +37,7 @@
     "path": "^0.12.7",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "styled-components": "^5.2.1",
     "webpack-dev-server": "^3.11.2"
   },
   "devDependencies": {

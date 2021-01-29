@@ -3,11 +3,13 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors');
 const db = require('../database');
 const stats = require('./reviewStatCalculations');
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.get('/reviews', (req, res) => {
   const gameId = req.query.id;
