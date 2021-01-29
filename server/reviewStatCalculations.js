@@ -7,13 +7,13 @@ const calculateRatingGroup = (percentPositive) => {
   } else if (percentPositive > 0.8 && percentPositive <= 0.9) {
     ratingGroupInfo.ratingGroup = 'Very Positive';
     ratingGroupInfo.type = 'positive';
-  } else if (percentPositive > 0.65 && percentPositive <= 0.8) {
+  } else if (percentPositive > 0.6 && percentPositive <= 0.8) {
     ratingGroupInfo.ratingGroup = 'Mostly Positive';
     ratingGroupInfo.type = 'positive';
-  } else if (percentPositive > 0.35 && percentPositive <= 0.65) {
+  } else if (percentPositive > 0.4 && percentPositive <= 0.6) {
     ratingGroupInfo.ratingGroup = 'Mixed';
     ratingGroupInfo.type = 'mixed';
-  } else if (percentPositive > 0.2 && percentPositive <= 0.35) {
+  } else if (percentPositive > 0.2 && percentPositive <= 0.4) {
     ratingGroupInfo.ratingGroup = 'Mostly Negative';
     ratingGroupInfo.type = 'negative';
   } else if (percentPositive > 0.1 && percentPositive <= 0.2) {

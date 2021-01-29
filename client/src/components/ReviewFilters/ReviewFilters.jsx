@@ -1,72 +1,29 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import ReviewTypeFilter from './ReviewTypeFilter.jsx';
+import PurchaseTypeFilter from './PurchaseTypeFilter.jsx';
+import LanguageTypeFilter from './LanguageTypeFilter.jsx';
+import DateRangeFilter from './DateRangeFilter.jsx';
+import PlaytimeFilter from './PlaytimeFilter.jsx';
 
 const ReviewFilters = ({ reviewStats, updateRatingTypeFilters, updatePurchaseTypeFilters, updateLanguageTypeFilters }) => (
   <div className="review_filters">
-    <div className="review_type_filter_menu">
-      <div className="review_type_tile">Review Type</div>
-      <div className="menu_flyout">
-        <form>
-          <label htmlFor="review_type_all">
-            All
-            <input type="radio" id="review_type_all" value="all" name="reviewType" onChange={updateRatingTypeFilters}></input>
-          </label>
-          <span>{`(${reviewStats.totalReviewCount})`}</span>
-          <br></br>
-          <label htmlFor="review_type_positive">
-            Positive
-            <input type="radio" id="review_type_positive" value="positive" name="reviewType" onChange={updateRatingTypeFilters}></input>
-          </label>
-          <span>{`(${reviewStats.totalPositiveReviewCount})`}</span>
-          <br></br>
-          <label htmlFor="review_type_negative">
-            Negative
-            <input type="radio" id="review_type_negative" value="negative" name="reviewType" onChange={updateRatingTypeFilters}></input>
-          </label>
-          <span>{`(${reviewStats.totalReviewCount - reviewStats.totalPositiveReviewCount})`}</span>
-        </form>
-      </div>
-    </div>
-    <div className="purchase_filter_menu">
-      <div className="purchase_type_tile">Purchase Type</div>
-      <div className="menu_flyout">
-        <form>
-          <label htmlFor="purchase_type_all">
-            All
-            <input type="radio" id="purchase_type_all" value="all" name="purchaseType" onChange={updatePurchaseTypeFilters}></input>
-          </label>
-          <span>{`(${reviewStats.totalReviewCount})`}</span>
-          <br></br>
-          <label htmlFor="purchase_type_steam">
-            Steam Purchasers
-            <input type="radio" id="purchase_type_steam" value="steam" name="purchaseType" onChange={updatePurchaseTypeFilters}></input>
-          </label>
-          <span>{`(${reviewStats.purchaseViaSteamCount})`}</span>
-          <br></br>
-          <label htmlFor="purchase_type_other">
-            Other
-            <input type="radio" id="purchase_type_other" value="other" name="purchaseType" onChange={updatePurchaseTypeFilters}></input>
-          </label>
-          <span>{`(${reviewStats.totalReviewCount - reviewStats.purchaseViaSteamCount})`}</span>
-        </form>
-      </div>
-    </div>
-    <div className="language_filter_menu">
-      <div className="language_type_tile">Language</div>
-      <div className="menu_flyout">
-        <form>
-          <label htmlFor="all_languages">
-            All Languages
-            <input type="radio" id="all_languages" value="all" name="languageType" onChange={updateLanguageTypeFilters}></input>
-          </label>
-          <span>{`(${reviewStats.totalReviewCount})`}</span>
-          <br></br>
-          <label htmlFor="your_language">
-            Your Languages
-            <input type="radio" id="your_language" value="your" name="languageType" onChange={updateLanguageTypeFilters}></input>
-          </label>
-          <span>{`(${reviewStats.englighLanguageReviewCount})`}</span>
-        </form>
-      </div>
+    <ReviewTypeFilter reviewStats={reviewStats} updateRatingTypeFilters={updateRatingTypeFilters} />
+    <PurchaseTypeFilter reviewStats={reviewStats} updatePurchaseTypeFilters={updatePurchaseTypeFilters} />
+    <LanguageTypeFilter reviewStats={reviewStats} updateLanguageTypeFilters={updateLanguageTypeFilters} />
+    <div className="date_range_filter_menu">
+      <div className="date_range_title">Date Range</div>
+      <form>
+        <label htmlFor="start_date">
+          Start date:
+          <input type="date" id="start_date"></input>
+        </label>
+        <label htmlFor="end_date">
+          End date:
+          <input type="date" id="end_date"></input>
+        </label>
+      </form>
     </div>
   </div>
 );

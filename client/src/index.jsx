@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 import ReviewsBreakdown from './components/ReviewsBreakdown/ReviewsBreakdown.jsx';
 import ReviewFilters from './components/ReviewFilters/ReviewFilters.jsx';
-import HelpfulReviewList from './components/HelpfulReviewList.jsx';
-import RecentReviewList from './components/RecentReviewList.jsx';
+import HelpfulReviewList from './components/MainReviewList/MainReviewList.jsx';
+import RecentReviewList from './components/RecentReviewList/RecentReviewList.jsx';
 
 //----------------------------------------
 // Styled Components
@@ -36,13 +36,14 @@ class CustomerReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentGameId: 16,
+      currentGameId: 85,
       reviews: {},
       reviewDisplayStatus: 'default',
       reviewFilters: {
         type: 'all',
         language: 'EN',
       },
+      questionMarkImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/icon_questionmark.png',
     };
     this.updateRatingTypeFilters = this.updateRatingTypeFilters.bind(this);
     this.updatePurchaseTypeFilters = this.updatePurchaseTypeFilters.bind(this);
@@ -83,7 +84,7 @@ class CustomerReviews extends React.Component {
       return (
         <Reviews>
           <ReviewsTitle>Customer Reviews</ReviewsTitle>
-          <ReviewsBreakdown reviewStats={reviews.reviewStats} totalType={reviews.reviewStats.overallRatingGroup.type} recentType={reviews.reviewStats.recentRatingGroup.type} />
+          <ReviewsBreakdown reviewStats={reviews.reviewStats} totalType={reviews.reviewStats.overallRatingGroup.type} recentType={reviews.reviewStats.recentRatingGroup.type} questionMarkImage={this.state.questionMarkImage} />
           <ReviewFilters reviewStats={reviews.reviewStats} updateRatingTypeFilters={this.updateRatingTypeFilters} updatePurchaseTypeFilters={this.updatePurchaseTypeFilters} updateLanguageTypeFilters={this.updateLanguageTypeFilters} />
           <HelpfulReviewList />
           <RecentReviewList />

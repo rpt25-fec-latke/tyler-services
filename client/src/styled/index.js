@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+//----------------------------------------
+// ReveiwsBreakdown styled
+//----------------------------------------
+
 const OverallReviews = styled.div`
   background-color: #2a475e;
   padding: 10px;
@@ -108,6 +112,18 @@ const QuestionMarkImage = styled.img`
   visibility: visible;
   opacity: 1;
 `;
+
+//----------------------------------------
+// ReveiwsFilters styled
+//----------------------------------------
+
+//----------------------------------------
+// MainReviewList styled
+//----------------------------------------
+
+//----------------------------------------
+// RecentReviewList styled
+//----------------------------------------
 
 export {
   OverallReviews,
