@@ -24,4 +24,5 @@ module.exports = {
     contentBase: path.resolve(__dirname, '/client/dist'),
     port: 3001,
   },
+  mode: 'development',
 };

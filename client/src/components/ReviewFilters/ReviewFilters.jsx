@@ -7,24 +7,13 @@ import LanguageTypeFilter from './LanguageTypeFilter.jsx';
 import DateRangeFilter from './DateRangeFilter.jsx';
 import PlaytimeFilter from './PlaytimeFilter.jsx';
 
-const ReviewFilters = ({ reviewStats, updateRatingTypeFilters, updatePurchaseTypeFilters, updateLanguageTypeFilters }) => (
+const ReviewFilters = ({ reviewStats, updateRatingTypeFilters, updatePurchaseTypeFilters, updateLanguageTypeFilters, steamLabsLogo }) => (
   <div className="review_filters">
     <ReviewTypeFilter reviewStats={reviewStats} updateRatingTypeFilters={updateRatingTypeFilters} />
     <PurchaseTypeFilter reviewStats={reviewStats} updatePurchaseTypeFilters={updatePurchaseTypeFilters} />
     <LanguageTypeFilter reviewStats={reviewStats} updateLanguageTypeFilters={updateLanguageTypeFilters} />
-    <div className="date_range_filter_menu">
-      <div className="date_range_title">Date Range</div>
-      <form>
-        <label htmlFor="start_date">
-          Start date:
-          <input type="date" id="start_date"></input>
-        </label>
-        <label htmlFor="end_date">
-          End date:
-          <input type="date" id="end_date"></input>
-        </label>
-      </form>
-    </div>
+    <DateRangeFilter />
+    <PlaytimeFilter steamLabsLogo={steamLabsLogo} />
   </div>
 );
 

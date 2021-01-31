@@ -44,6 +44,7 @@ class CustomerReviews extends React.Component {
         language: 'EN',
       },
       questionMarkImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/icon_questionmark.png',
+      steamLabsLogo: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/steam_labs_logo.svg',
     };
     this.updateRatingTypeFilters = this.updateRatingTypeFilters.bind(this);
     this.updatePurchaseTypeFilters = this.updatePurchaseTypeFilters.bind(this);
@@ -84,8 +85,17 @@ class CustomerReviews extends React.Component {
       return (
         <Reviews>
           <ReviewsTitle>Customer Reviews</ReviewsTitle>
-          <ReviewsBreakdown reviewStats={reviews.reviewStats} totalType={reviews.reviewStats.overallRatingGroup.type} recentType={reviews.reviewStats.recentRatingGroup.type} questionMarkImage={this.state.questionMarkImage} />
-          <ReviewFilters reviewStats={reviews.reviewStats} updateRatingTypeFilters={this.updateRatingTypeFilters} updatePurchaseTypeFilters={this.updatePurchaseTypeFilters} updateLanguageTypeFilters={this.updateLanguageTypeFilters} />
+          <ReviewsBreakdown
+            reviewStats={reviews.reviewStats}
+            totalType={reviews.reviewStats.overallRatingGroup.type}
+            recentType={reviews.reviewStats.recentRatingGroup.type}
+            questionMarkImage={this.state.questionMarkImage} />
+          <ReviewFilters
+            reviewStats={reviews.reviewStats}
+            steamLabsLogo={this.state.steamLabsLogo}
+            updateRatingTypeFilters={this.updateRatingTypeFilters}
+            updatePurchaseTypeFilters={this.updatePurchaseTypeFilters}
+            updateLanguageTypeFilters={this.updateLanguageTypeFilters} />
           <HelpfulReviewList />
           <RecentReviewList />
         </Reviews>
@@ -101,4 +111,4 @@ class CustomerReviews extends React.Component {
   }
 }
 
-ReactDOM.render(<CustomerReviews />, document.getElementById('customerReviews'));
+ReactDOM.render(<CustomerReviews />, document.getElementById('reviews'));

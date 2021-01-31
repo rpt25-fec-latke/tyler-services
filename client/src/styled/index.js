@@ -117,6 +117,125 @@ const QuestionMarkImage = styled.img`
 // ReveiwsFilters styled
 //----------------------------------------
 
+const SteamLabsImage = styled.img`
+  height: 32px;
+`;
+
+const SliderDiv = styled.div`
+  position: relative;
+  width: 50%;
+  max-width: 500px;
+  height: 15px;
+  margin-top: 15px;
+`;
+
+const SliderInputLeft = styled.input`
+  position: absolute;
+  pointer-events: none;
+  -webkit-appearance: none;
+  z-index: 2;
+  height: 10px;
+  width: 100%;
+  opacity: 0;
+  ::-webkit-slider-thumb {
+    pointer-events: all;
+    width: 30px;
+    height: 30px;
+    border-radius: 0;
+    border: 0 none;
+    background-color: red;
+    -webkit-appearance: none;
+  }
+`;
+
+const SliderInputRight = styled.input`
+  position: absolute;
+  pointer-events: none;
+  -webkit-appearance: none;
+  z-index: 2;
+  height: 10px;
+  width: 100%;
+  opacity: 0;
+  ::-webkit-slider-thumb {
+    pointer-events: all;
+    width: 30px;
+    height: 30px;
+    border-radius: 0;
+    border: 0 none;
+    background-color: red;
+    -webkit-appearance: none;
+  }
+`;
+
+const Slider = styled.div`
+  position: relative;
+  z-index: 1;
+  height: 10px;
+  margin: 0 15px;
+`;
+
+const Track = styled.div`
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 7px;
+  border-radius: 5px;
+  background-color: white;
+`;
+
+const Range = styled.div`
+  position: absolute;
+  z-index: 2;
+  left: 25%;
+  right: 25%;
+  height: 7px;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #4582a5;
+`;
+
+const ThumbLeft = styled.div`
+  position: absolute;
+  z-index: 3;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 0 0 0 0 rgba(98,0,238,.1);
+  transition: box-shadow .3s ease-in-out;
+  left: 25%;
+  transform: translate(-15px, -10px);
+`;
+
+const ThumbRight = styled.div`
+  position: absolute;
+  z-index: 3;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 0 0 0 0 rgba(98,0,238,.1);
+  transition: box-shadow .3s ease-in-out;
+  right: 25%;
+  transform: translate(15px, -10px);
+`;
+
+const PlayTimeFilterMenu = styled.div`
+  margin: 10px;
+  margin-left: 0px
+`;
+
+const DropDownText = styled.div`
+  content: "&#9660";
+  text-transform: uppercase;
+`;
+
 //----------------------------------------
 // MainReviewList styled
 //----------------------------------------
@@ -134,4 +253,15 @@ export {
   ToolTip,
   ReviewCount,
   QuestionMarkImage,
+  SteamLabsImage,
+  SliderDiv,
+  SliderInputLeft,
+  SliderInputRight,
+  Slider,
+  Track,
+  Range,
+  ThumbLeft,
+  ThumbRight,
+  PlayTimeFilterMenu,
+  DropDownText,
 };

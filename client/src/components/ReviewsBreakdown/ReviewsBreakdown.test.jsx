@@ -24,8 +24,8 @@ describe('ReviewsBreakdown component', () => {
 
     expect(component.find('.total_rating_group').text()).toEqual('Very Positive');
     expect(component.find('.recent_rating_group').text()).toEqual('0 user reviews');
-    expect(component.find('.total_review_count').text()).toEqual(' (149 reviews) ');
-    expect(component.find('.recent_review_count').text()).toEqual(' (0 reviews) ');
+    expect(component.find('.total_review_count').text()).toEqual('(149 reviews)');
+    expect(component.find('.recent_review_count').text()).toEqual('(0 reviews)');
   });
 
   it('Should correctly render review breakdown when the recent review count is greater than 0', () => {
@@ -48,7 +48,7 @@ describe('ReviewsBreakdown component', () => {
 
     expect(component.find('.total_rating_group').text()).toEqual('Very Positive');
     expect(component.find('.recent_rating_group').text()).toEqual('Mostly Positive');
-    expect(component.find('.total_review_count').text()).toEqual(' (149 reviews) ');
-    expect(component.find('.recent_review_count').text()).toEqual(' (12 reviews) ');
+    expect(component.find('.total_review_count').text()).toEqual('(149 reviews)');
+    expect(component.find('.recent_review_count').text()).toEqual('(12 reviews)');
   });
 });

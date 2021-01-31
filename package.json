@@ -19,7 +19,7 @@
     "react-dev": "webpack --watch",
     "db-setup": "mysql -u root < schema.sql",
     "seed": "node ./seedingscript.js",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
@@ -37,6 +37,7 @@
     "path": "^0.12.7",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-range": "^1.8.6",
     "styled-components": "^5.2.1",
     "webpack-dev-server": "^3.11.2"
   },
