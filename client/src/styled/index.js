@@ -1,27 +1,71 @@
 import styled from 'styled-components';
 
 //----------------------------------------
+// Parent Reviews styled
+//----------------------------------------
+
+const Reviews = styled.div`
+  border-top: 1px solid black;
+  margin-top: 0px;
+  display: flex;
+`;
+
+const LeftReviewsContainer = styled.div`
+  width: 475px;
+`;
+
+const CenterReviewsContainer = styled.div`
+  width: 940px;
+`;
+
+const RightReviewsContainer = styled.div`
+  width: 320px;
+`;
+
+const ReviewsTitle = styled.h2`
+  font-family: "Motiva Sans", Sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: white;
+  letter-spacing: 2px;
+  font-weight: normal;
+  padding-top: 2px;
+  padding-bottom: 4px;
+  margin: 0px;
+`;
+
+//----------------------------------------
 // ReveiwsBreakdown styled
 //----------------------------------------
+
+const ReviewsBreakdownContainer = styled.div`
+  display: flex;
+`;
 
 const OverallReviews = styled.div`
   background-color: #2a475e;
   padding: 10px;
-  min-height: 38px;
+  height: 42px;
   border-bottom-color: rgb(0, 0, 0);
   border-bottom-style: solid;
   border-bottom-width: 1px;
   width: 585px;
+  -moz-box-shadow: 0 0 10px #000000;
+  -webkit-box-shadow: 0 0 10px #000000;
+  box-shadow: 0 0 10px #000000;
 `;
 
 const RecentReviews = styled.div`
   background-color: #416781;
   padding: 10px;
-  min-height: 38px;
+  height: 42px;
   border-bottom-color: rgb(0, 0, 0);
   border-bottom-style: solid;
   border-bottom-width: 1px;
   width: 320px;
+  -moz-box-shadow: 0 0 10px #000000;
+  -webkit-box-shadow: 0 0 10px #000000;
+  box-shadow: 0 0 10px #000000;
 `;
 
 const SectionTitle = styled.div`
@@ -75,7 +119,6 @@ const RecentRatingGroup = styled.span`
     }
   }};
   &:hover .tooltip {
-    visibility: visible;
     opacity: 1;
   }
 `;
@@ -109,8 +152,6 @@ const ReviewCount = styled.span`
 `;
 
 const QuestionMarkImage = styled.img`
-  visibility: visible;
-  opacity: 1;
 `;
 
 //----------------------------------------
@@ -227,8 +268,13 @@ const ThumbRight = styled.div`
 `;
 
 const ReviewFiltersContainer = styled.div`
+  background-image: none;
+`;
+
+const MenuOptions = styled.div`
   background-color: #203042;
   color: #4582a5;
+  display: flex;
 `;
 
 const ReviewTypeContainer = styled.div`
@@ -236,10 +282,36 @@ const ReviewTypeContainer = styled.div`
 
 const ReviewTypeTitle = styled.div`
   text-transform: uppercase;
-  border-left: solid 2px #2a475e;
+  border-left: solid 1px #2a475e;
+  padding: 10px 20px 15px 5px;
+  margin-bottom: 0px;
+  width: auto;
+  white-space: nowrap;
+  height: 11px;
+  width: 68.1719px;
+  font-size: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #c6d4df;
+  }
+  &:hover .review_type_down_arrow {
+    color: black;
+  }
+  &:hover .review_type_flyout {
+    opacity: 1;
+  }
 `;
 
 const ReviewTypeFlyoutMenu = styled.div`
+  background-color: #c6d4df;
+  position: relative;
+  opacity: 0;
+  cursor: default;
+  right: 5px;
+  top: 10px;
+  height: 60x;
+  width: 106.406px;
+  padding: 10px;
 `;
 
 const PurchaseTypeContainer = styled.div`
@@ -247,9 +319,35 @@ const PurchaseTypeContainer = styled.div`
 
 const PurchaseTypeTitle = styled.div`
   text-transform: uppercase;
+  border-left: solid 1px #2a475e;
+  padding: 10px 20px 15px 10px;
+  margin-bottom: 0px;
+  width: 84.2969px;
+  white-space: nowrap;
+  height: 11px;
+  font-size: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #c6d4df;
+  }
+  &:hover .purchase_down_arrow {
+    color: black;
+  }
+  &:hover .purchase_type_flyout {
+    opacity: 1;
+  }
 `;
 
 const PurchaseTypeFlyoutMenu = styled.div`
+  background-color: #c6d4df;
+  position: relative;
+  opacity: 0;
+  cursor: default;
+  right: 10px;
+  top: 10px;
+  height: 60px;
+  width: 178.438px;
+  padding: 10px;
 `;
 
 const LanguageTypeContainer = styled.div`
@@ -257,9 +355,52 @@ const LanguageTypeContainer = styled.div`
 
 const LanguageTypeTitle = styled.div`
   text-transform: uppercase;
+  border-left: solid 1px #2a475e;
+  padding: 10px 20px 15px 10px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  width: 55.5781px;
+  white-space: nowrap;
+  height: 11px;
+  font-size: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #c6d4df;
+  }
+  &:hover .language_down_arrow {
+    color: black;
+  }
+  &:hover .language_type_flyout {
+    opacity: 1;
+  }
 `;
 
 const LanguageTypeFlyoutMenu = styled.div`
+  background-color: #c6d4df;
+  position: relative;
+  opacity: 0;
+  cursor: default;
+  right: 10px;
+  top: 10px;
+  height: 61px;
+  width: 166.484px;
+  padding: 10px;
+`;
+
+const CustomizeButton = styled.button`
+  background-color: #636a70;
+  color: #67c1f5;
+  text-transform: uppercase;
+  font-size: 10px;
+  padding: 2px 4px;
+  border: none;
+  border-radius: 2px;
+  &:hover {
+    color: white;
+    background-color: #67c1f5;
+    padding: 3px 5px;
+    cursor: pointer;
+  }
 `;
 
 const DateRangeContainer = styled.div`
@@ -267,9 +408,30 @@ const DateRangeContainer = styled.div`
 
 const DateRangeTitle = styled.div`
   text-transform: uppercase;
+  border-left: solid 1px #2a475e;
+  padding: 10px 20px 15px 10px;
+  margin-bottom: 0px;
+  width: auto;
+  white-space: nowrap;
+  height: 11px;
+  font-size: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #c6d4df;
+  }
+  &:hover .date_down_arrow {
+    color: black;
+  }
+  &:hover .date_range_flyout {
+    opacity: 1;
+  }
 `;
 
 const DateRangeFlyoutMenu = styled.div`
+  background-color: #c6d4df;
+  position: absolute;
+  opacity: 0;
+  cursor: default;
 `;
 
 const PlayTimeContainer = styled.div`
@@ -278,17 +440,83 @@ const PlayTimeContainer = styled.div`
 
 const PlaytimeTitle = styled.div`
   text-transform: uppercase;
+  border-left: solid 1px #2a475e;
+  padding: 10px 20px 15px 10px;
+  margin-bottom: 0px;
+  width: auto;
+  white-space: nowrap;
+  height: 11px;
+  font-size: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #c6d4df;
+  }
+  &:hover .playtime_down_arrow {
+    color: black;
+  }
+  &:hover .playtime_flyout {
+    opacity: 1;
+  }
 `;
 
 const PlaytimeFlyoutMenu = styled.div`
+  background-color: #c6d4df;
+  position: absolute;
+  opacity: 0;
+  cursor: default;
 `;
 
 const DownArrow = styled.span`
-  font-size: 8px;
+  font-size: 13px;
+  padding-left: 5px;
+  color: #66c0f4;
+`;
+
+const DisplayAsContainer = styled.div`
+  display: flex;
 `;
 
 const DisplayAsTitle = styled.span`
   text-transform: uppercase;
+  border-left: solid 1px #2a475e;
+  padding: 10px 20px 15px 10px;
+  margin-bottom: 0px;
+  padding-right: 5px;
+  width: auto;
+  white-space: nowrap;
+  height: 11px;
+  font-size: 10px;
+`;
+
+const DisplayAsOptions = styled.select`
+  height: 16px;
+  background-color: #4582a5;
+  font-size: 12px;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  border-radius: 2px;
+  margin-top: 8px;
+`;
+
+const FlyoutMenuText = styled.span`
+  font-family: Arial, Helvetica, sans-serif;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 20px;
+  color: #596b76;
+  text-transform: none;
+`;
+
+const FlyoutMenuStat = styled.span`
+  color: #7193a6;
+  font-size: 12px;
+  white-space: nowrap;
+  line-height: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: none;
+  margin-left: 3px;
+  margin-right: 3px;
 `;
 
 //----------------------------------------
@@ -300,6 +528,12 @@ const DisplayAsTitle = styled.span`
 //----------------------------------------
 
 export {
+  Reviews,
+  LeftReviewsContainer,
+  CenterReviewsContainer,
+  RightReviewsContainer,
+  ReviewsTitle,
+  ReviewsBreakdownContainer,
   OverallReviews,
   RecentReviews,
   SectionTitle,
@@ -318,6 +552,7 @@ export {
   ThumbLeft,
   ThumbRight,
   ReviewFiltersContainer,
+  MenuOptions,
   ReviewTypeContainer,
   ReviewTypeTitle,
   ReviewTypeFlyoutMenu,
@@ -327,6 +562,7 @@ export {
   LanguageTypeContainer,
   LanguageTypeTitle,
   LanguageTypeFlyoutMenu,
+  CustomizeButton,
   DateRangeContainer,
   DateRangeTitle,
   DateRangeFlyoutMenu,
@@ -334,5 +570,9 @@ export {
   PlaytimeTitle,
   PlaytimeFlyoutMenu,
   DownArrow,
+  DisplayAsContainer,
   DisplayAsTitle,
+  DisplayAsOptions,
+  FlyoutMenuText,
+  FlyoutMenuStat,
 };

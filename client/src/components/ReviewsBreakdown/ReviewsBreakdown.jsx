@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { OverallReviews, RecentReviews, SectionTitle, TotalRatingGroup, RecentRatingGroup, ToolTip, ReviewCount, QuestionMarkImage } from '../../styled';
+import { ReviewsBreakdownContainer, OverallReviews, RecentReviews, SectionTitle, TotalRatingGroup, RecentRatingGroup, ToolTip, ReviewCount, QuestionMarkImage } from '../../styled';
 
 const ReviewsBreakdown = ({ reviewStats, totalType, recentType, questionMarkImage }) => (
-  <div className="reviews_breakdown">
+  <ReviewsBreakdownContainer>
     <OverallReviews>
       <SectionTitle>Overall Reviews:</SectionTitle>
       <TotalRatingGroup className="total_rating_group" type={totalType}>
@@ -25,7 +25,7 @@ const ReviewsBreakdown = ({ reviewStats, totalType, recentType, questionMarkImag
       <QuestionMarkImage src={questionMarkImage} alt="question mark"></QuestionMarkImage>
       <ToolTip className="tooltip">This summary uses only reviews written by customers that purchased the game directly from Steam.</ToolTip>
     </RecentReviews>
-  </div>
+  </ReviewsBreakdownContainer>
 );
 
 export default ReviewsBreakdown;

@@ -118,50 +118,50 @@ class PlaytimeFilter extends React.Component {
       <PlayTimeContainer>
         <PlaytimeTitle>
           Playtime
-          <DownArrow>&#9660;</DownArrow>
+          <DownArrow className="playtime_down_arrow">&#9662;</DownArrow>
+          <PlaytimeFlyoutMenu className="playtime_flyout">
+            <SteamLabsImage src={steamLabsLogo} />
+            <span>Brought to you by Steam Labs</span>
+            <div>Filter reviews by the user&apos;s playtime when the review was written:</div>
+            <form>
+              <input type="radio" value="none" name="playtime" onClick={this.updateViaFormSelection} />
+              <span>No Minimum</span>
+              <br></br>
+              <input type="radio" value="overOneHour" name="playtime" onClick={this.updateViaFormSelection} />
+              <span>Over 1 hour</span>
+              <br></br>
+              <input type="radio" value="overTenHours" name="playtime" onClick={this.updateViaFormSelection} />
+              <span>Over 10 hours</span>
+            </form>
+            <div className="current_selection_message">
+              <span className="minimum_value">{minimum === null ? 'No minimum' : `${minimum} hour(s)`}</span>
+              <span>to</span>
+              <span className="maximum_value">{maximum === null ? 'No maximum' : `${maximum} hour(s)`}</span>
+            </div>
+            <SliderDiv>
+              <SliderInputLeft
+                type="range"
+                id="input-left"
+                min="0"
+                max="100"
+                defaultValue={0}
+                onInput={(e) => { this.updateMinimum(e); }} />
+              <SliderInputRight
+                type="range"
+                id="input-right"
+                min="0"
+                max="100"
+                defaultValue={100}
+                onInput={(e) => { this.updateMaximum(e); }} />
+              <Slider>
+                <Track></Track>
+                <Range id="range"></Range>
+                <ThumbLeft id="thumbLeft"></ThumbLeft>
+                <ThumbRight id="thumbRight"></ThumbRight>
+              </Slider>
+            </SliderDiv>
+          </PlaytimeFlyoutMenu>
         </PlaytimeTitle>
-        <div className="playtime_menu_flyout">
-          <SteamLabsImage src={steamLabsLogo} />
-          <span>Brought to you by Steam Labs</span>
-          <div>Filter reviews by the user&apos;s playtime when the review was written:</div>
-          <form>
-            <input type="radio" value="none" name="playtime" onClick={this.updateViaFormSelection} />
-            <span>No Minimum</span>
-            <br></br>
-            <input type="radio" value="overOneHour" name="playtime" onClick={this.updateViaFormSelection} />
-            <span>Over 1 hour</span>
-            <br></br>
-            <input type="radio" value="overTenHours" name="playtime" onClick={this.updateViaFormSelection} />
-            <span>Over 10 hours</span>
-          </form>
-          <div className="current_selection_message">
-            <span className="minimum_value">{minimum === null ? 'No minimum' : `${minimum} hour(s)`}</span>
-            <span>to</span>
-            <span className="maximum_value">{maximum === null ? 'No maximum' : `${maximum} hour(s)`}</span>
-          </div>
-          <SliderDiv>
-            <SliderInputLeft
-              type="range"
-              id="input-left"
-              min="0"
-              max="100"
-              defaultValue={0}
-              onInput={(e) => { this.updateMinimum(e); }} />
-            <SliderInputRight
-              type="range"
-              id="input-right"
-              min="0"
-              max="100"
-              defaultValue={100}
-              onInput={(e) => { this.updateMaximum(e); }} />
-            <Slider>
-              <Track></Track>
-              <Range id="range"></Range>
-              <ThumbLeft id="thumbLeft"></ThumbLeft>
-              <ThumbRight id="thumbRight"></ThumbRight>
-            </Slider>
-          </SliderDiv>
-        </div>
       </PlayTimeContainer>
     );
   }

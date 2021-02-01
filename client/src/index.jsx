@@ -8,29 +8,7 @@ import ReviewFilters from './components/ReviewFilters/ReviewFilters.jsx';
 import HelpfulReviewList from './components/MainReviewList/MainReviewList.jsx';
 import RecentReviewList from './components/RecentReviewList/RecentReviewList.jsx';
 
-//----------------------------------------
-// Styled Components
-//----------------------------------------
-
-const Reviews = styled.div`
-  border-top: 1px solid black;
-  margin-top: 0px;
-`;
-
-const ReviewsTitle = styled.h2`
-  font-family: "Motiva Sans", Sans-serif;
-  text-transform: uppercase;
-  font-size: 14px;
-  margin: 0 0 10px;
-  color: white;
-  letter-spacing: 2px;
-  font-weight: normal;
-  padding-top: 2px;
-`;
-
-//----------------------------------------
-// Component
-//----------------------------------------
+import { Reviews, LeftReviewsContainer, CenterReviewsContainer, RightReviewsContainer, ReviewsTitle } from './styled';
 
 class CustomerReviews extends React.Component {
   constructor(props) {
@@ -44,6 +22,7 @@ class CustomerReviews extends React.Component {
         language: 'EN',
       },
       questionMarkImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/icon_questionmark.png',
+      questionMarkImageDark: 'https://store.cloudflare.steamstatic.com/public/shared/images/ico/icon_questionmark_dark.png',
       steamLabsLogo: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/steam_labs_logo.svg',
     };
     this.updateReviewFilters = this.updateReviewFilters.bind(this);
@@ -74,18 +53,23 @@ class CustomerReviews extends React.Component {
       const { reviews } = this.state;
       return (
         <Reviews>
-          <ReviewsTitle>Customer Reviews</ReviewsTitle>
-          <ReviewsBreakdown
-            reviewStats={reviews.reviewStats}
-            totalType={reviews.reviewStats.overallRatingGroup.type}
-            recentType={reviews.reviewStats.recentRatingGroup.type}
-            questionMarkImage={this.state.questionMarkImage} />
-          <ReviewFilters
-            reviewStats={reviews.reviewStats}
-            steamLabsLogo={this.state.steamLabsLogo}
-            updateReviewFilters={this.updateReviewFilters} />
-          <HelpfulReviewList />
-          <RecentReviewList />
+          <LeftReviewsContainer />
+          <CenterReviewsContainer>
+            <ReviewsTitle>Customer Reviews</ReviewsTitle>
+            <ReviewsBreakdown
+              reviewStats={reviews.reviewStats}
+              totalType={reviews.reviewStats.overallRatingGroup.type}
+              recentType={reviews.reviewStats.recentRatingGroup.type}
+              questionMarkImage={this.state.questionMarkImage} />
+            <ReviewFilters
+              reviewStats={reviews.reviewStats}
+              steamLabsLogo={this.state.steamLabsLogo}
+              updateReviewFilters={this.updateReviewFilters}
+              questionMarkImage={this.state.questionMarkImageDark} />
+            <HelpfulReviewList />
+            <RecentReviewList />
+          </CenterReviewsContainer>
+          <RightReviewsContainer />
         </Reviews>
       );
     } else {
