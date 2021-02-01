@@ -46,9 +46,7 @@ class CustomerReviews extends React.Component {
       questionMarkImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/icon_questionmark.png',
       steamLabsLogo: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/steam_labs_logo.svg',
     };
-    this.updateRatingTypeFilters = this.updateRatingTypeFilters.bind(this);
-    this.updatePurchaseTypeFilters = this.updatePurchaseTypeFilters.bind(this);
-    this.updateLanguageTypeFilters = this.updateLanguageTypeFilters.bind(this);
+    this.updateReviewFilters = this.updateReviewFilters.bind(this);
   }
 
   componentDidMount() {
@@ -67,16 +65,8 @@ class CustomerReviews extends React.Component {
     });
   }
 
-  updateRatingTypeFilters(e) {
-    console.log(e.target.value);
-  }
-
-  updatePurchaseTypeFilters(e) {
-    console.log(e.target.value);
-  }
-
-  updateLanguageTypeFilters(e) {
-    console.log(e.target.value);
+  updateReviewFilters(value, type) {
+    console.log(value, type);
   }
 
   render() {
@@ -93,9 +83,7 @@ class CustomerReviews extends React.Component {
           <ReviewFilters
             reviewStats={reviews.reviewStats}
             steamLabsLogo={this.state.steamLabsLogo}
-            updateRatingTypeFilters={this.updateRatingTypeFilters}
-            updatePurchaseTypeFilters={this.updatePurchaseTypeFilters}
-            updateLanguageTypeFilters={this.updateLanguageTypeFilters} />
+            updateReviewFilters={this.updateReviewFilters} />
           <HelpfulReviewList />
           <RecentReviewList />
         </Reviews>

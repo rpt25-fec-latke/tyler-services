@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-import { SteamLabsImage, SliderDiv, SliderInputLeft, SliderInputRight, Slider, Track, Range, ThumbLeft, ThumbRight, PlayTimeFilterMenu, DropDownText } from '../../styled';
+import { SteamLabsImage, SliderDiv, SliderInputLeft, SliderInputRight, Slider, Track, Range, ThumbLeft, ThumbRight, PlayTimeContainer, PlaytimeTitle, PlaytimeFlyoutMenu, DownArrow } from '../../styled';
 
 class PlaytimeFilter extends React.Component {
   constructor(props) {
@@ -12,9 +12,11 @@ class PlaytimeFilter extends React.Component {
       maximum: null,
     };
     this.setLeftValue = this.setLeftValue.bind(this);
+    this.setRightValue = this.setRightValue.bind(this);
     this.updateMinimum = this.updateMinimum.bind(this);
     this.updateMaximum = this.updateMaximum.bind(this);
     this.updateViaFormSelection = this.updateViaFormSelection.bind(this);
+    this.updatePlaytimeReviewFilters = this.updatePlaytimeReviewFilters.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +28,9 @@ class PlaytimeFilter extends React.Component {
 
     inputLeft.addEventListener('input', this.setLeftValue);
     inputRight.addEventListener('input', this.setRightValue);
+
+    inputLeft.addEventListener('mouseup', this.updatePlaytimeReviewFilters);
+    inputRight.addEventListener('mouseup', this.updatePlaytimeReviewFilters);
   }
 
   setLeftValue() {
@@ -66,26 +71,6 @@ class PlaytimeFilter extends React.Component {
     range.style.right = (100 - percent) + '%';
   }
 
-  updateViaFormSelection(e) {
-    let min;
-    let max;
-
-    if (e.target.value === 'none') {
-      min = null;
-      max = null;
-    } else if (e.target.value === 'overOneHour') {
-      min = 1;
-      max = null;
-    } else if (e.target.value === 'overTenHours') {
-      min = 10;
-      max = null;
-    }
-    this.setState({
-      minimum: min,
-      maximum: max,
-    });
-  }
-
   updateMinimum(e) {
     let min;
     e.target.value === 0 ? min = null : min = e.target.value;
@@ -102,11 +87,39 @@ class PlaytimeFilter extends React.Component {
     });
   }
 
+  updateViaFormSelection(e) {
+    let min;
+
+    if (e.target.value === 'none') {
+      min = null;
+    } else if (e.target.value === 'overOneHour') {
+      min = 1;
+    } else if (e.target.value === 'overTenHours') {
+      min = 10;
+    }
+    this.setState({
+      minimum: min,
+      maximum: null,
+    });
+    this.updatePlaytimeReviewFilters(min, null);
+  }
+
+  updatePlaytimeReviewFilters(min, max) {
+    if (max === undefined) {
+      min = this.state.minimum;
+      max = this.state.maximum;
+    }
+    this.props.updateReviewFilters({ minimum: min, maximum: max }, 'playtime');
+  }
+
   render() {
     const { steamLabsLogo, minimum, maximum } = this.state;
     return (
-      <PlayTimeFilterMenu>
-        <DropDownText>Playtime</DropDownText>
+      <PlayTimeContainer>
+        <PlaytimeTitle>
+          Playtime
+          <DownArrow>&#9660;</DownArrow>
+        </PlaytimeTitle>
         <div className="playtime_menu_flyout">
           <SteamLabsImage src={steamLabsLogo} />
           <span>Brought to you by Steam Labs</span>
@@ -132,16 +145,14 @@ class PlaytimeFilter extends React.Component {
               id="input-left"
               min="0"
               max="100"
-              value={minimum === null ? 0 : minimum}
-              onChange={(e) => { console.log(e.target.value); }}
+              defaultValue={0}
               onInput={(e) => { this.updateMinimum(e); }} />
             <SliderInputRight
               type="range"
               id="input-right"
               min="0"
               max="100"
-              value={maximum === null ? 100 : maximum}
-              onChange={(e) => { console.log(e.target.value); }}
+              defaultValue={100}
               onInput={(e) => { this.updateMaximum(e); }} />
             <Slider>
               <Track></Track>
@@ -151,7 +162,7 @@ class PlaytimeFilter extends React.Component {
             </Slider>
           </SliderDiv>
         </div>
-      </PlayTimeFilterMenu>
+      </PlayTimeContainer>
     );
   }
 }

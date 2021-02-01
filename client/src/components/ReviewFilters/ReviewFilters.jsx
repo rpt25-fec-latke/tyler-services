@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import ReviewTypeFilter from './ReviewTypeFilter.jsx';
 import PurchaseTypeFilter from './PurchaseTypeFilter.jsx';
@@ -7,16 +6,25 @@ import LanguageTypeFilter from './LanguageTypeFilter.jsx';
 import DateRangeFilter from './DateRangeFilter.jsx';
 import PlaytimeFilter from './PlaytimeFilter.jsx';
 
-const ReviewFilters = ({ reviewStats, updateRatingTypeFilters, updatePurchaseTypeFilters, updateLanguageTypeFilters, steamLabsLogo }) => (
-  <div className="review_filters">
-    <ReviewTypeFilter reviewStats={reviewStats} updateRatingTypeFilters={updateRatingTypeFilters} />
-    <PurchaseTypeFilter reviewStats={reviewStats} updatePurchaseTypeFilters={updatePurchaseTypeFilters} />
-    <LanguageTypeFilter reviewStats={reviewStats} updateLanguageTypeFilters={updateLanguageTypeFilters} />
-    <DateRangeFilter />
-    <PlaytimeFilter steamLabsLogo={steamLabsLogo} />
-  </div>
+import { ReviewFiltersContainer, DisplayAsTitle } from '../../styled';
+
+const ReviewFilters = ({ reviewStats, updateReviewFilters, steamLabsLogo }) => (
+  <ReviewFiltersContainer>
+    <ReviewTypeFilter reviewStats={reviewStats} updateReviewFilters={updateReviewFilters} />
+    <PurchaseTypeFilter reviewStats={reviewStats} updateReviewFilters={updateReviewFilters} />
+    <LanguageTypeFilter reviewStats={reviewStats} updateReviewFilters={updateReviewFilters} />
+    <DateRangeFilter updateReviewFilters={updateReviewFilters} />
+    <PlaytimeFilter steamLabsLogo={steamLabsLogo} updateReviewFilters={updateReviewFilters} />
+    <div>
+      <DisplayAsTitle>Display As:</DisplayAsTitle>
+      <select value="Summary" onChange={(e) => { updateReviewFilters(e.target.value, 'displayType'); }}>
+        <option value="summary">Summary</option>
+        <option value="mostHelpful">Most Helpful</option>
+        <option value="recent">Recent</option>
+        <option value="funny">Funny</option>
+      </select>
+    </div>
+  </ReviewFiltersContainer>
 );
 
 export default ReviewFilters;
-
-// For aligning buttons left: https://stackoverflow.com/questions/4457609/what-is-the-best-way-to-left-align-radio-buttons-on-top-of-each-other

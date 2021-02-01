@@ -226,13 +226,68 @@ const ThumbRight = styled.div`
   transform: translate(15px, -10px);
 `;
 
-const PlayTimeFilterMenu = styled.div`
-  margin: 10px;
+const ReviewFiltersContainer = styled.div`
+  background-color: #203042;
+  color: #4582a5;
+`;
+
+const ReviewTypeContainer = styled.div`
+`;
+
+const ReviewTypeTitle = styled.div`
+  text-transform: uppercase;
+  border-left: solid 2px #2a475e;
+`;
+
+const ReviewTypeFlyoutMenu = styled.div`
+`;
+
+const PurchaseTypeContainer = styled.div`
+`;
+
+const PurchaseTypeTitle = styled.div`
+  text-transform: uppercase;
+`;
+
+const PurchaseTypeFlyoutMenu = styled.div`
+`;
+
+const LanguageTypeContainer = styled.div`
+`;
+
+const LanguageTypeTitle = styled.div`
+  text-transform: uppercase;
+`;
+
+const LanguageTypeFlyoutMenu = styled.div`
+`;
+
+const DateRangeContainer = styled.div`
+`;
+
+const DateRangeTitle = styled.div`
+  text-transform: uppercase;
+`;
+
+const DateRangeFlyoutMenu = styled.div`
+`;
+
+const PlayTimeContainer = styled.div`
   margin-left: 0px
 `;
 
-const DropDownText = styled.div`
-  content: "&#9660";
+const PlaytimeTitle = styled.div`
+  text-transform: uppercase;
+`;
+
+const PlaytimeFlyoutMenu = styled.div`
+`;
+
+const DownArrow = styled.span`
+  font-size: 8px;
+`;
+
+const DisplayAsTitle = styled.span`
   text-transform: uppercase;
 `;
 
@@ -262,6 +317,22 @@ export {
   Range,
   ThumbLeft,
   ThumbRight,
-  PlayTimeFilterMenu,
-  DropDownText,
+  ReviewFiltersContainer,
+  ReviewTypeContainer,
+  ReviewTypeTitle,
+  ReviewTypeFlyoutMenu,
+  PurchaseTypeContainer,
+  PurchaseTypeTitle,
+  PurchaseTypeFlyoutMenu,
+  LanguageTypeContainer,
+  LanguageTypeTitle,
+  LanguageTypeFlyoutMenu,
+  DateRangeContainer,
+  DateRangeTitle,
+  DateRangeFlyoutMenu,
+  PlayTimeContainer,
+  PlaytimeTitle,
+  PlaytimeFlyoutMenu,
+  DownArrow,
+  DisplayAsTitle,
 };
