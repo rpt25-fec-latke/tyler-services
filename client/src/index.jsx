@@ -1,20 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useParams } from 'react-router-dom';
 import $ from 'jquery';
 import styled from 'styled-components';
 
 import ReviewsBreakdown from './components/ReviewsBreakdown/ReviewsBreakdown.jsx';
 import ReviewFilters from './components/ReviewFilters/ReviewFilters.jsx';
-import HelpfulReviewList from './components/MainReviewList/MainReviewList.jsx';
+import MainReviewList from './components/MainReviewList/MainReviewList.jsx';
 import RecentReviewList from './components/RecentReviewList/RecentReviewList.jsx';
 
-import { Reviews, LeftReviewsContainer, CenterReviewsContainer, RightReviewsContainer, ReviewsTitle } from './styled';
+import { Reviews, LeftReviewsContainer, CenterReviewsContainer, RightReviewsContainer, ReviewListContainer, ReviewsTitle } from './styled';
 
 class CustomerReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentGameId: 85,
       reviews: {},
       reviewDisplayStatus: 'default',
       reviewFilters: {
@@ -29,13 +29,17 @@ class CustomerReviews extends React.Component {
   }
 
   componentDidMount() {
+    const url = window.location.href;
+    const id = url.indexOf('?id=') !== -1 ? url.slice(url.indexOf('?id=') + 4) : 1;
+
     $.ajax({
       method: 'GET',
-      url: `http://localhost:3000/?id=${this.state.currentGameId}`,
+      url: `http://localhost:3001/reviews?id=${id}`,
       success: (data) => {
         console.log(data);
         this.setState({
           reviews: data,
+          currentGameId: id,
         });
       },
       error: (err) => {
@@ -66,8 +70,10 @@ class CustomerReviews extends React.Component {
               steamLabsLogo={this.state.steamLabsLogo}
               updateReviewFilters={this.updateReviewFilters}
               questionMarkImage={this.state.questionMarkImageDark} />
-            <HelpfulReviewList />
-            <RecentReviewList />
+            <ReviewListContainer>
+              <MainReviewList />
+              <RecentReviewList />
+            </ReviewListContainer>
           </CenterReviewsContainer>
           <RightReviewsContainer />
         </Reviews>

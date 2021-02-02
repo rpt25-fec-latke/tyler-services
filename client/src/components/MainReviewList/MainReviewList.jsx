@@ -1,9 +1,11 @@
 import React from 'react';
 
-const HelpfulReviewList = (props) => (
-  <div className="helpful_review_list">
+import { MainReviewListContainer } from '../../styled';
+
+const MainReviewList = (props) => (
+  <MainReviewListContainer>
     <span>Helpful Review List</span>
-  </div>
+  </MainReviewListContainer>
 );
 
-export default HelpfulReviewList;
+export default MainReviewList;

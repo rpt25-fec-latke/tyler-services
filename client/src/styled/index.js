@@ -4,25 +4,29 @@ import styled from 'styled-components';
 // Parent Reviews styled
 //----------------------------------------
 
-const Reviews = styled.div`
+export const Reviews = styled.div`
   border-top: 1px solid black;
   margin-top: 0px;
   display: flex;
 `;
 
-const LeftReviewsContainer = styled.div`
+export const LeftReviewsContainer = styled.div`
   width: 475px;
 `;
 
-const CenterReviewsContainer = styled.div`
+export const CenterReviewsContainer = styled.div`
   width: 940px;
 `;
 
-const RightReviewsContainer = styled.div`
+export const RightReviewsContainer = styled.div`
   width: 320px;
 `;
 
-const ReviewsTitle = styled.h2`
+export const ReviewListContainer = styled.div`
+  display: flex;
+`;
+
+export const ReviewsTitle = styled.h2`
   font-family: "Motiva Sans", Sans-serif;
   text-transform: uppercase;
   font-size: 14px;
@@ -38,11 +42,11 @@ const ReviewsTitle = styled.h2`
 // ReveiwsBreakdown styled
 //----------------------------------------
 
-const ReviewsBreakdownContainer = styled.div`
+export const ReviewsBreakdownContainer = styled.div`
   display: flex;
 `;
 
-const OverallReviews = styled.div`
+export const OverallReviews = styled.div`
   background-color: #2a475e;
   padding: 10px;
   height: 42px;
@@ -50,12 +54,10 @@ const OverallReviews = styled.div`
   border-bottom-style: solid;
   border-bottom-width: 1px;
   width: 585px;
-  -moz-box-shadow: 0 0 10px #000000;
-  -webkit-box-shadow: 0 0 10px #000000;
   box-shadow: 0 0 10px #000000;
 `;
 
-const RecentReviews = styled.div`
+export const RecentReviews = styled.div`
   background-color: #416781;
   padding: 10px;
   height: 42px;
@@ -63,12 +65,10 @@ const RecentReviews = styled.div`
   border-bottom-style: solid;
   border-bottom-width: 1px;
   width: 320px;
-  -moz-box-shadow: 0 0 10px #000000;
-  -webkit-box-shadow: 0 0 10px #000000;
   box-shadow: 0 0 10px #000000;
 `;
 
-const SectionTitle = styled.div`
+export const SectionTitle = styled.div`
   margin-left: 0px;
   margin-bottom: 5px;
   padding-left: 0px;
@@ -78,7 +78,7 @@ const SectionTitle = styled.div`
   font-weight: normal;
 `;
 
-const TotalRatingGroup = styled.span`
+export const TotalRatingGroup = styled.span`
   font-weight: bold;
   font-size: 17px;
   line-height: 9px;
@@ -101,7 +101,7 @@ const TotalRatingGroup = styled.span`
   }
 `;
 
-const RecentRatingGroup = styled.span`
+export const RecentRatingGroup = styled.span`
   font-weight: bold;
   font-size: 17px;
   line-height: 9px;
@@ -123,7 +123,7 @@ const RecentRatingGroup = styled.span`
   }
 `;
 
-const ToolTip = styled.span`
+export const ToolTip = styled.span`
   width: 275px;
   height: auto;
   width: max-content;
@@ -143,7 +143,7 @@ const ToolTip = styled.span`
   transition: opacity .5s;
 `;
 
-const ReviewCount = styled.span`
+export const ReviewCount = styled.span`
   color: rgb(139, 166, 182);
   font-family: Arial, Helvetica, sans-serif ;
   font-size: 12px;
@@ -151,18 +151,18 @@ const ReviewCount = styled.span`
   padding-right: 5px;
 `;
 
-const QuestionMarkImage = styled.img`
+export const QuestionMarkImage = styled.img`
 `;
 
 //----------------------------------------
 // ReveiwsFilters styled
 //----------------------------------------
 
-const SteamLabsImage = styled.img`
+export const SteamLabsImage = styled.img`
   height: 32px;
 `;
 
-const SliderDiv = styled.div`
+export const SliderDiv = styled.div`
   position: relative;
   width: 50%;
   max-width: 500px;
@@ -170,7 +170,7 @@ const SliderDiv = styled.div`
   margin-top: 15px;
 `;
 
-const SliderInputLeft = styled.input`
+export const SliderInputLeft = styled.input`
   position: absolute;
   pointer-events: none;
   -webkit-appearance: none;
@@ -189,7 +189,7 @@ const SliderInputLeft = styled.input`
   }
 `;
 
-const SliderInputRight = styled.input`
+export const SliderInputRight = styled.input`
   position: absolute;
   pointer-events: none;
   -webkit-appearance: none;
@@ -208,14 +208,14 @@ const SliderInputRight = styled.input`
   }
 `;
 
-const Slider = styled.div`
+export const Slider = styled.div`
   position: relative;
   z-index: 1;
   height: 10px;
   margin: 0 15px;
 `;
 
-const Track = styled.div`
+export const Track = styled.div`
   position: absolute;
   z-index: 1;
   left: 0;
@@ -227,7 +227,7 @@ const Track = styled.div`
   background-color: white;
 `;
 
-const Range = styled.div`
+export const Range = styled.div`
   position: absolute;
   z-index: 2;
   left: 25%;
@@ -239,7 +239,7 @@ const Range = styled.div`
   background-color: #4582a5;
 `;
 
-const ThumbLeft = styled.div`
+export const ThumbLeft = styled.div`
   position: absolute;
   z-index: 3;
   width: 20px;
@@ -253,7 +253,7 @@ const ThumbLeft = styled.div`
   transform: translate(-15px, -10px);
 `;
 
-const ThumbRight = styled.div`
+export const ThumbRight = styled.div`
   position: absolute;
   z-index: 3;
   width: 20px;
@@ -267,20 +267,20 @@ const ThumbRight = styled.div`
   transform: translate(15px, -10px);
 `;
 
-const ReviewFiltersContainer = styled.div`
+export const ReviewFiltersContainer = styled.div`
   background-image: none;
 `;
 
-const MenuOptions = styled.div`
+export const MenuOptions = styled.div`
   background-color: #203042;
   color: #4582a5;
   display: flex;
 `;
 
-const ReviewTypeContainer = styled.div`
+export const ReviewTypeContainer = styled.div`
 `;
 
-const ReviewTypeTitle = styled.div`
+export const ReviewTypeTitle = styled.div`
   text-transform: uppercase;
   border-left: solid 1px #2a475e;
   padding: 10px 20px 15px 5px;
@@ -299,10 +299,11 @@ const ReviewTypeTitle = styled.div`
   }
   &:hover .review_type_flyout {
     opacity: 1;
+    visibility: visible;
   }
 `;
 
-const ReviewTypeFlyoutMenu = styled.div`
+export const ReviewTypeFlyoutMenu = styled.div`
   background-color: #c6d4df;
   position: relative;
   opacity: 0;
@@ -312,12 +313,13 @@ const ReviewTypeFlyoutMenu = styled.div`
   height: 60x;
   width: 106.406px;
   padding: 10px;
+  visibility: hidden;
 `;
 
-const PurchaseTypeContainer = styled.div`
+export const PurchaseTypeContainer = styled.div`
 `;
 
-const PurchaseTypeTitle = styled.div`
+export const PurchaseTypeTitle = styled.div`
   text-transform: uppercase;
   border-left: solid 1px #2a475e;
   padding: 10px 20px 15px 10px;
@@ -335,10 +337,11 @@ const PurchaseTypeTitle = styled.div`
   }
   &:hover .purchase_type_flyout {
     opacity: 1;
+    visibility: visible;
   }
 `;
 
-const PurchaseTypeFlyoutMenu = styled.div`
+export const PurchaseTypeFlyoutMenu = styled.div`
   background-color: #c6d4df;
   position: relative;
   opacity: 0;
@@ -348,12 +351,13 @@ const PurchaseTypeFlyoutMenu = styled.div`
   height: 60px;
   width: 178.438px;
   padding: 10px;
+  visibility: hidden;
 `;
 
-const LanguageTypeContainer = styled.div`
+export const LanguageTypeContainer = styled.div`
 `;
 
-const LanguageTypeTitle = styled.div`
+export const LanguageTypeTitle = styled.div`
   text-transform: uppercase;
   border-left: solid 1px #2a475e;
   padding: 10px 20px 15px 10px;
@@ -372,10 +376,11 @@ const LanguageTypeTitle = styled.div`
   }
   &:hover .language_type_flyout {
     opacity: 1;
+    visibility: visible;
   }
 `;
 
-const LanguageTypeFlyoutMenu = styled.div`
+export const LanguageTypeFlyoutMenu = styled.div`
   background-color: #c6d4df;
   position: relative;
   opacity: 0;
@@ -385,9 +390,10 @@ const LanguageTypeFlyoutMenu = styled.div`
   height: 61px;
   width: 166.484px;
   padding: 10px;
+  visibility: hidden;
 `;
 
-const CustomizeButton = styled.button`
+export const CustomizeButton = styled.button`
   background-color: #636a70;
   color: #67c1f5;
   text-transform: uppercase;
@@ -403,10 +409,10 @@ const CustomizeButton = styled.button`
   }
 `;
 
-const DateRangeContainer = styled.div`
+export const DateRangeContainer = styled.div`
 `;
 
-const DateRangeTitle = styled.div`
+export const DateRangeTitle = styled.div`
   text-transform: uppercase;
   border-left: solid 1px #2a475e;
   padding: 10px 20px 15px 10px;
@@ -424,21 +430,23 @@ const DateRangeTitle = styled.div`
   }
   &:hover .date_range_flyout {
     opacity: 1;
+    visibility: visible;
   }
 `;
 
-const DateRangeFlyoutMenu = styled.div`
+export const DateRangeFlyoutMenu = styled.div`
   background-color: #c6d4df;
   position: absolute;
   opacity: 0;
   cursor: default;
+  visibility: hidden;
 `;
 
-const PlayTimeContainer = styled.div`
+export const PlayTimeContainer = styled.div`
   margin-left: 0px
 `;
 
-const PlaytimeTitle = styled.div`
+export const PlaytimeTitle = styled.div`
   text-transform: uppercase;
   border-left: solid 1px #2a475e;
   padding: 10px 20px 15px 10px;
@@ -456,27 +464,29 @@ const PlaytimeTitle = styled.div`
   }
   &:hover .playtime_flyout {
     opacity: 1;
+    visibility: visible;
   }
 `;
 
-const PlaytimeFlyoutMenu = styled.div`
+export const PlaytimeFlyoutMenu = styled.div`
   background-color: #c6d4df;
   position: absolute;
   opacity: 0;
   cursor: default;
+  visibility: hidden;
 `;
 
-const DownArrow = styled.span`
+export const DownArrow = styled.span`
   font-size: 13px;
   padding-left: 5px;
   color: #66c0f4;
 `;
 
-const DisplayAsContainer = styled.div`
+export const DisplayAsContainer = styled.div`
   display: flex;
 `;
 
-const DisplayAsTitle = styled.span`
+export const DisplayAsTitle = styled.span`
   text-transform: uppercase;
   border-left: solid 1px #2a475e;
   padding: 10px 20px 15px 10px;
@@ -488,7 +498,7 @@ const DisplayAsTitle = styled.span`
   font-size: 10px;
 `;
 
-const DisplayAsOptions = styled.select`
+export const DisplayAsOptions = styled.select`
   height: 16px;
   background-color: #4582a5;
   font-size: 12px;
@@ -499,7 +509,7 @@ const DisplayAsOptions = styled.select`
   margin-top: 8px;
 `;
 
-const FlyoutMenuText = styled.span`
+export const FlyoutMenuText = styled.span`
   font-family: Arial, Helvetica, sans-serif;
   white-space: nowrap;
   font-size: 12px;
@@ -508,7 +518,7 @@ const FlyoutMenuText = styled.span`
   text-transform: none;
 `;
 
-const FlyoutMenuStat = styled.span`
+export const FlyoutMenuStat = styled.span`
   color: #7193a6;
   font-size: 12px;
   white-space: nowrap;
@@ -523,56 +533,14 @@ const FlyoutMenuStat = styled.span`
 // MainReviewList styled
 //----------------------------------------
 
+export const MainReviewListContainer = styled.div`
+  width: 616px;
+`;
+
 //----------------------------------------
 // RecentReviewList styled
 //----------------------------------------
 
-export {
-  Reviews,
-  LeftReviewsContainer,
-  CenterReviewsContainer,
-  RightReviewsContainer,
-  ReviewsTitle,
-  ReviewsBreakdownContainer,
-  OverallReviews,
-  RecentReviews,
-  SectionTitle,
-  TotalRatingGroup,
-  RecentRatingGroup,
-  ToolTip,
-  ReviewCount,
-  QuestionMarkImage,
-  SteamLabsImage,
-  SliderDiv,
-  SliderInputLeft,
-  SliderInputRight,
-  Slider,
-  Track,
-  Range,
-  ThumbLeft,
-  ThumbRight,
-  ReviewFiltersContainer,
-  MenuOptions,
-  ReviewTypeContainer,
-  ReviewTypeTitle,
-  ReviewTypeFlyoutMenu,
-  PurchaseTypeContainer,
-  PurchaseTypeTitle,
-  PurchaseTypeFlyoutMenu,
-  LanguageTypeContainer,
-  LanguageTypeTitle,
-  LanguageTypeFlyoutMenu,
-  CustomizeButton,
-  DateRangeContainer,
-  DateRangeTitle,
-  DateRangeFlyoutMenu,
-  PlayTimeContainer,
-  PlaytimeTitle,
-  PlaytimeFlyoutMenu,
-  DownArrow,
-  DisplayAsContainer,
-  DisplayAsTitle,
-  DisplayAsOptions,
-  FlyoutMenuText,
-  FlyoutMenuStat,
-};
+export const RecentReviewListContainer = styled.div`
+  width: 308px;
+`;

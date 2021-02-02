@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { RecentReviewListContainer } from '../../styled';
+
 const RecentReviewList = (props) => (
-  <div className="recent_review_list">
+  <RecentReviewListContainer>
     <span>Recent Review List</span>
-  </div>
+  </RecentReviewListContainer>
 );
 
 export default RecentReviewList;
