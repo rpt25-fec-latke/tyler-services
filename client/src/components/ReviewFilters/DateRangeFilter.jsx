@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DateRangeContainer, DateRangeTitle, DateRangeFlyoutMenu, DownArrow } from '../../styled';
+import { DateRangeContainer, DateRangeTitle, DateRangeFlyoutMenu, DownArrow, StartDateText, EndDateText } from '../../styled';
 
 const DateRangeFilter = ({ updateReviewFilters }) => (
   <DateRangeContainer>
@@ -9,10 +9,10 @@ const DateRangeFilter = ({ updateReviewFilters }) => (
       <DownArrow className="date_down_arrow">&#9662;</DownArrow>
       <DateRangeFlyoutMenu className="date_range_flyout">
         <form>
-          <span>Start date:</span>
+          <StartDateText>Start date:</StartDateText>
           <input type="date" id="start_date" onChange={(e) => { updateReviewFilters(e.target.value, 'startDateRange'); }} />
           <br></br>
-          <span>End date:</span>
+          <EndDateText>End date:</EndDateText>
           <input type="date" id="end_date" onChange={(e) => { updateReviewFilters(e.target.value, 'endDateRange'); }} />
         </form>
       </DateRangeFlyoutMenu>

@@ -80,10 +80,14 @@ class CustomerReviews extends React.Component {
       );
     } else {
       return (
-        <div>
-          <div>Loading...</div>
-          <img src="https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/loading.gif" alt="loading gif"></img>
-        </div>
+        <Reviews>
+          <LeftReviewsContainer />
+          <CenterReviewsContainer>
+            <div>Loading...</div>
+            <img src="https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/loading.gif" alt="loading gif"></img>
+          </CenterReviewsContainer>
+          <RightReviewsContainer />
+        </Reviews>
       );
     }
   }

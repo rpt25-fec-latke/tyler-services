@@ -158,8 +158,28 @@ export const QuestionMarkImage = styled.img`
 // ReveiwsFilters styled
 //----------------------------------------
 
+export const SteamLabsImageContainer = styled.div`
+  height: 38px;
+  line-height: 20px;
+`;
+
 export const SteamLabsImage = styled.img`
   height: 32px;
+`;
+
+export const SteamLabsText = styled.span`
+  white-space: no-wrap;
+  font-size: 12px;
+  text-transform: none;
+  position: relative;
+  display: inline-block;
+  bottom: 4px;
+  left: 5px;
+  color: #19c0d0;
+  &:hover {
+    color: white;
+    cursor: pointer;
+  }
 `;
 
 export const SliderDiv = styled.div`
@@ -223,7 +243,6 @@ export const Track = styled.div`
   top: 0;
   bottom: 0;
   height: 7px;
-  border-radius: 5px;
   background-color: white;
 `;
 
@@ -235,7 +254,6 @@ export const Range = styled.div`
   height: 7px;
   top: 0;
   bottom: 0;
-  border-radius: 5px;
   background-color: #4582a5;
 `;
 
@@ -246,8 +264,7 @@ export const ThumbLeft = styled.div`
   height: 20px;
   background-color: white;
   border-radius: 50%;
-  border: 1px solid black;
-  box-shadow: 0 0 0 0 rgba(98,0,238,.1);
+  box-shadow: 0 0 7px #000000;
   transition: box-shadow .3s ease-in-out;
   left: 25%;
   transform: translate(-15px, -10px);
@@ -260,8 +277,7 @@ export const ThumbRight = styled.div`
   height: 20px;
   background-color: white;
   border-radius: 50%;
-  border: 1px solid black;
-  box-shadow: 0 0 0 0 rgba(98,0,238,.1);
+  box-shadow: 0 0 7px #000000;
   transition: box-shadow .3s ease-in-out;
   right: 25%;
   transform: translate(15px, -10px);
@@ -275,6 +291,8 @@ export const MenuOptions = styled.div`
   background-color: #203042;
   color: #4582a5;
   display: flex;
+  height: 31px;
+  margin-bottom: 30px;
 `;
 
 export const ReviewTypeContainer = styled.div`
@@ -283,12 +301,10 @@ export const ReviewTypeContainer = styled.div`
 export const ReviewTypeTitle = styled.div`
   text-transform: uppercase;
   border-left: solid 1px #2a475e;
-  padding: 10px 20px 15px 5px;
-  margin-bottom: 0px;
-  width: auto;
+  padding: 7px 7px 7px 14px;
+  height: 17px;
+  width: 86.1719px;
   white-space: nowrap;
-  height: 11px;
-  width: 68.1719px;
   font-size: 10px;
   cursor: pointer;
   &:hover {
@@ -308,10 +324,10 @@ export const ReviewTypeFlyoutMenu = styled.div`
   position: relative;
   opacity: 0;
   cursor: default;
-  right: 5px;
-  top: 10px;
+  right: 14px;
+  top: 8px;
   height: 60x;
-  width: 106.406px;
+  width: 115.516px;
   padding: 10px;
   visibility: hidden;
 `;
@@ -322,11 +338,10 @@ export const PurchaseTypeContainer = styled.div`
 export const PurchaseTypeTitle = styled.div`
   text-transform: uppercase;
   border-left: solid 1px #2a475e;
-  padding: 10px 20px 15px 10px;
-  margin-bottom: 0px;
-  width: 84.2969px;
+  padding: 7px 7px 7px 14px;
+  height: 17px;
+  width: 102.297px;
   white-space: nowrap;
-  height: 11px;
   font-size: 10px;
   cursor: pointer;
   &:hover {
@@ -346,12 +361,14 @@ export const PurchaseTypeFlyoutMenu = styled.div`
   position: relative;
   opacity: 0;
   cursor: default;
-  right: 10px;
-  top: 10px;
+  right: 14px;
+  top: 8px;
   height: 60px;
   width: 178.438px;
   padding: 10px;
+  padding-bottom: 15px;
   visibility: hidden;
+  line-height: 20px;
 `;
 
 export const LanguageTypeContainer = styled.div`
@@ -360,12 +377,10 @@ export const LanguageTypeContainer = styled.div`
 export const LanguageTypeTitle = styled.div`
   text-transform: uppercase;
   border-left: solid 1px #2a475e;
-  padding: 10px 20px 15px 10px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  width: 55.5781px;
+  padding: 7px 7px 7px 14px;
+  height: 17px;
+  width: 73.5781px;
   white-space: nowrap;
-  height: 11px;
   font-size: 10px;
   cursor: pointer;
   &:hover {
@@ -385,28 +400,12 @@ export const LanguageTypeFlyoutMenu = styled.div`
   position: relative;
   opacity: 0;
   cursor: default;
-  right: 10px;
-  top: 10px;
+  right: 14px;
+  top: 8px;
   height: 61px;
   width: 166.484px;
   padding: 10px;
   visibility: hidden;
-`;
-
-export const CustomizeButton = styled.button`
-  background-color: #636a70;
-  color: #67c1f5;
-  text-transform: uppercase;
-  font-size: 10px;
-  padding: 2px 4px;
-  border: none;
-  border-radius: 2px;
-  &:hover {
-    color: white;
-    background-color: #67c1f5;
-    padding: 3px 5px;
-    cursor: pointer;
-  }
 `;
 
 export const DateRangeContainer = styled.div`
@@ -415,11 +414,10 @@ export const DateRangeContainer = styled.div`
 export const DateRangeTitle = styled.div`
   text-transform: uppercase;
   border-left: solid 1px #2a475e;
-  padding: 10px 20px 15px 10px;
-  margin-bottom: 0px;
-  width: auto;
+  padding: 7px 7px 7px 14px;
+  height: 17px;
+  width: 82.2812px;
   white-space: nowrap;
-  height: 11px;
   font-size: 10px;
   cursor: pointer;
   &:hover {
@@ -436,10 +434,14 @@ export const DateRangeTitle = styled.div`
 
 export const DateRangeFlyoutMenu = styled.div`
   background-color: #c6d4df;
-  position: absolute;
+  position: relative;
+  right: 14px;
+  top: 8px;
   opacity: 0;
   cursor: default;
   visibility: hidden;
+  width: 211.469px;
+  padding: 10px;
 `;
 
 export const PlayTimeContainer = styled.div`
@@ -449,11 +451,10 @@ export const PlayTimeContainer = styled.div`
 export const PlaytimeTitle = styled.div`
   text-transform: uppercase;
   border-left: solid 1px #2a475e;
-  padding: 10px 20px 15px 10px;
-  margin-bottom: 0px;
-  width: auto;
+  padding: 7px 7px 7px 14px;
+  height: 17px;
+  width: 76.7188px;
   white-space: nowrap;
-  height: 11px;
   font-size: 10px;
   cursor: pointer;
   &:hover {
@@ -470,15 +471,20 @@ export const PlaytimeTitle = styled.div`
 
 export const PlaytimeFlyoutMenu = styled.div`
   background-color: #c6d4df;
-  position: absolute;
+  position: relative;
+  right: 14px;
+  top: 8px;
+  width: 300px;
+  height: 203px;
   opacity: 0;
   cursor: default;
   visibility: hidden;
+  padding: 10px;
 `;
 
 export const DownArrow = styled.span`
   font-size: 13px;
-  padding-left: 5px;
+  padding-left: 8px;
   color: #66c0f4;
 `;
 
@@ -494,7 +500,7 @@ export const DisplayAsTitle = styled.span`
   padding-right: 5px;
   width: auto;
   white-space: nowrap;
-  height: 11px;
+  height: 6px;
   font-size: 10px;
 `;
 
@@ -507,6 +513,22 @@ export const DisplayAsOptions = styled.select`
   border: none;
   border-radius: 2px;
   margin-top: 8px;
+`;
+
+export const CustomizeButton = styled.button`
+  background-color: #636a70;
+  color: #67c1f5;
+  text-transform: uppercase;
+  font-size: 10px;
+  padding: 2px 4px;
+  border: none;
+  border-radius: 2px;
+  &:hover {
+    color: white;
+    background-color: #67c1f5;
+    padding: 3px 5px;
+    cursor: pointer;
+  }
 `;
 
 export const FlyoutMenuText = styled.span`
@@ -527,6 +549,36 @@ export const FlyoutMenuStat = styled.span`
   text-transform: none;
   margin-left: 3px;
   margin-right: 3px;
+`;
+
+export const StartDateText = styled.span`
+  font-family: Arial, Helvetica, sans-serif;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 20px;
+  color: #596b76;
+  text-transform: none;
+  padding-right: 5px;
+`;
+
+export const EndDateText = styled.span`
+  font-family: Arial, Helvetica, sans-serif;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 20px;
+  color: #596b76;
+  text-transform: none;
+  padding-right: 5px;
+`;
+
+export const PlaytimeFlyoutDescriptionText = styled.div`
+  padding-bottom: 10px;
+  text-transform: none;
+  white-space: normal;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #556772;
+  border-bottom: 1px solid #4582a5;
 `;
 
 //----------------------------------------

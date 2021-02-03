@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-import { SteamLabsImage, SliderDiv, SliderInputLeft, SliderInputRight, Slider, Track, Range, ThumbLeft, ThumbRight, PlayTimeContainer, PlaytimeTitle, PlaytimeFlyoutMenu, DownArrow } from '../../styled';
+import { SteamLabsImage, SliderDiv, SliderInputLeft, SliderInputRight, Slider, Track, Range, ThumbLeft, ThumbRight, PlayTimeContainer, PlaytimeTitle, PlaytimeFlyoutMenu, DownArrow, SteamLabsImageContainer, SteamLabsText, PlaytimeFlyoutDescriptionText, FlyoutMenuText } from '../../styled';
 
 class PlaytimeFilter extends React.Component {
   constructor(props) {
@@ -120,18 +120,20 @@ class PlaytimeFilter extends React.Component {
           Playtime
           <DownArrow className="playtime_down_arrow">&#9662;</DownArrow>
           <PlaytimeFlyoutMenu className="playtime_flyout">
-            <SteamLabsImage src={steamLabsLogo} />
-            <span>Brought to you by Steam Labs</span>
-            <div>Filter reviews by the user&apos;s playtime when the review was written:</div>
+            <SteamLabsImageContainer>
+              <SteamLabsImage src={steamLabsLogo} />
+              <SteamLabsText>Brought to you by Steam Labs</SteamLabsText>
+            </SteamLabsImageContainer>
+            <PlaytimeFlyoutDescriptionText>Filter reviews by the user&apos;s playtime when the review was written:</PlaytimeFlyoutDescriptionText>
             <form>
               <input type="radio" value="none" name="playtime" onClick={this.updateViaFormSelection} />
-              <span>No Minimum</span>
+              <FlyoutMenuText>No Minimum</FlyoutMenuText>
               <br></br>
               <input type="radio" value="overOneHour" name="playtime" onClick={this.updateViaFormSelection} />
-              <span>Over 1 hour</span>
+              <FlyoutMenuText>Over 1 hour</FlyoutMenuText>
               <br></br>
               <input type="radio" value="overTenHours" name="playtime" onClick={this.updateViaFormSelection} />
-              <span>Over 10 hours</span>
+              <FlyoutMenuText>Over 10 hours</FlyoutMenuText>
             </form>
             <div className="current_selection_message">
               <span className="minimum_value">{minimum === null ? 'No minimum' : `${minimum} hour(s)`}</span>
