@@ -6,7 +6,7 @@ import LanguageTypeFilter from './LanguageTypeFilter.jsx';
 import DateRangeFilter from './DateRangeFilter.jsx';
 import PlaytimeFilter from './PlaytimeFilter.jsx';
 
-import { ReviewFiltersContainer, MenuOptions, DisplayAsContainer, DisplayAsTitle, DisplayAsOptions } from '../../styled';
+import { ReviewFiltersContainer, MenuOptions, DisplayAsContainer, DisplayAsTitle, DisplayAsOptions, ShowGraphContainer, ShowGraphText, ShowGraphArrow } from '../../styled';
 
 const ReviewFilters = ({ reviewStats, updateReviewFilters, steamLabsLogo, questionMarkImage }) => (
   <ReviewFiltersContainer>
@@ -25,6 +25,12 @@ const ReviewFilters = ({ reviewStats, updateReviewFilters, steamLabsLogo, questi
           <option value="funny">Funny</option>
         </DisplayAsOptions>
       </DisplayAsContainer>
+      <ShowGraphContainer>
+        <ShowGraphText>
+          Show graph
+          <ShowGraphArrow className="show_graph_arrow">&#65086;</ShowGraphArrow>
+        </ShowGraphText>
+      </ShowGraphContainer>
     </MenuOptions>
   </ReviewFiltersContainer>
 );

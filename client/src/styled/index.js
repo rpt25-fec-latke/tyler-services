@@ -581,6 +581,59 @@ export const PlaytimeFlyoutDescriptionText = styled.div`
   border-bottom: 1px solid #4582a5;
 `;
 
+export const MinHours = styled.span`
+  font-weight: 700;
+  font-size: 12px;
+  color: #556772;
+  text-transform: none;
+  padding-right: 5px;
+`;
+
+export const MinMaxBetweenText = styled.span`
+  font-size: 12px;
+  color: #556772;
+  text-transform: none;
+`;
+
+export const MaxHours = styled.span`
+  font-weight: 700;
+  font-size: 12px;
+  color: #556772;
+  text-transform: none;
+  padding-left: 5px;
+`;
+
+export const ShowGraphContainer = styled.div`
+  margin-left: 150px;
+  width: 98.3906px;
+  border-radius: 2px;
+  background-color: rgba(103, 193, 245, 0.2);
+  color: #67c1f5;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  font-size: 12px;
+  &:hover {
+    background: linear-gradient( -60deg, #417a9b 5%,#67c1f5 95%);
+    color: white;
+    cursor: pointer;
+  }
+`;
+
+export const ShowGraphText = styled.span`
+  position: relative;
+  left: 5px;
+  bottom: 3px;
+  margin-bottom: 5px;
+`;
+
+export const ShowGraphArrow = styled.span`
+  position: relative;
+  top: 5px;
+  left: 5px;
+  font-size: 17px;
+  color: #c6d4df;
+`;
+
 //----------------------------------------
 // MainReviewList styled
 //----------------------------------------

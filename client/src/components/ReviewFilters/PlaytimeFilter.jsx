@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 
-import { SteamLabsImage, SliderDiv, SliderInputLeft, SliderInputRight, Slider, Track, Range, ThumbLeft, ThumbRight, PlayTimeContainer, PlaytimeTitle, PlaytimeFlyoutMenu, DownArrow, SteamLabsImageContainer, SteamLabsText, PlaytimeFlyoutDescriptionText, FlyoutMenuText } from '../../styled';
+import { SteamLabsImage, SliderDiv, SliderInputLeft, SliderInputRight, Slider, Track, Range, ThumbLeft, ThumbRight, PlayTimeContainer, PlaytimeTitle, PlaytimeFlyoutMenu, DownArrow, SteamLabsImageContainer, SteamLabsText, PlaytimeFlyoutDescriptionText, FlyoutMenuText, MinHours, MinMaxBetweenText, MaxHours } from '../../styled';
 
 class PlaytimeFilter extends React.Component {
   constructor(props) {
@@ -136,9 +136,9 @@ class PlaytimeFilter extends React.Component {
               <FlyoutMenuText>Over 10 hours</FlyoutMenuText>
             </form>
             <div className="current_selection_message">
-              <span className="minimum_value">{minimum === null ? 'No minimum' : `${minimum} hour(s)`}</span>
-              <span>to</span>
-              <span className="maximum_value">{maximum === null ? 'No maximum' : `${maximum} hour(s)`}</span>
+              <MinHours className="minimum_value">{minimum === null ? 'No minimum' : `${minimum} hour(s)`}</MinHours>
+              <MinMaxBetweenText>to</MinMaxBetweenText>
+              <MaxHours className="maximum_value">{maximum === null ? 'No maximum' : `${maximum} hour(s)`}</MaxHours>
             </div>
             <SliderDiv>
               <SliderInputLeft
