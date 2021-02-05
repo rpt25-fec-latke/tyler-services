@@ -126,7 +126,7 @@ class PlaytimeFilter extends React.Component {
             </SteamLabsImageContainer>
             <PlaytimeFlyoutDescriptionText>Filter reviews by the user&apos;s playtime when the review was written:</PlaytimeFlyoutDescriptionText>
             <form>
-              <input type="radio" value="none" name="playtime" onClick={this.updateViaFormSelection} />
+              <input type="radio" value="none" name="playtime" className="none_playtime_filter" onClick={this.updateViaFormSelection} />
               <FlyoutMenuText>No Minimum</FlyoutMenuText>
               <br></br>
               <input type="radio" value="overOneHour" name="playtime" onClick={this.updateViaFormSelection} />

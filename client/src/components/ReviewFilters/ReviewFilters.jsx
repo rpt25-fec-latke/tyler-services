@@ -18,7 +18,7 @@ const ReviewFilters = ({ reviewStats, updateReviewFilters, steamLabsLogo, questi
       <PlaytimeFilter steamLabsLogo={steamLabsLogo} updateReviewFilters={updateReviewFilters} />
       <DisplayAsContainer>
         <DisplayAsTitle>Display As:</DisplayAsTitle>
-        <DisplayAsOptions defaultValue="Summary" onChange={(e) => { updateReviewFilters(e.target.value, 'displayType'); }}>
+        <DisplayAsOptions className="display_as" defaultValue="Summary" onChange={(e) => { updateReviewFilters(e.target.value, 'displayType'); }}>
           <option value="summary">Summary</option>
           <option value="mostHelpful">Most Helpful</option>
           <option value="recent">Recent</option>

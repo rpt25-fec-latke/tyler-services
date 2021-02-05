@@ -23,6 +23,7 @@
     "react/jsx-closing-bracket-location": "off",
     "no-useless-constructor": "off",
     "prefer-template": "off",
-    "no-underscore-dangle": "off"
+    "no-underscore-dangle": "off",
+    "prefer-destructuring": "off"
   }
 }

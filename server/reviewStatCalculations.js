@@ -35,7 +35,7 @@ const calculateReviewStats = (initialReviewStats) => {
   const totalRecent = initialReviewStats.totalRecentReviewCount;
   const totalPositiveRecent = initialReviewStats.totalPositiveRecentReviewCount;
   const purchaseViaSteamCount = initialReviewStats.isPurchasedViaSteamCount;
-  const englighLanguageReviewCount = initialReviewStats.englishLanguageReviewCount;
+  const englishLanguageReviewCount = initialReviewStats.englishLanguageReviewCount;
 
   const hasOverallReviews = initialReviewStats.totalReviewCount > 0;
   const hasRecentReviews = initialReviewStats.totalRecentReviewCount > 0;
@@ -57,7 +57,7 @@ const calculateReviewStats = (initialReviewStats) => {
   reviewStats.totalRecentReviewCount = totalRecent;
   reviewStats.totalPositiveRecentReviewCount = totalPositiveRecent;
   reviewStats.purchaseViaSteamCount = purchaseViaSteamCount;
-  reviewStats.englighLanguageReviewCount = englighLanguageReviewCount;
+  reviewStats.englishLanguageReviewCount = englishLanguageReviewCount;
   reviewStats.percentPositiveOverall = percentPositiveOverall;
   reviewStats.overallRatingGroup = overallRatingGroup;
   reviewStats.percentPositiveRecent = percentPositiveRecent;

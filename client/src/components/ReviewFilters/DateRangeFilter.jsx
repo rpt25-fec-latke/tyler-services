@@ -10,10 +10,10 @@ const DateRangeFilter = ({ updateReviewFilters }) => (
       <DateRangeFlyoutMenu className="date_range_flyout">
         <form>
           <StartDateText>Start date:</StartDateText>
-          <input type="date" id="start_date" onChange={(e) => { updateReviewFilters(e.target.value, 'startDateRange'); }} />
+          <input type="date" className="start_date_input" onChange={(e) => { updateReviewFilters(e.target.value, 'startDateRange'); }} />
           <br></br>
           <EndDateText>End date:</EndDateText>
-          <input type="date" id="end_date" onChange={(e) => { updateReviewFilters(e.target.value, 'endDateRange'); }} />
+          <input type="date" onChange={(e) => { updateReviewFilters(e.target.value, 'endDateRange'); }} />
         </form>
       </DateRangeFlyoutMenu>
     </DateRangeTitle>

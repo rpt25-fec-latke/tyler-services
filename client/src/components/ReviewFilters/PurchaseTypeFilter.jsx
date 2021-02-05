@@ -9,18 +9,18 @@ const PurchaseTypeFilter = ({ reviewStats, updateReviewFilters, questionMarkImag
       <DownArrow className="purchase_down_arrow">&#9662;</DownArrow>
       <PurchaseTypeFlyoutMenu className="purchase_type_flyout">
         <form>
-          <input type="radio" id="purchase_type_all" value="all" name="purchaseType" onChange={(e) => { updateReviewFilters(e.target.value, 'purchaseType'); }} />
+          <input type="radio" className="purchase_type_all_filter" value="all" name="purchaseType" onChange={(e) => { updateReviewFilters(e.target.value, 'purchaseType'); }} />
           <FlyoutMenuText>All</FlyoutMenuText>
-          <FlyoutMenuStat>{`(${reviewStats.totalReviewCount})`}</FlyoutMenuStat>
+          <FlyoutMenuStat className="purchase_type_all_count_stat">{`(${reviewStats.totalReviewCount})`}</FlyoutMenuStat>
           <br></br>
-          <input type="radio" id="purchase_type_steam" value="steam" name="purchaseType" onChange={(e) => { updateReviewFilters(e.target.value, 'purchaseType'); }} />
+          <input type="radio" value="steam" name="purchaseType" onChange={(e) => { updateReviewFilters(e.target.value, 'purchaseType'); }} />
           <FlyoutMenuText>Steam Purchasers</FlyoutMenuText>
-          <FlyoutMenuStat>{`(${reviewStats.purchaseViaSteamCount})`}</FlyoutMenuStat>
+          <FlyoutMenuStat className="purchase_type_steam_count_stat">{`(${reviewStats.purchaseViaSteamCount})`}</FlyoutMenuStat>
           <QuestionMarkImage src={questionMarkImage} alt="question mark"></QuestionMarkImage>
           <br></br>
-          <input type="radio" id="purchase_type_other" value="other" name="purchaseType" onChange={(e) => { updateReviewFilters(e.target.value, 'purchaseType'); }} />
+          <input type="radio" value="other" name="purchaseType" onChange={(e) => { updateReviewFilters(e.target.value, 'purchaseType'); }} />
           <FlyoutMenuText>Other</FlyoutMenuText>
-          <FlyoutMenuStat>{`(${reviewStats.totalReviewCount - reviewStats.purchaseViaSteamCount})`}</FlyoutMenuStat>
+          <FlyoutMenuStat className="purchase_type_other_count_stat">{`(${reviewStats.totalReviewCount - reviewStats.purchaseViaSteamCount})`}</FlyoutMenuStat>
           <QuestionMarkImage src={questionMarkImage} alt="question mark"></QuestionMarkImage>
         </form>
       </PurchaseTypeFlyoutMenu>
