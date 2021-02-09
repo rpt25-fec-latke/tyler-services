@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.get('/reviews', (req, res) => {
-  const gameId = req.query.id;
+  const gameId = req.query ? req.query.id : 1;
 
   if (gameId < 1 || gameId > 100) {
     res.status(500);

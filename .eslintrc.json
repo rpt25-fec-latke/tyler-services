@@ -19,6 +19,11 @@
     "react/prop-types": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "object-curly-newline": "off",
-    "no-trailing-spaces": "off"
+    "no-trailing-spaces": "off",
+    "react/jsx-closing-bracket-location": "off",
+    "no-useless-constructor": "off",
+    "prefer-template": "off",
+    "no-underscore-dangle": "off",
+    "prefer-destructuring": "off"
   }
 }

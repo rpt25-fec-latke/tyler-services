@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { OverallReviews, RecentReviews, SectionTitle, TotalRatingGroup, RecentRatingGroup, ToolTip, ReviewCount, QuestionMarkImage } from './ReviewsBreakdownStyledComponents';
+import { ReviewsBreakdownContainer, OverallReviews, RecentReviews, SectionTitle, TotalRatingGroup, RecentRatingGroup, ToolTip, ReviewCount, QuestionMarkImage } from '../../styled';
 
-const ReviewsBreakdown = ({ reviewStats, totalType, recentType }) => (
-  <div className="reviews_breakdown">
+const ReviewsBreakdown = ({ reviewStats, totalType, recentType, questionMarkImage }) => (
+  <ReviewsBreakdownContainer>
     <OverallReviews>
       <SectionTitle>Overall Reviews:</SectionTitle>
       <TotalRatingGroup className="total_rating_group" type={totalType}>
@@ -12,7 +12,7 @@ const ReviewsBreakdown = ({ reviewStats, totalType, recentType }) => (
         <ToolTip className="tooltip">{reviewStats.overallReviewsRatingGroupHoverMessage}</ToolTip>
       </TotalRatingGroup>
       <ReviewCount className="total_review_count">{`(${reviewStats.totalReviewCount} reviews)`}</ReviewCount>
-      <QuestionMarkImage src="https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/icon_questionmark.png" alt="question mark"></QuestionMarkImage>
+      <QuestionMarkImage src={questionMarkImage} alt="question mark"></QuestionMarkImage>
       <ToolTip className="tooltip">This summary uses only reviews written by customers that purchased the game directly from Steam.</ToolTip>
     </OverallReviews>
     <RecentReviews>
@@ -22,10 +22,10 @@ const ReviewsBreakdown = ({ reviewStats, totalType, recentType }) => (
         <ToolTip className="tooltip">{reviewStats.recentReviewsRatingGroupHoverMessage}</ToolTip>
       </RecentRatingGroup>
       <ReviewCount className="recent_review_count">{`(${reviewStats.totalRecentReviewCount} reviews)`}</ReviewCount>
-      <QuestionMarkImage src="https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/icon_questionmark.png" alt="question mark"></QuestionMarkImage>
+      <QuestionMarkImage src={questionMarkImage} alt="question mark"></QuestionMarkImage>
       <ToolTip className="tooltip">This summary uses only reviews written by customers that purchased the game directly from Steam.</ToolTip>
     </RecentReviews>
-  </div>
+  </ReviewsBreakdownContainer>
 );
 
 export default ReviewsBreakdown;
