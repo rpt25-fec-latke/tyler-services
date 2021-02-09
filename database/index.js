@@ -17,8 +17,8 @@ const getAllReviewsForGame = (gameId, cb) => {
   });
 };
 
-const getTopTenMostHelpfulLastThirtyDays = (gameId, cb) => {
-  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} AND reviews.reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) ORDER BY reviews.isHelpfulCount DESC LIMIT 10;`, (err, data) => {
+const getTopTenMostHelpful = (gameId, cb) => {
+  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} AND reviewLanguage = 'EN' AND isPurchasedOrActivatedViaSteamFlags = 'purchased' ORDER BY reviews.isHelpfulCount DESC LIMIT 10;`, (err, data) => {
     if (err) {
       cb(err, null);
     } else {
@@ -28,7 +28,7 @@ const getTopTenMostHelpfulLastThirtyDays = (gameId, cb) => {
 };
 
 const getTenMostRecentLastThirtyDays = (gameId, cb) => {
-  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} AND reviews.reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) ORDER BY reviews.reviewDate DESC LIMIT 10;`, (err, data) => {
+  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} AND reviews.reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) AND reviewLanguage = 'EN' AND isPurchasedOrActivatedViaSteamFlags = 'purchased' ORDER BY reviews.reviewDate DESC LIMIT 10;`, (err, data) => {
     if (err) {
       cb(err, null);
     } else {
@@ -48,6 +48,6 @@ const getReviewStatsForGame = (gameId, cb) => {
 };
 
 module.exports.getAllReviewsForGame = getAllReviewsForGame;
-module.exports.getTopTenMostHelpfulLastThirtyDays = getTopTenMostHelpfulLastThirtyDays;
+module.exports.getTopTenMostHelpful = getTopTenMostHelpful;
 module.exports.getTenMostRecentLastThirtyDays = getTenMostRecentLastThirtyDays;
 module.exports.getReviewStatsForGame = getReviewStatsForGame;

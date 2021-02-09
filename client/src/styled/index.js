@@ -445,7 +445,7 @@ export const DateRangeFlyoutMenu = styled.div`
 `;
 
 export const PlayTimeContainer = styled.div`
-  margin-left: 0px
+  margin-left: 0px;
 `;
 
 export const PlaytimeTitle = styled.div`

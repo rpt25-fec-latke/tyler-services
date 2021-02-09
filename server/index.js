@@ -26,12 +26,12 @@ app.get('/reviews', (req, res) => {
       res.send(`Error getting all reviews for game ${gameId}`, err);
     } else {
       responseData.allReviews = data;
-      db.getTopTenMostHelpfulLastThirtyDays(gameId, (err2, data2) => {
+      db.getTopTenMostHelpful(gameId, (err2, data2) => {
         if (err2) {
           console.log(err2);
           res.send(`Error getting top 10 most help last 30 days for game ${gameId}`);
         } else {
-          responseData.mostHelpfulLastThirty = data2;
+          responseData.mostHelpful = data2;
           db.getTenMostRecentLastThirtyDays(gameId, (err3, data3) => {
             if (err3) {
               console.log(err3);
