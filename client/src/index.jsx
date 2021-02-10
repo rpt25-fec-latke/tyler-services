@@ -33,6 +33,15 @@ class CustomerReviews extends React.Component {
           max: null,
         },
       },
+      filteredReviewStats: {
+        totalReviews: 0,
+        totalPositive: 0,
+        percentPositive: 0.00,
+        ratingGroupInfo: {
+          ratingGroup: null,
+          type: null,
+        },
+      },
       questionMarkImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/icon_questionmark.png',
       questionMarkImageDark: 'https://store.cloudflare.steamstatic.com/public/shared/images/ico/icon_questionmark_dark.png',
       steamLabsLogo: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/steam_labs_logo.svg',
@@ -43,6 +52,8 @@ class CustomerReviews extends React.Component {
     this.formatDateForPillText = this.formatDateForPillText.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
     this.updateDisplayAs = this.updateDisplayAs.bind(this);
+    this.getFilteredReviewStats = this.getFilteredReviewStats.bind(this);
+    this.getRatingGroup = this.getRatingGroup.bind(this);
   }
 
   componentDidMount() {
@@ -54,19 +65,68 @@ class CustomerReviews extends React.Component {
       url: `http://localhost:3001/reviews?id=${id}`,
       success: (data) => {
         const { reviewFilters, displayAs } = this.state;
-        console.log(data);
+
         const starterMainReviewsList = this.filterReviews(reviewFilters, displayAs, data.allReviewsOrderedHelpful);
         const starterRecentReviewList = data.allReviewsRecentLastThirty;
+        const filteredReviewStats = this.getFilteredReviewStats(starterMainReviewsList);
+
         this.setState({
           reviews: data,
           mainReviewsList: starterMainReviewsList,
           recentReviewList: starterRecentReviewList,
+          filteredReviewStats: filteredReviewStats,
         });
       },
       error: (err) => {
         window.alert('Invalid game ID, please enter another ID');
       },
     });
+  }
+
+  getRatingGroup(percentPositive) {
+    const ratingGroupInfo = {};
+
+    if (percentPositive > 0.9 && percentPositive <= 1) {
+      ratingGroupInfo.ratingGroup = 'Overwhelmingly Positive';
+      ratingGroupInfo.type = 'positive';
+    } else if (percentPositive > 0.8 && percentPositive <= 0.9) {
+      ratingGroupInfo.ratingGroup = 'Very Positive';
+      ratingGroupInfo.type = 'positive';
+    } else if (percentPositive > 0.6 && percentPositive <= 0.8) {
+      ratingGroupInfo.ratingGroup = 'Mostly Positive';
+      ratingGroupInfo.type = 'positive';
+    } else if (percentPositive > 0.4 && percentPositive <= 0.6) {
+      ratingGroupInfo.ratingGroup = 'Mixed';
+      ratingGroupInfo.type = 'mixed';
+    } else if (percentPositive > 0.2 && percentPositive <= 0.4) {
+      ratingGroupInfo.ratingGroup = 'Mostly Negative';
+      ratingGroupInfo.type = 'negative';
+    } else if (percentPositive > 0.1 && percentPositive <= 0.2) {
+      ratingGroupInfo.ratingGroup = 'Very Negative';
+      ratingGroupInfo.type = 'negative';
+    } else if (percentPositive >= 0 && percentPositive <= 0.1) {
+      ratingGroupInfo.ratingGroup = 'Overwhelmingly Negative';
+      ratingGroupInfo.type = 'negative';
+    }
+
+    return ratingGroupInfo;
+  }
+
+  getFilteredReviewStats(reviewsArray) {
+    const reviewStats = {};
+    reviewStats.totalReviews = reviewsArray.length;
+
+    let totalPositiveReviews = 0;
+    for (let i = 0; i < reviewsArray.length; i++) {
+      const currentReview = reviewsArray[i];
+      currentReview.isRecommended ? totalPositiveReviews++ : null;
+    }
+    reviewStats.totalPositive = totalPositiveReviews;
+
+    reviewStats.percentPositive = (reviewStats.totalPositive / reviewStats.totalReviews).toFixed(2);
+    reviewStats.ratingGroupInfo = this.getRatingGroup(reviewStats.percentPositive);
+
+    return reviewStats;
   }
 
   filterReviews(reviewFilters, displayAs, reviews) {
@@ -137,9 +197,6 @@ class CustomerReviews extends React.Component {
       }
 
       filteredReviews.push(currentReview);
-      if (filteredReviews.length === 10) {
-        break;
-      }
     }
 
     return filteredReviews;
@@ -202,7 +259,7 @@ class CustomerReviews extends React.Component {
     return reviewFilterDisplayPills;
   }
 
-  removeReviewFilterPill(type) {
+  removeReviewFilterPill(e, type) {
     const { reviewFilterDisplayPills } = this.state;
     const reviewFilterArrayPositions = {
       reviewType: 0,
@@ -212,13 +269,39 @@ class CustomerReviews extends React.Component {
       playTime: 4,
     };
 
-    reviewFilterDisplayPills[reviewFilterArrayPositions[type]] = null;
-    return reviewFilterDisplayPills;
+    if (type !== undefined) {
+      reviewFilterDisplayPills[reviewFilterArrayPositions[type]] = null;
+      return reviewFilterDisplayPills;
+    } else if (e.innerText === 'Positive' || e.innerText === 'Negative') {
+      reviewFilterDisplayPills[0] = null;
+      this.setState({
+        reviewFilterDisplayPills: reviewFilterDisplayPills,
+      });
+    } else if (e.innerText.indexOf('Steam') !== -1) {
+      reviewFilterDisplayPills[1] = null;
+      this.setState({
+        reviewFilterDisplayPills: reviewFilterDisplayPills,
+      });
+    } else if (e.innerText === 'Your Languages') {
+      reviewFilterDisplayPills[2] = null;
+      this.setState({
+        reviewFilterDisplayPills: reviewFilterDisplayPills,
+      });
+    } else if (e.innerText.indexOf('View Only') !== -1) {
+      reviewFilterDisplayPills[3] = null;
+      this.setState({
+        reviewFilterDisplayPills: reviewFilterDisplayPills,
+      });
+    } else if (e.innerText.indexOf('Playtime') !== -1) {
+      reviewFilterDisplayPills[4] = null;
+      this.setState({
+        reviewFilterDisplayPills: reviewFilterDisplayPills,
+      });
+    }
   }
 
   updateReviewFilters(value, type) {
     const { reviewFilters, displayAs } = this.state;
-    console.log(value, type);
 
     // Step 1: Update review filters
 
@@ -232,13 +315,14 @@ class CustomerReviews extends React.Component {
     // Step 2: Update review filter display pills
 
     let updatedReviewFilterPills;
-    type === 'playTime' && value.minimum === null && value.maximum === null ? this.removeReviewFilterPill(type) : null;
-    value ? updatedReviewFilterPills = this.addReviewFilterPill(value, type) : updatedReviewFilterPills = this.removeReviewFilterPill(type);
+    type === 'playTime' && value.minimum === null && value.maximum === null ? this.removeReviewFilterPill(null, type) : null;
+    value ? updatedReviewFilterPills = this.addReviewFilterPill(value, type) : updatedReviewFilterPills = this.removeReviewFilterPill(null, type);
 
-    // Step 3: Update review lists
+    // Step 3: Update review lists and review stats
 
     const updatedMainReviewsList = this.filterReviews(reviewFilters, displayAs);
     const updatedRecentReviewsList = this.filterReviews(reviewFilters, 'recentLastThirty');
+    const filteredReviewStats = this.getFilteredReviewStats(updatedMainReviewsList);
 
     // Step 4: Set state with all 3 updated
 
@@ -247,16 +331,18 @@ class CustomerReviews extends React.Component {
       reviewFilterDisplayPills: updatedReviewFilterPills,
       mainReviewsList: updatedMainReviewsList,
       recentReviewsList: updatedRecentReviewsList,
+      filteredReviewStats: filteredReviewStats,
     });
   }
 
   updateDisplayAs(newDisplayAs) {
     const { reviewFilters } = this.state;
 
-    // Step 1: Update review lists
+    // Step 1: Update review lists and reviewstats
 
     const updatedMainReviewsList = this.filterReviews(reviewFilters, newDisplayAs);
     const updatedRecentReviewsList = this.filterReviews(reviewFilters, 'recentLastThirty');
+    const filteredReviewStats = this.getFilteredReviewStats(updatedMainReviewsList);
 
     // Step 2: Set State with the 2 updated
 
@@ -264,12 +350,13 @@ class CustomerReviews extends React.Component {
       mainReviewsList: updatedMainReviewsList,
       recentReviewsList: updatedRecentReviewsList,
       displayAs: newDisplayAs,
+      filteredReviewStats: filteredReviewStats,
     });
   }
 
   render() {
     if (this.state.reviews.allReviews) {
-      const { reviews } = this.state;
+      const { reviews, questionMarkImage, steamLabsLogo, reviewFilterDisplayPills, questionMarkImageDark, filteredReviewStats } = this.state;
       return (
         <Reviews>
           <CenterReviewsContainer>
@@ -278,13 +365,16 @@ class CustomerReviews extends React.Component {
               reviewStats={reviews.reviewStats}
               totalType={reviews.reviewStats.overallRatingGroup.type}
               recentType={reviews.reviewStats.recentRatingGroup.type}
-              questionMarkImage={this.state.questionMarkImage} />
+              questionMarkImage={questionMarkImage} />
             <ReviewFilters
               reviewStats={reviews.reviewStats}
-              steamLabsLogo={this.state.steamLabsLogo}
+              steamLabsLogo={steamLabsLogo}
               updateReviewFilters={this.updateReviewFilters}
               updateDisplayAs={this.updateDisplayAs}
-              questionMarkImage={this.state.questionMarkImageDark} />
+              reviewFilterDisplayPills={reviewFilterDisplayPills}
+              questionMarkImage={questionMarkImageDark}
+              removeReviewFilterPill={this.removeReviewFilterPill}
+              filteredReviewStats={filteredReviewStats} />
             <ReviewListContainer>
               <MainReviewList />
               <RecentReviewList />

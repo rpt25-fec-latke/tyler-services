@@ -5,10 +5,25 @@ import PurchaseTypeFilter from './PurchaseTypeFilter.jsx';
 import LanguageTypeFilter from './LanguageTypeFilter.jsx';
 import DateRangeFilter from './DateRangeFilter.jsx';
 import PlaytimeFilter from './PlaytimeFilter.jsx';
+import ReviewFilterPill from './ReviewFilterPill.jsx';
+import FilteredReviewsStatBreakdown from './FilteredReviewsStatBreakdown.jsx';
 
-import { ReviewFiltersContainer, MenuOptions, DisplayAsContainer, DisplayAsTitle, DisplayAsOptions, ShowGraphContainer, ShowGraphText, ShowGraphArrow } from '../../styled';
+import {
+  ReviewFiltersContainer,
+  MenuOptions,
+  DisplayAsContainer,
+  DisplayAsTitle,
+  DisplayAsOptions,
+  ShowGraphContainer,
+  ShowGraphText,
+  ShowGraphArrow,
+  FilterInfoContainer,
+  ReviewFilterPillsContainer,
+  ReviewFilterPillsTitle,
+  ReviewRatingInfoContainer,
+} from '../../styled';
 
-const ReviewFilters = ({ reviewStats, updateReviewFilters, updateDisplayAs, steamLabsLogo, questionMarkImage }) => (
+const ReviewFilters = ({ reviewStats, updateReviewFilters, updateDisplayAs, steamLabsLogo, questionMarkImage, reviewFilterDisplayPills, removeReviewFilterPill, filteredReviewStats }) => (
   <ReviewFiltersContainer>
     <MenuOptions>
       <ReviewTypeFilter reviewStats={reviewStats} updateReviewFilters={updateReviewFilters} />
@@ -32,6 +47,21 @@ const ReviewFilters = ({ reviewStats, updateReviewFilters, updateDisplayAs, stea
         </ShowGraphText>
       </ShowGraphContainer>
     </MenuOptions>
+    <FilterInfoContainer>
+      <ReviewFilterPillsContainer>
+        <ReviewFilterPillsTitle>
+          Filters
+        </ReviewFilterPillsTitle>
+        {reviewFilterDisplayPills.map((pill, i) => {
+          if (pill) {
+            return (
+              <ReviewFilterPill key={i} index={i} pill={pill} removeReviewFilterPill={removeReviewFilterPill} />
+            );
+          }
+        })}
+      </ReviewFilterPillsContainer>
+      <FilteredReviewsStatBreakdown reviewTypeFilter={reviewFilterDisplayPills[0]} filteredReviewStats={filteredReviewStats} />
+    </FilterInfoContainer>
   </ReviewFiltersContainer>
 );
 

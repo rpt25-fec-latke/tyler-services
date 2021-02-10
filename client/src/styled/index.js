@@ -286,7 +286,6 @@ export const ThumbRight = styled.div`
 `;
 
 export const ReviewFiltersContainer = styled.div`
-  background-image: none;
 `;
 
 export const MenuOptions = styled.div`
@@ -332,6 +331,7 @@ export const ReviewTypeFlyoutMenu = styled.div`
   width: 115.516px;
   padding: 10px;
   visibility: hidden;
+  z-index: 1;
 `;
 
 export const PurchaseTypeContainer = styled.div`
@@ -371,6 +371,7 @@ export const PurchaseTypeFlyoutMenu = styled.div`
   padding-bottom: 15px;
   visibility: hidden;
   line-height: 20px;
+  z-index: 1;
 `;
 
 export const LanguageTypeContainer = styled.div`
@@ -408,6 +409,7 @@ export const LanguageTypeFlyoutMenu = styled.div`
   width: 166.484px;
   padding: 10px;
   visibility: hidden;
+  z-index: 1;
 `;
 
 export const DateRangeContainer = styled.div`
@@ -444,6 +446,7 @@ export const DateRangeFlyoutMenu = styled.div`
   visibility: hidden;
   width: 211.469px;
   padding: 10px;
+  z-index: 1;
 `;
 
 export const PlayTimeContainer = styled.div`
@@ -482,6 +485,7 @@ export const PlaytimeFlyoutMenu = styled.div`
   cursor: default;
   visibility: hidden;
   padding: 10px;
+  z-index: 1;
 `;
 
 export const DownArrow = styled.span`
@@ -615,7 +619,7 @@ export const ShowGraphContainer = styled.div`
   white-space: nowrap;
   font-size: 12px;
   &:hover {
-    background: linear-gradient( -60deg, #417a9b 5%,#67c1f5 95%);
+    background: linear-gradient(-60deg, #417a9b 5%,#67c1f5 95%);
     color: white;
     cursor: pointer;
   }
@@ -634,6 +638,81 @@ export const ShowGraphArrow = styled.span`
   left: 5px;
   font-size: 17px;
   color: #c6d4df;
+`;
+
+export const FilterInfoContainer = styled.div`
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: solid black 1px;
+`;
+
+export const ReviewFilterPillsContainer = styled.div`
+  display: flex;
+`;
+
+export const ReviewFilterPillsTitle = styled.div`
+  color: #c6d4df;
+  font-size: 15px;
+  font-weight: 400;
+  margin-right: 5px;
+  padding-top: 3px;
+  display: inline-block;
+`;
+
+export const ReviewFilterPillContainer = styled.div`
+  border-radius: 2px;
+  background-color: rgba( 255, 255, 255, 0.2 );
+  color: #c6d4df;
+  cursor: pointer;
+  margin-right: 5px;
+  margin-left: 5px;
+  font-size: 12px;
+  padding: 5px 10px 7px 5px;
+  display: inline-block;
+  width: auto;
+  height: 14px;
+`;
+
+export const ReviewFilterPillText = styled.span`
+`;
+
+export const ReviewFilterPillImage = styled.img`
+  position: relative;
+  left: 5px;
+  top: 2px;
+`;
+
+export const FilteredReviewsStatContainer = styled.div`
+  padding-top: 10px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #c6d4df;
+`;
+
+export const FilteredReviewsStatNormalText = styled.span`
+`;
+
+export const FilteredReviewsStatBoldText = styled.b`
+  margin-left: 5px;
+  margin-right: 5px;
+`;
+
+export const FilteredReviewsStatRatingGroup = styled.span`
+  margin-left: 5px;
+  margin-right: 5px;
+  font-weight: 700;
+  cursor: help;
+  color: ${({ type }) => {
+    if (type === 'positive') {
+      return '#66C0F4';
+    } else if (type === 'mixed') {
+      return '#a8926a';
+    } else if (type === 'negative') {
+      return '#c35c2c';
+    } else {
+      return '#929396';
+    }
+  }};
 `;
 
 //----------------------------------------
