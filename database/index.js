@@ -17,8 +17,8 @@ const getAllReviewsForGame = (gameId, cb) => {
   });
 };
 
-const getTopTenMostHelpful = (gameId, cb) => {
-  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} AND reviewLanguage = 'EN' AND isPurchasedOrActivatedViaSteamFlags = 'purchased' ORDER BY reviews.isHelpfulCount DESC LIMIT 10;`, (err, data) => {
+const getAllReviewsOrderedByRecent = (gameId, cb) => {
+  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} ORDER BY reviews.reviewDate DESC;`, (err, data) => {
     if (err) {
       cb(err, null);
     } else {
@@ -27,8 +27,28 @@ const getTopTenMostHelpful = (gameId, cb) => {
   });
 };
 
-const getTenMostRecentLastThirtyDays = (gameId, cb) => {
-  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} AND reviews.reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) AND reviewLanguage = 'EN' AND isPurchasedOrActivatedViaSteamFlags = 'purchased' ORDER BY reviews.reviewDate DESC LIMIT 10;`, (err, data) => {
+const getAllReviewsOrderedByHelpful = (gameId, cb) => {
+  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} ORDER BY reviews.isHelpfulCount DESC;`, (err, data) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, data);
+    }
+  });
+};
+
+const getAllReviewsOrderedByFunny = (gameId, cb) => {
+  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} ORDER BY reviews.isFunnyCount DESC;`, (err, data) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, data);
+    }
+  });
+};
+
+const getAllReviewsRecentLastThirty = (gameId, cb) => {
+  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} AND reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) ORDER BY reviews.reviewDate DESC;`, (err, data) => {
     if (err) {
       cb(err, null);
     } else {
@@ -48,6 +68,8 @@ const getReviewStatsForGame = (gameId, cb) => {
 };
 
 module.exports.getAllReviewsForGame = getAllReviewsForGame;
-module.exports.getTopTenMostHelpful = getTopTenMostHelpful;
-module.exports.getTenMostRecentLastThirtyDays = getTenMostRecentLastThirtyDays;
+module.exports.getAllReviewsOrderedByRecent = getAllReviewsOrderedByRecent;
+module.exports.getAllReviewsOrderedByHelpful = getAllReviewsOrderedByHelpful;
+module.exports.getAllReviewsOrderedByFunny = getAllReviewsOrderedByFunny;
+module.exports.getAllReviewsRecentLastThirty = getAllReviewsRecentLastThirty;
 module.exports.getReviewStatsForGame = getReviewStatsForGame;

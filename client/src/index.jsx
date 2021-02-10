@@ -9,7 +9,7 @@ import ReviewFilters from './components/ReviewFilters/ReviewFilters.jsx';
 import MainReviewList from './components/MainReviewList/MainReviewList.jsx';
 import RecentReviewList from './components/RecentReviewList/RecentReviewList.jsx';
 
-import { Reviews, LeftReviewsContainer, CenterReviewsContainer, RightReviewsContainer, ReviewListContainer, ReviewsTitle } from './styled';
+import { Reviews, CenterReviewsContainer, ReviewListContainer, ReviewsTitle } from './styled';
 
 class CustomerReviews extends React.Component {
   constructor(props) {
@@ -42,6 +42,7 @@ class CustomerReviews extends React.Component {
     this.removeReviewFilterPill = this.removeReviewFilterPill.bind(this);
     this.formatDateForPillText = this.formatDateForPillText.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
+    this.updateDisplayAs = this.updateDisplayAs.bind(this);
   }
 
   componentDidMount() {
@@ -52,17 +53,96 @@ class CustomerReviews extends React.Component {
       method: 'GET',
       url: `http://localhost:3001/reviews?id=${id}`,
       success: (data) => {
+        const { reviewFilters, displayAs } = this.state;
         console.log(data);
+        const starterMainReviewsList = this.filterReviews(reviewFilters, displayAs, data.allReviewsOrderedHelpful);
+        const starterRecentReviewList = data.allReviewsRecentLastThirty;
         this.setState({
           reviews: data,
-          mainReviewsList: data.mostHelpful,
-          recentReviewsList: data.mostRecentLastThirty,
+          mainReviewsList: starterMainReviewsList,
+          recentReviewList: starterRecentReviewList,
         });
       },
       error: (err) => {
         window.alert('Invalid game ID, please enter another ID');
       },
     });
+  }
+
+  filterReviews(reviewFilters, displayAs, reviews) {
+    const { reviews: { allReviewsOrderedRecent, allReviewsOrderedHelpful, allReviewsOrderedFunny, allReviewsRecentLastThirty } } = this.state;
+    const filteredReviews = [];
+    let reviewList;
+
+    if (reviews) {
+      reviewList = reviews;
+    } else if (displayAs === 'recent') {
+      reviewList = allReviewsOrderedRecent;
+    } else if (displayAs === 'mostHelpful' || displayAs === 'summary') {
+      reviewList = allReviewsOrderedHelpful;
+    } else if (displayAs === 'funny') {
+      reviewList = allReviewsOrderedFunny;
+    } else if (displayAs === 'recentLastThirty') {
+      reviewList = allReviewsRecentLastThirty;
+    }
+
+    const { reviewType, purchaseType, languageType, dateRange: { startDateRange, endDateRange }, playTime: { minimum, maximum } } = reviewFilters;
+
+    for (let i = 0; i < reviewList.length; i++) {
+      const currentReview = reviewList[i];
+      const { isRecommended, isPurchasedOrActivatedViaSteamFlags, reviewLanguage, reviewDate, userHoursOnRecordAtTimeOfReview } = currentReview;
+
+      if (reviewType) {
+        if ((reviewType === 'positive' && !isRecommended) || (reviewType === 'negative' && isRecommended)) {
+          continue;
+        }
+      }
+
+      if (purchaseType) {
+        if ((purchaseType === 'steam' && isPurchasedOrActivatedViaSteamFlags === 'activated') || (purchaseType === 'other' && isPurchasedOrActivatedViaSteamFlags === 'purchased')) {
+          continue;
+        }
+      }
+
+      if (languageType) {
+        if (reviewLanguage !== 'EN') {
+          continue;
+        }
+      }
+
+      if (startDateRange) {
+        const startDate = new Date(`${startDateRange}T00:00:00`);
+        if (reviewDate < startDate) {
+          continue;
+        }
+      }
+
+      if (endDateRange) {
+        const endDate = new Date(`${endDateRange}T00:00:00`);
+        if (reviewDate > endDate) {
+          continue;
+        }
+      }
+
+      if (minimum) {
+        if (userHoursOnRecordAtTimeOfReview < minimum) {
+          continue;
+        }
+      }
+
+      if (maximum) {
+        if (userHoursOnRecordAtTimeOfReview > maximum) {
+          continue;
+        }
+      }
+
+      filteredReviews.push(currentReview);
+      if (filteredReviews.length === 10) {
+        break;
+      }
+    }
+
+    return filteredReviews;
   }
 
   formatDateForPillText(date) {
@@ -136,12 +216,11 @@ class CustomerReviews extends React.Component {
     return reviewFilterDisplayPills;
   }
 
-  filterReviews(reviewFilters, reviewSection) {
-    // code
-  }
-
   updateReviewFilters(value, type) {
-    const { reviewFilters } = this.state;
+    const { reviewFilters, displayAs } = this.state;
+    console.log(value, type);
+
+    // Step 1: Update review filters
 
     value === 'all' ? value = null : null;
     if (type === 'startDateRange' || type === 'endDateRange') {
@@ -150,16 +229,41 @@ class CustomerReviews extends React.Component {
       reviewFilters[type] = value;
     }
 
+    // Step 2: Update review filter display pills
+
     let updatedReviewFilterPills;
     type === 'playTime' && value.minimum === null && value.maximum === null ? this.removeReviewFilterPill(type) : null;
     value ? updatedReviewFilterPills = this.addReviewFilterPill(value, type) : updatedReviewFilterPills = this.removeReviewFilterPill(type);
 
-    const mainReviewsList = this.filterReviews(reviewFilters, 'main');
-    const recentReviewList = this.filterReviews(reviewFilters, 'recent');
+    // Step 3: Update review lists
+
+    const updatedMainReviewsList = this.filterReviews(reviewFilters, displayAs);
+    const updatedRecentReviewsList = this.filterReviews(reviewFilters, 'recentLastThirty');
+
+    // Step 4: Set state with all 3 updated
 
     this.setState({
       reviewFilters: reviewFilters,
       reviewFilterDisplayPills: updatedReviewFilterPills,
+      mainReviewsList: updatedMainReviewsList,
+      recentReviewsList: updatedRecentReviewsList,
+    });
+  }
+
+  updateDisplayAs(newDisplayAs) {
+    const { reviewFilters } = this.state;
+
+    // Step 1: Update review lists
+
+    const updatedMainReviewsList = this.filterReviews(reviewFilters, newDisplayAs);
+    const updatedRecentReviewsList = this.filterReviews(reviewFilters, 'recentLastThirty');
+
+    // Step 2: Set State with the 2 updated
+
+    this.setState({
+      mainReviewsList: updatedMainReviewsList,
+      recentReviewsList: updatedRecentReviewsList,
+      displayAs: newDisplayAs,
     });
   }
 
@@ -168,7 +272,6 @@ class CustomerReviews extends React.Component {
       const { reviews } = this.state;
       return (
         <Reviews>
-          <LeftReviewsContainer />
           <CenterReviewsContainer>
             <ReviewsTitle>Customer Reviews</ReviewsTitle>
             <ReviewsBreakdown
@@ -180,24 +283,22 @@ class CustomerReviews extends React.Component {
               reviewStats={reviews.reviewStats}
               steamLabsLogo={this.state.steamLabsLogo}
               updateReviewFilters={this.updateReviewFilters}
+              updateDisplayAs={this.updateDisplayAs}
               questionMarkImage={this.state.questionMarkImageDark} />
             <ReviewListContainer>
               <MainReviewList />
               <RecentReviewList />
             </ReviewListContainer>
           </CenterReviewsContainer>
-          <RightReviewsContainer />
         </Reviews>
       );
     } else {
       return (
         <Reviews>
-          <LeftReviewsContainer />
           <CenterReviewsContainer>
             <div>Loading...</div>
             <img src="https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/loading.gif" alt="loading gif"></img>
           </CenterReviewsContainer>
-          <RightReviewsContainer />
         </Reviews>
       );
     }

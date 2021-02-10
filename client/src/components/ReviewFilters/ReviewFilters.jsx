@@ -8,7 +8,7 @@ import PlaytimeFilter from './PlaytimeFilter.jsx';
 
 import { ReviewFiltersContainer, MenuOptions, DisplayAsContainer, DisplayAsTitle, DisplayAsOptions, ShowGraphContainer, ShowGraphText, ShowGraphArrow } from '../../styled';
 
-const ReviewFilters = ({ reviewStats, updateReviewFilters, steamLabsLogo, questionMarkImage }) => (
+const ReviewFilters = ({ reviewStats, updateReviewFilters, updateDisplayAs, steamLabsLogo, questionMarkImage }) => (
   <ReviewFiltersContainer>
     <MenuOptions>
       <ReviewTypeFilter reviewStats={reviewStats} updateReviewFilters={updateReviewFilters} />
@@ -18,7 +18,7 @@ const ReviewFilters = ({ reviewStats, updateReviewFilters, steamLabsLogo, questi
       <PlaytimeFilter steamLabsLogo={steamLabsLogo} updateReviewFilters={updateReviewFilters} />
       <DisplayAsContainer>
         <DisplayAsTitle>Display As:</DisplayAsTitle>
-        <DisplayAsOptions className="display_as" defaultValue="Summary" onChange={(e) => { updateReviewFilters(e.target.value, 'displayType'); }}>
+        <DisplayAsOptions className="display_as" defaultValue="Summary" onChange={(e) => { updateDisplayAs(e.target.value); }}>
           <option value="summary">Summary</option>
           <option value="mostHelpful">Most Helpful</option>
           <option value="recent">Recent</option>

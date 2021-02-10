@@ -8,6 +8,8 @@ export const Reviews = styled.div`
   border-top: 1px solid black;
   margin-top: 0px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const LeftReviewsContainer = styled.div`

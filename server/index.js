@@ -22,30 +22,40 @@ app.get('/reviews', (req, res) => {
 
   db.getAllReviewsForGame(gameId, (err, data) => {
     if (err) {
-      console.log(err);
-      res.send(`Error getting all reviews for game ${gameId}`, err);
+      res.status(500).send(`Error getting all reviews for game ${gameId}`, err);
     } else {
       responseData.allReviews = data;
-      db.getTopTenMostHelpful(gameId, (err2, data2) => {
+      db.getAllReviewsOrderedByRecent(gameId, (err2, data2) => {
         if (err2) {
-          console.log(err2);
-          res.send(`Error getting top 10 most help last 30 days for game ${gameId}`);
+          res.status(500).send(`Error getting all reviews ordered by recent for game ${gameId}`, err2);
         } else {
-          responseData.mostHelpful = data2;
-          db.getTenMostRecentLastThirtyDays(gameId, (err3, data3) => {
+          responseData.allReviewsOrderedRecent = data2;
+          db.getAllReviewsOrderedByHelpful(gameId, (err3, data3) => {
             if (err3) {
-              console.log(err3);
-              res.send(`Error getting top 10 most recent last 30 days for game ${gameId}`);
+              res.status(500).send(`Error getting all reviews ordered by helpful for game ${gameId}`, err3);
             } else {
-              responseData.mostRecentLastThirty = data3;
-              db.getReviewStatsForGame(gameId, (err4, data4) => {
+              responseData.allReviewsOrderedHelpful = data3;
+              db.getAllReviewsOrderedByFunny(gameId, (err4, data4) => {
                 if (err4) {
-                  res.send(`Error getting review stats for game ${gameId}`);
-                  console.log(err);
+                  res.status(500).send(`Error getting all reviews ordered by funny for game ${gameId}`, err4);
                 } else {
-                  const reviewStats = stats.calculateReviewStats(data4[0]);
-                  responseData.reviewStats = reviewStats;
-                  res.send(responseData);
+                  responseData.allReviewsOrderedFunny = data4;
+                  db.getAllReviewsRecentLastThirty(gameId, (err5, data5) => {
+                    if (err5) {
+                      res.status(500).send(`Error getting all reviews recent last thirty for game ${gameId}`, err5);
+                    } else {
+                      responseData.allReviewsRecentLastThirty = data5;
+                      db.getReviewStatsForGame(gameId, (err6, data6) => {
+                        if (err6) {
+                          res.status(500).send(`Error getting review stats for game ${gameId}`, err6);
+                        } else {
+                          const reviewStats = stats.calculateReviewStats(data6[0]);
+                          responseData.reviewStats = reviewStats;
+                          res.send(responseData);
+                        }
+                      });
+                    }
+                  });
                 }
               });
             }

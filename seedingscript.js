@@ -158,7 +158,7 @@ const seedReviews = (numGames, numUsers) => {
         michelangeloAwardCount: Math.floor(Math.random() * 6),
         madScinetistAwardCount: Math.floor(Math.random() * 6),
         isEarlyAccessReview: Math.ceil(Math.random() * 10) > 5,
-        isPurchasedOrActivatedViaSteamFlags: Math.ceil(Math.random() * 10) > 2 ? 'purchased' : 'activated',
+        isPurchasedOrActivatedViaSteamFlags: Math.ceil(Math.random() * 10) > 3 ? "'purchased'" : "'activated'",
         userHoursOnRecordAtTimeOfReview: (Math.random() * userHoursOnRecord[userId]).toFixed(1),
         reviewLanguage: Math.ceil(Math.random() * 10) < 3 ? otherLanguages[Math.floor(Math.random() * otherLanguages.length)] : "'EN'",
         reviewDate: `'${year}-${month}-${day} 00:00:00'`,

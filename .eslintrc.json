@@ -25,6 +25,7 @@
     "prefer-template": "off",
     "no-underscore-dangle": "off",
     "prefer-destructuring": "off",
-    "no-alert": "off"
+    "no-alert": "off",
+    "no-continue": "off"
   }
 }
