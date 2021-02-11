@@ -8,20 +8,6 @@ import LanguageTypeFilter from './LanguageTypeFilter.jsx';
 import DateRangeFilter from './DateRangeFilter.jsx';
 import PlaytimeFilter from './PlaytimeFilter.jsx';
 
-describe('Display as filter component', () => {
-  it('Should properly call the "updateReviewFilters" function upon a change event occurring on the display as select element', () => {
-    const testFunc = jest.fn();
-    const fakeEvent = { target: { value: 'mostHelpful' } };
-    const component = shallow(<ReviewFilters updateReviewFilters={testFunc} />);
-
-    component
-      .find('.display_as')
-      .simulate('change', fakeEvent);
-
-    expect(testFunc).toHaveBeenCalled();
-  });
-});
-
 describe('Review type filter component', () => {
   it('Should call the "updateReviewFilters" function upon a change event occurring on one of the radio input elements and should also render the reviewStats passed down to it correctly', () => {
     const testFunc = jest.fn();

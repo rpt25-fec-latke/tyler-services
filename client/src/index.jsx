@@ -170,16 +170,22 @@ class CustomerReviews extends React.Component {
         }
       }
 
-      if (startDateRange) {
+      const reviewDateConverted = new Date(reviewDate);
+
+      if (startDateRange && endDateRange) {
         const startDate = new Date(`${startDateRange}T00:00:00`);
-        if (reviewDate < startDate) {
+        const endDate = new Date(`${endDateRange}T00:00:00`);
+        if (reviewDateConverted < startDate || reviewDateConverted > endDate) {
           continue;
         }
-      }
-
-      if (endDateRange) {
+      } else if (startDateRange) {
+        const startDate = new Date(`${startDateRange}T00:00:00`);
+        if (reviewDateConverted < startDate) {
+          continue;
+        }
+      } else if (endDateRange) {
         const endDate = new Date(`${endDateRange}T00:00:00`);
-        if (reviewDate > endDate) {
+        if (reviewDateConverted > endDate) {
           continue;
         }
       }
@@ -269,34 +275,22 @@ class CustomerReviews extends React.Component {
       playTime: 4,
     };
 
+    type === 'endDateRange' || type === 'endDateRange' ? type = 'dateRange' : null;
+
     if (type !== undefined) {
       reviewFilterDisplayPills[reviewFilterArrayPositions[type]] = null;
       return reviewFilterDisplayPills;
     } else if (e.innerText === 'Positive' || e.innerText === 'Negative') {
-      reviewFilterDisplayPills[0] = null;
-      this.setState({
-        reviewFilterDisplayPills: reviewFilterDisplayPills,
-      });
+      this.updateReviewFilters(null, 'reviewType');
     } else if (e.innerText.indexOf('Steam') !== -1) {
-      reviewFilterDisplayPills[1] = null;
-      this.setState({
-        reviewFilterDisplayPills: reviewFilterDisplayPills,
-      });
+      this.updateReviewFilters(null, 'purchaseType');
     } else if (e.innerText === 'Your Languages') {
-      reviewFilterDisplayPills[2] = null;
-      this.setState({
-        reviewFilterDisplayPills: reviewFilterDisplayPills,
-      });
+      this.updateReviewFilters(null, 'languageType');
     } else if (e.innerText.indexOf('View Only') !== -1) {
-      reviewFilterDisplayPills[3] = null;
-      this.setState({
-        reviewFilterDisplayPills: reviewFilterDisplayPills,
-      });
+      this.updateReviewFilters(null, 'startDateRange');
+      this.updateReviewFilters(null, 'endDateRange');
     } else if (e.innerText.indexOf('Playtime') !== -1) {
-      reviewFilterDisplayPills[4] = null;
-      this.setState({
-        reviewFilterDisplayPills: reviewFilterDisplayPills,
-      });
+      this.updateReviewFilters({ minimum: null, maximum: null }, 'playTime');
     }
   }
 
@@ -324,7 +318,7 @@ class CustomerReviews extends React.Component {
     const updatedRecentReviewsList = this.filterReviews(reviewFilters, 'recentLastThirty');
     const filteredReviewStats = this.getFilteredReviewStats(updatedMainReviewsList);
 
-    // Step 4: Set state with all 3 updated
+    // Step 4: Set state with all 4 updated
 
     this.setState({
       reviewFilters: reviewFilters,
@@ -344,7 +338,7 @@ class CustomerReviews extends React.Component {
     const updatedRecentReviewsList = this.filterReviews(reviewFilters, 'recentLastThirty');
     const filteredReviewStats = this.getFilteredReviewStats(updatedMainReviewsList);
 
-    // Step 2: Set State with the 2 updated
+    // Step 2: Set State with the 4 updated
 
     this.setState({
       mainReviewsList: updatedMainReviewsList,

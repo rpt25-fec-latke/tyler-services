@@ -29,6 +29,7 @@
     "no-continue": "off",
     "array-callback-return": "off",
     "consistent-return": "off",
-    "react/no-array-index-key": "off"
+    "react/no-array-index-key": "off",
+    "no-unneeded-ternary": "off"
   }
 }

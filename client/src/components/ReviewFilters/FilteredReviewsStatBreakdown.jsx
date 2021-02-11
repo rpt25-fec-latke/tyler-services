@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FilteredReviewsStatContainer, FilteredReviewsStatNormalText, FilteredReviewsStatBoldText, FilteredReviewsStatRatingGroup } from '../../styled';
 
-const FilteredReviewsStatBreakdown = ({ reviewTypeFilter, filteredReviewStats }) => {
+const FilteredReviewsStatBreakdown = ({ reviewTypeFilter, filteredReviewStats: { totalReviews, ratingGroupInfo: { type, ratingGroup } } }) => {
   if (!reviewTypeFilter) {
     return (
       <FilteredReviewsStatContainer>
@@ -10,16 +10,17 @@ const FilteredReviewsStatBreakdown = ({ reviewTypeFilter, filteredReviewStats })
           Showing
         </FilteredReviewsStatNormalText>
         <FilteredReviewsStatBoldText>
-          {filteredReviewStats.totalReviews}
+          {totalReviews}
         </FilteredReviewsStatBoldText>
         <FilteredReviewsStatNormalText>
-          reviews that match the filters above (
+          reviews that match the filters above
+          {ratingGroup ? ' (' : null}
         </FilteredReviewsStatNormalText>
-        <FilteredReviewsStatRatingGroup type={filteredReviewStats.ratingGroupInfo.type}>
-          {filteredReviewStats.ratingGroupInfo.ratingGroup}
+        <FilteredReviewsStatRatingGroup type={type}>
+          {ratingGroup ? ratingGroup : null}
         </FilteredReviewsStatRatingGroup>
         <FilteredReviewsStatNormalText>
-          )
+          {ratingGroup ? ')' : null}
         </FilteredReviewsStatNormalText>
       </FilteredReviewsStatContainer>
     );

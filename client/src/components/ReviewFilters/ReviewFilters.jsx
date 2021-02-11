@@ -20,7 +20,6 @@ import {
   FilterInfoContainer,
   ReviewFilterPillsContainer,
   ReviewFilterPillsTitle,
-  ReviewRatingInfoContainer,
 } from '../../styled';
 
 const ReviewFilters = ({ reviewStats, updateReviewFilters, updateDisplayAs, steamLabsLogo, questionMarkImage, reviewFilterDisplayPills, removeReviewFilterPill, filteredReviewStats }) => (

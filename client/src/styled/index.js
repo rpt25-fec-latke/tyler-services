@@ -648,6 +648,7 @@ export const FilterInfoContainer = styled.div`
 
 export const ReviewFilterPillsContainer = styled.div`
   display: flex;
+  height: 27px;
 `;
 
 export const ReviewFilterPillsTitle = styled.div`
