@@ -9,17 +9,17 @@ const FilteredReviewsStatBreakdown = ({ reviewTypeFilter, filteredReviewStats: {
         <FilteredReviewsStatNormalText>
           Showing
         </FilteredReviewsStatNormalText>
-        <FilteredReviewsStatBoldText>
+        <FilteredReviewsStatBoldText className="review_filters_section_review_count">
           {totalReviews}
         </FilteredReviewsStatBoldText>
-        <FilteredReviewsStatNormalText>
+        <FilteredReviewsStatNormalText className="opening_review_stat_bracket">
           reviews that match the filters above
           {ratingGroup ? ' (' : null}
         </FilteredReviewsStatNormalText>
-        <FilteredReviewsStatRatingGroup type={type}>
+        <FilteredReviewsStatRatingGroup type={type} className="review_filters_section_rating_group">
           {ratingGroup ? ratingGroup : null}
         </FilteredReviewsStatRatingGroup>
-        <FilteredReviewsStatNormalText>
+        <FilteredReviewsStatNormalText className="closing_review_stat_bracket">
           {ratingGroup ? ')' : null}
         </FilteredReviewsStatNormalText>
       </FilteredReviewsStatContainer>

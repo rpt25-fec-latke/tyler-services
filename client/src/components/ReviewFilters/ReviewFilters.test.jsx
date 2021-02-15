@@ -7,6 +7,7 @@ import PurchaseTypeFilter from './PurchaseTypeFilter.jsx';
 import LanguageTypeFilter from './LanguageTypeFilter.jsx';
 import DateRangeFilter from './DateRangeFilter.jsx';
 import PlaytimeFilter from './PlaytimeFilter.jsx';
+import FilteredReviewsStatBreakdown from './FilteredReviewsStatBreakdown.jsx';
 
 describe('Review type filter component', () => {
   it('Should call the "updateReviewFilters" function upon a change event occurring on one of the radio input elements and should also render the reviewStats passed down to it correctly', () => {
@@ -81,5 +82,22 @@ describe('Date range filter component', () => {
       .simulate('change', fakeEvent);
 
     expect(testFunc).toHaveBeenCalled();
+  });
+});
+
+describe('Filtered reviews stat breakdown component', () => {
+  it('Should properly render when there is no review group selected', () => {
+    const fakeProps = {
+      totalReviews: 44,
+      ratingGroupInfo: {
+        ratingGroup: 'Very Positive',
+      },
+    };
+    const component = shallow(<FilteredReviewsStatBreakdown reviewTypeFilter={null} filteredReviewStats={fakeProps} />);
+
+    expect(component.find('.review_filters_section_review_count').text()).toEqual('44');
+    expect(component.find('.opening_review_stat_bracket').text()).toEqual('reviews that match the filters above (');
+    expect(component.find('.review_filters_section_rating_group').text()).toEqual('Very Positive');
+    expect(component.find('.closing_review_stat_bracket').text()).toEqual(')');
   });
 });
