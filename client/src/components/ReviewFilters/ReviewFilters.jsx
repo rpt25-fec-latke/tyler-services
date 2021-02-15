@@ -22,7 +22,7 @@ import {
   ReviewFilterPillsTitle,
 } from '../../styled';
 
-const ReviewFilters = ({ reviewStats, updateReviewFilters, updateDisplayAs, steamLabsLogo, questionMarkImage, reviewFilterDisplayPills, removeReviewFilterPill, filteredReviewStats }) => (
+const ReviewFilters = ({ reviewStats, updateReviewFilters, updateDisplayAs, steamLabsLogo, questionMarkImage, reviewFilterDisplayPills, removeReviewFilterPill, filteredReviewStats, numFilterPills }) => (
   <ReviewFiltersContainer>
     <MenuOptions>
       <ReviewTypeFilter reviewStats={reviewStats} updateReviewFilters={updateReviewFilters} />
@@ -49,7 +49,7 @@ const ReviewFilters = ({ reviewStats, updateReviewFilters, updateDisplayAs, stea
     <FilterInfoContainer>
       <ReviewFilterPillsContainer>
         <ReviewFilterPillsTitle>
-          Filters
+          {numFilterPills > 0 ? 'Filters' : null}
         </ReviewFilterPillsTitle>
         {reviewFilterDisplayPills.map((pill, i) => {
           if (pill) {

@@ -2,9 +2,10 @@ const mysql = require('mysql');
 const faker = require('faker');
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
+  host: 'fec-reviews.cd9acy3f01qb.us-west-1.rds.amazonaws.com',
+  port: '3306',
+  user: 'admin',
+  password: 'passwrd567',
   database: 'review_data',
 });
 

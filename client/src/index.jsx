@@ -351,6 +351,8 @@ class CustomerReviews extends React.Component {
   render() {
     if (this.state.reviews.allReviews) {
       const { reviews, questionMarkImage, steamLabsLogo, reviewFilterDisplayPills, questionMarkImageDark, filteredReviewStats } = this.state;
+      let numFilterPills = 0;
+      reviewFilterDisplayPills.map((pill) => { pill !== null ? numFilterPills++ : null; });
       return (
         <Reviews>
           <CenterReviewsContainer>
@@ -368,7 +370,8 @@ class CustomerReviews extends React.Component {
               reviewFilterDisplayPills={reviewFilterDisplayPills}
               questionMarkImage={questionMarkImageDark}
               removeReviewFilterPill={this.removeReviewFilterPill}
-              filteredReviewStats={filteredReviewStats} />
+              filteredReviewStats={filteredReviewStats}
+              numFilterPills={numFilterPills} />
             <ReviewListContainer>
               <MainReviewList />
               <RecentReviewList />
