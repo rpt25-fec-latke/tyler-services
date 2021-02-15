@@ -65,15 +65,16 @@ class CustomerReviews extends React.Component {
       url: `http://localhost:3001/reviews?id=${id}`,
       success: (data) => {
         const { reviewFilters, displayAs } = this.state;
+        const { allReviewsOrderedHelpful, allReviewsRecentLastThirty } = data;
 
-        const starterMainReviewsList = this.filterReviews(reviewFilters, displayAs, data.allReviewsOrderedHelpful);
-        const starterRecentReviewList = data.allReviewsRecentLastThirty;
+        const starterMainReviewsList = this.filterReviews(reviewFilters, displayAs, allReviewsOrderedHelpful);
+        const starterRecentReviewList = this.filterReviews(reviewFilters, 'recentLastThirty', allReviewsRecentLastThirty);
         const filteredReviewStats = this.getFilteredReviewStats(starterMainReviewsList);
 
         this.setState({
           reviews: data,
           mainReviewsList: starterMainReviewsList,
-          recentReviewList: starterRecentReviewList,
+          recentReviewsList: starterRecentReviewList,
           filteredReviewStats: filteredReviewStats,
         });
       },
@@ -350,7 +351,7 @@ class CustomerReviews extends React.Component {
 
   render() {
     if (this.state.reviews.allReviews) {
-      const { reviews, questionMarkImage, steamLabsLogo, reviewFilterDisplayPills, questionMarkImageDark, filteredReviewStats } = this.state;
+      const { reviews, questionMarkImage, steamLabsLogo, reviewFilterDisplayPills, questionMarkImageDark, filteredReviewStats, mainReviewsList, recentReviewsList } = this.state;
       let numFilterPills = 0;
       reviewFilterDisplayPills.map((pill) => { pill !== null ? numFilterPills++ : null; });
       return (
@@ -373,8 +374,8 @@ class CustomerReviews extends React.Component {
               filteredReviewStats={filteredReviewStats}
               numFilterPills={numFilterPills} />
             <ReviewListContainer>
-              <MainReviewList />
-              <RecentReviewList />
+              <MainReviewList mainReviewsList={mainReviewsList} />
+              <RecentReviewList recentReviewsList={recentReviewsList} />
             </ReviewListContainer>
           </CenterReviewsContainer>
         </Reviews>

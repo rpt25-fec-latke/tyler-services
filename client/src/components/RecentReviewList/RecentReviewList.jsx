@@ -1,10 +1,12 @@
 import React from 'react';
 
+import RecentReviewListEntry from './RecentReviewListEntry.jsx';
+
 import { RecentReviewListContainer } from '../../styled';
 
-const RecentReviewList = (props) => (
+const RecentReviewList = ({ recentReviewsList }) => (
   <RecentReviewListContainer>
-    <span>Recent Review List</span>
+    {recentReviewsList.map((review, i) => (i < 10 ? <RecentReviewListEntry key={i} review={review} /> : null))}
   </RecentReviewListContainer>
 );
 
