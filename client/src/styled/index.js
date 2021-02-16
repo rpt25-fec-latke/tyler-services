@@ -12,16 +12,8 @@ export const Reviews = styled.div`
   align-items: center;
 `;
 
-export const LeftReviewsContainer = styled.div`
-  width: 475px;
-`;
-
 export const CenterReviewsContainer = styled.div`
   width: 940px;
-`;
-
-export const RightReviewsContainer = styled.div`
-  width: 320px;
 `;
 
 export const ReviewListContainer = styled.div`
@@ -720,6 +712,10 @@ export const FilteredReviewsStatRatingGroup = styled.span`
 // MainReviewList styled
 //----------------------------------------
 
+export const MainReviewListContainer = styled.div`
+  width: 616px;
+`;
+
 export const MainReviewsSectionTitle = styled.div`
   font-family: "Motiva Sans", Sans-serif;
   text-transform: uppercase;
@@ -731,13 +727,243 @@ export const MainReviewsSectionTitle = styled.div`
   height: 20px;
 `;
 
-export const MainReviewListContainer = styled.div`
-  width: 616px;
+export const MainReviewListReviewBoxContainer = styled.div`
+  display: flex;
+  background-color: rgba( 0, 0, 0, 0.2 );
+  background-image: url('https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/maincol_gradient_rule.png');
+  background-position-x: 0%;
+  background-position-y: 0%;
+  margin-bottom: 26px;
+  background-position: top left;
+  color: #c6d4df;
+  background-repeat: no-repeat;
+  &:hover .user_info_container {
+    opacity: 1;
+  }
+`;
+
+export const MainReviewListUserInfo = styled.div`
+  width: 184px;
+`;
+
+export const MainReviewListUserInfoContainer = styled.div`
+  padding: 8px;
+  height: 48px;
+  opacity: .7;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+export const MainReviewListUserInfoGeneral = styled.div`
+  display: flex;
+`;
+
+export const MainReviewListUserProfilePicContainer = styled.div`
+  padding-right: 8px;
+  margin-left: -2px;
+  height: 32px;
+  width: 38px;
+  &:hover .user_profile_hover_box_profile_pic {
+    visibility: visible;
+  }
+`;
+
+export const MainReviewListUserProfilePic = styled.img`
+  height: 32px;
+  width: 32px;
+  border: 2.5px solid;
+  margin: 1px;
+  object-fit: cover;
+  border-image-source: ${({ online }) => {
+    if (online === 1) {
+      return 'linear-gradient(rgb(65, 119, 143) 5%, rgb(61, 105, 123) 95%)';
+    } else {
+      return 'linear-gradient(rgb(81, 81, 81) 5%, rgb(71, 71, 71) 95%)';
+    }
+  }};
+  border-image-slice: 1;
+  cursor: pointer;
+`;
+
+export const MainReviewListUserNameAndProductCount = styled.div`
+  width: 125px;
+`;
+
+export const MainReviewListUserName = styled.div`
+  color: #c1dbf4;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  height: 15px;
+  &:hover .user_profile_hover_box_username {
+    visibility: visible;
+  }
+`;
+
+export const MainReviewListProductCount = styled.div`
+  color: #c1dbf4;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 5px;
+  &:hover {
+    color: #67c1f5;
+  }
+`;
+
+export const MainReviewListReviewCount = styled.div`
+  color: #c1dbf4;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 17px;
+  width: 55px;
+  font-family: Arial, Helvetica, sans-serif;
+  &:hover {
+    color: #67c1f5;
+  }
+`;
+
+export const MainReviewListUserProfilePicHoverBox = styled.div`
+  position: relative;
+  display: flex;
+  background: rgb(100,96,96);
+  background: linear-gradient(0deg, rgba(100,96,96,1) 14%, rgba(34,37,43,1) 40%, rgba(100,96,96,1) 40%, rgba(93,90,91,1) 61%);
+  height: 100px;
+  width: 100px;
+  right: 336px;
+  bottom: 50px;
+  width: 330px;
+  height: 169px;
+  visibility: hidden;
+  z-index: 1;
+  padding-left: 15px;
+  padding-top: 15px;
+  overflow: hidden;
+`;
+
+export const MainReviewListUsernameHoverBox = styled.div`
+  position: relative;
+  display: flex;
+  background: rgb(100,96,96);
+  background: linear-gradient(0deg, rgba(100,96,96,1) 14%, rgba(34,37,43,1) 40%, rgba(100,96,96,1) 40%, rgba(93,90,91,1) 61%);
+  height: 100px;
+  width: 100px;
+  right: 336px;
+  bottom: 40px;
+  width: 330px;
+  height: 169px;
+  visibility: hidden;
+  z-index: 1;
+  padding-left: 15px;
+  padding-top: 15px;
+  overflow: hidden;
+`;
+
+export const UserInfoHoverBoxProfilePic = styled.img`
+  height: 110px;
+  width: 110px;
+  border: 5px solid;
+  border-image-source: ${({ online }) => {
+    if (online === 1) {
+      return 'linear-gradient(rgb(65, 119, 143) 5%, rgb(61, 105, 123) 95%)';
+    } else {
+      return 'linear-gradient(rgb(81, 81, 81) 5%, rgb(71, 71, 71) 95%)';
+    }
+  }};
+  border-image-slice: 1;
+`;
+
+export const UserInfoHoverBoxUsername = styled.div`
+  color: ${({ online }) => {
+    if (online === 1) {
+      return '#66c0f4';
+    } else {
+      return '#807e7e';
+    }
+  }};
+  text-shadow: 2px 2px 5px black;
+  font-weight: normal;
+  font-size: 25px;
+  padding-top: 25px;
+  padding-left: 10px;
+`;
+
+export const UserInfoHoverBoxOnlineStatus = styled.div`
+  color: ${({ online }) => {
+    if (online === 1) {
+      return '#66c0f4';
+    } else {
+      return '#807e7e';
+    }
+  }};
+  text-shadow: 2px 2px 5px black;
+  font-size: 12px;
+  font-weight: normal;
+  padding-left: 10px;
+  padding-top: 5px;
+`;
+
+export const UserInfoHoverBoxSteamLevel = styled.div`
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 10px;
+  width: 23px;
+  height: 20px;
+  text-align: center;
+  padding-top: 3px;
+  border: 2px solid;
+  border-color: ${({ steamLevel }) => {
+    if (steamLevel < 10) {
+      return '#999999';
+    } else if (steamLevel < 20 && steamLevel >= 10) {
+      return '#bd2d48';
+    } else if (steamLevel < 30 && steamLevel >= 20) {
+      return '#d25d48';
+    } else if (steamLevel < 40 && steamLevel >= 30) {
+      return '#fad129';
+    } else if (steamLevel < 50 && steamLevel >= 40) {
+      return '#67895c';
+    } else if (steamLevel < 60 && steamLevel >= 50) {
+      return '#548dd9';
+    } else if (steamLevel < 70 && steamLevel >= 60) {
+      return '#7953c4';
+    } else if (steamLevel < 80 && steamLevel >= 70) {
+      return '#bc56c6';
+    } else if (steamLevel < 90 && steamLevel >= 80) {
+      return '#4f2239';
+    } else if (steamLevel < 100 && steamLevel >= 90) {
+      return '#977b53';
+    }
+  }};
+  border-radius: 50%;
+  color: white;
+  font-size: 16px;
+  font-weight: normal;
+`;
+
+export const UserInfoHoverBoxSteamLevelText = styled.div`
+  position: relative;
+  left: 60px;
+  bottom: 22px;
+  color: #b5b5b5;
+  font-size: 16px;
+  font-weight: normal;
+`;
+
+export const MainReviewListReviewInfo = styled.div`
 `;
 
 //----------------------------------------
 // RecentReviewList styled
 //----------------------------------------
+
+export const RecentReviewListContainer = styled.div`
+  width: 308px;
+  margin-left: 14px;
+`;
 
 export const RecentReviewsSectionTitle = styled.div`
   font-family: "Motiva Sans", Sans-serif;
@@ -748,8 +974,4 @@ export const RecentReviewsSectionTitle = styled.div`
   font-weight: 400;
   padding-bottom: 5px;
   height: 20px;
-`;
-
-export const RecentReviewListContainer = styled.div`
-  width: 308px;
 `;

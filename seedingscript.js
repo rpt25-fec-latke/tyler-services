@@ -69,7 +69,7 @@ const seedUsers = (numUsers) => {
       reviewCount: Math.floor(Math.random() * 71),
       profilePictureUrl: `'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/images+(${startingUserId}).jpeg'`,
       hoursOnRecord: ((Math.random() * 100) + 5).toFixed(1),
-      steamLevel: Math.ceil(Math.random() * 1050),
+      steamLevel: Math.ceil(Math.random() * 99),
       isOnline: Math.floor(Math.random() * 11) > 5,
     };
 
