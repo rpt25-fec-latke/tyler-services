@@ -720,6 +720,17 @@ export const FilteredReviewsStatRatingGroup = styled.span`
 // MainReviewList styled
 //----------------------------------------
 
+export const MainReviewsSectionTitle = styled.div`
+  font-family: "Motiva Sans", Sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: white;
+  letter-spacing: 2px;
+  font-weight: 400;
+  padding-bottom: 5px;
+  height: 20px;
+`;
+
 export const MainReviewListContainer = styled.div`
   width: 616px;
 `;
@@ -727,6 +738,17 @@ export const MainReviewListContainer = styled.div`
 //----------------------------------------
 // RecentReviewList styled
 //----------------------------------------
+
+export const RecentReviewsSectionTitle = styled.div`
+  font-family: "Motiva Sans", Sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: white;
+  letter-spacing: 2px;
+  font-weight: 400;
+  padding-bottom: 5px;
+  height: 20px;
+`;
 
 export const RecentReviewListContainer = styled.div`
   width: 308px;

@@ -2,11 +2,14 @@ import React from 'react';
 
 import RecentReviewListEntry from './RecentReviewListEntry.jsx';
 
-import { RecentReviewListContainer } from '../../styled';
+import { RecentReviewListContainer, RecentReviewsSectionTitle } from '../../styled';
 
-const RecentReviewList = ({ recentReviewsList }) => (
+const RecentReviewList = ({ recentReviewsList, displayAs }) => (
   <RecentReviewListContainer>
-    {recentReviewsList.map((review, i) => (i < 10 ? <RecentReviewListEntry key={i} review={review} /> : null))}
+    <RecentReviewsSectionTitle>
+      {displayAs === 'summary' ? 'Most Helpful Reviews' : null}
+    </RecentReviewsSectionTitle>
+    {displayAs === 'summary' ? recentReviewsList.map((review, i) => (i < 10 ? <RecentReviewListEntry key={i} review={review} /> : null)) : null}
   </RecentReviewListContainer>
 );
 
