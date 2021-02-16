@@ -2,7 +2,7 @@ import React from 'react';
 
 const MainReviewListEntry = ({ review }) => (
   <div>
-    {JSON.stringify(review)}
+    {JSON.stringify(review.userName)}
   </div>
 );
 

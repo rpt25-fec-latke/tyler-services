@@ -8,6 +8,7 @@ import ReviewsBreakdown from './components/ReviewsBreakdown/ReviewsBreakdown.jsx
 import ReviewFilters from './components/ReviewFilters/ReviewFilters.jsx';
 import MainReviewList from './components/MainReviewList/MainReviewList.jsx';
 import RecentReviewList from './components/RecentReviewList/RecentReviewList.jsx';
+import GlobalStyle from './styled/globalStyles.js';
 
 import { Reviews, CenterReviewsContainer, ReviewListContainer, ReviewsTitle } from './styled';
 
@@ -42,8 +43,8 @@ class CustomerReviews extends React.Component {
           type: null,
         },
       },
-      questionMarkImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/user-profile-pictures/icon_questionmark.png',
-      questionMarkImageDark: 'https://store.cloudflare.steamstatic.com/public/shared/images/ico/icon_questionmark_dark.png',
+      questionMarkImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_questionmark.png',
+      questionMarkImageDark: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_questionmark_dark.png',
       steamLabsLogo: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/steam_labs_logo.svg',
     };
     this.updateReviewFilters = this.updateReviewFilters.bind(this);
@@ -57,12 +58,13 @@ class CustomerReviews extends React.Component {
   }
 
   componentDidMount() {
-    const url = window.location.href;
-    const id = url.indexOf('?id=') !== -1 ? url.slice(url.indexOf('?id=') + 4) : 1;
+    const fullUrl = window.location.href;
+    const coreUrl = fullUrl.slice(0, fullUrl.indexOf(':3'));
+    const id = fullUrl.indexOf('?id=') !== -1 ? fullUrl.slice(fullUrl.indexOf('?id=') + 4) : 1;
 
     $.ajax({
       method: 'GET',
-      url: `http://localhost:3001/reviews?id=${id}`,
+      url: `${coreUrl}:3001/reviews?id=${id}`,
       success: (data) => {
         const { reviewFilters, displayAs } = this.state;
         const { allReviewsOrderedHelpful, allReviewsRecentLastThirty } = data;
@@ -356,6 +358,7 @@ class CustomerReviews extends React.Component {
       reviewFilterDisplayPills.map((pill) => { pill !== null ? numFilterPills++ : null; });
       return (
         <Reviews>
+          <GlobalStyle />
           <CenterReviewsContainer>
             <ReviewsTitle>Customer Reviews</ReviewsTitle>
             <ReviewsBreakdown
