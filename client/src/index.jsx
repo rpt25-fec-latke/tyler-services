@@ -21,6 +21,31 @@ class CustomerReviews extends React.Component {
       recentReviewsList: [],
       displayAs: 'summary',
       reviewFilterDisplayPills: [null, 'Steam Purchasers', 'Your Languages', null, null],
+      awardImages: {
+        deepThoughtsAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/deep-thoughts.png',
+        extraHelpfulAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/extra-helpful.png',
+        fancyPantsAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/fancy-pants.png',
+        goldenUnicornAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/golden-unicorn.png',
+        gottaHaveItAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/gotta-have-it.png',
+        heartWarmingAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/heartwarming.png',
+        hilariousAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/hilarious.png',
+        hotTakeAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/hot-take.png',
+        isCleverAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/clever.png',
+        jesterAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/jester.png',
+        madScinetistAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/mad-scientist.png',
+        michelangeloAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/michelangelo.png',
+        mindBlownAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/mind-blown.png',
+        poetryAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/poetry.png',
+        saucyAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/saucy.png',
+        slowClapAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/slow-clap.png',
+        superStarAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/super-star.png',
+        takeMyPointsAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/take-my-points.png',
+        treasureAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/treasure.png',
+        warmBlanketAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/warm-blanket.png',
+        whoaAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/whoa.png',
+        wholesomeAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/wholesome.png',
+        wildAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/wild.png',
+      },
       reviewFilters: {
         reviewType: null,
         purchaseType: 'steam',
@@ -46,6 +71,10 @@ class CustomerReviews extends React.Component {
       questionMarkImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_questionmark.png',
       questionMarkImageDark: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_questionmark_dark.png',
       steamLabsLogo: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/steam_labs_logo.svg',
+      thumbsUpLogo: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_thumbsUp_v6.png',
+      thumbsDownLogo: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_thumbsDown_v6.png',
+      purchasedViaSteamImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_review_steam.png',
+      activatedViaSteamImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_review_key.png',
     };
     this.updateReviewFilters = this.updateReviewFilters.bind(this);
     this.addReviewFilterPill = this.addReviewFilterPill.bind(this);
@@ -354,7 +383,22 @@ class CustomerReviews extends React.Component {
 
   render() {
     if (this.state.reviews.allReviews) {
-      const { reviews, questionMarkImage, steamLabsLogo, reviewFilterDisplayPills, questionMarkImageDark, filteredReviewStats, mainReviewsList, recentReviewsList, displayAs } = this.state;
+      const {
+        reviews,
+        questionMarkImage,
+        steamLabsLogo,
+        reviewFilterDisplayPills,
+        questionMarkImageDark,
+        filteredReviewStats,
+        mainReviewsList,
+        recentReviewsList,
+        displayAs,
+        thumbsUpLogo,
+        thumbsDownLogo,
+        purchasedViaSteamImage,
+        activatedViaSteamImage,
+        awardImages,
+      } = this.state;
       let numFilterPills = 0;
       reviewFilterDisplayPills.map((pill) => { pill !== null ? numFilterPills++ : null; });
       return (
@@ -378,7 +422,15 @@ class CustomerReviews extends React.Component {
               filteredReviewStats={filteredReviewStats}
               numFilterPills={numFilterPills} />
             <ReviewListContainer>
-              <MainReviewList mainReviewsList={mainReviewsList} displayAs={displayAs} />
+              <MainReviewList
+                mainReviewsList={mainReviewsList}
+                displayAs={displayAs}
+                thumbsUpLogo={thumbsUpLogo}
+                thumbsDownLogo={thumbsDownLogo}
+                purchasedViaSteamImage={purchasedViaSteamImage}
+                activatedViaSteamImage={activatedViaSteamImage}
+                awardImages={awardImages}
+              />
               <RecentReviewList recentReviewsList={recentReviewsList} displayAs={displayAs} />
             </ReviewListContainer>
           </CenterReviewsContainer>
