@@ -1,9 +1,10 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
+  host: 'fec-reviews.cd9acy3f01qb.us-west-1.rds.amazonaws.com',
+  port: '3306',
+  user: 'admin',
+  password: 'passwrd567',
   database: 'review_data',
 });
 
@@ -17,8 +18,8 @@ const getAllReviewsForGame = (gameId, cb) => {
   });
 };
 
-const getTopTenMostHelpfulLastThirtyDays = (gameId, cb) => {
-  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} AND reviews.reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) ORDER BY reviews.isHelpfulCount DESC LIMIT 10;`, (err, data) => {
+const getAllReviewsOrderedByRecent = (gameId, cb) => {
+  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} ORDER BY reviews.reviewDate DESC;`, (err, data) => {
     if (err) {
       cb(err, null);
     } else {
@@ -27,8 +28,28 @@ const getTopTenMostHelpfulLastThirtyDays = (gameId, cb) => {
   });
 };
 
-const getTenMostRecentLastThirtyDays = (gameId, cb) => {
-  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} AND reviews.reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) ORDER BY reviews.reviewDate DESC LIMIT 10;`, (err, data) => {
+const getAllReviewsOrderedByHelpful = (gameId, cb) => {
+  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} ORDER BY reviews.isHelpfulCount DESC;`, (err, data) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, data);
+    }
+  });
+};
+
+const getAllReviewsOrderedByFunny = (gameId, cb) => {
+  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} ORDER BY reviews.isFunnyCount DESC;`, (err, data) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, data);
+    }
+  });
+};
+
+const getAllReviewsRecentLastThirty = (gameId, cb) => {
+  connection.query(`SELECT * FROM reviews INNER JOIN users ON reviews.userId = users.userId WHERE reviews.gameId = ${gameId} AND reviewDate >= (CURRENT_DATE - INTERVAL 30 DAY) ORDER BY reviews.reviewDate DESC;`, (err, data) => {
     if (err) {
       cb(err, null);
     } else {
@@ -48,6 +69,8 @@ const getReviewStatsForGame = (gameId, cb) => {
 };
 
 module.exports.getAllReviewsForGame = getAllReviewsForGame;
-module.exports.getTopTenMostHelpfulLastThirtyDays = getTopTenMostHelpfulLastThirtyDays;
-module.exports.getTenMostRecentLastThirtyDays = getTenMostRecentLastThirtyDays;
+module.exports.getAllReviewsOrderedByRecent = getAllReviewsOrderedByRecent;
+module.exports.getAllReviewsOrderedByHelpful = getAllReviewsOrderedByHelpful;
+module.exports.getAllReviewsOrderedByFunny = getAllReviewsOrderedByFunny;
+module.exports.getAllReviewsRecentLastThirty = getAllReviewsRecentLastThirty;
 module.exports.getReviewStatsForGame = getReviewStatsForGame;

@@ -1,10 +1,12 @@
 import React from 'react';
 
+import MainReviewListEntry from './MainReviewListEntry.jsx';
+
 import { MainReviewListContainer } from '../../styled';
 
-const MainReviewList = (props) => (
+const MainReviewList = ({ mainReviewsList }) => (
   <MainReviewListContainer>
-    <span>Helpful Review List</span>
+    {mainReviewsList.map((review, i) => (i < 10 ? <MainReviewListEntry key={i} review={review} /> : null))}
   </MainReviewListContainer>
 );
 

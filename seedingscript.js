@@ -2,9 +2,10 @@ const mysql = require('mysql');
 const faker = require('faker');
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
+  host: 'fec-reviews.cd9acy3f01qb.us-west-1.rds.amazonaws.com',
+  port: '3306',
+  user: 'admin',
+  password: 'passwrd567',
   database: 'review_data',
 });
 
@@ -98,6 +99,10 @@ const seedReviews = (numGames, numUsers) => {
   const otherLanguages = ["'ZH'", "'ES'", "'AR'", "'HI'", "'BN'", "'PT'", "'RU'", "'JA'"];
   let startingGameId = 1;
 
+  const timestampToday = new Date();
+  const timestampTwoMonthsAgo = new Date();
+  timestampTwoMonthsAgo.setMonth(timestampTwoMonthsAgo.getMonth() - 1);
+
   while (startingGameId <= numGames) {
     let numReviews = Math.floor(Math.random() * 51);
     const arrayOfUserIds = generateArrayOfUserIds(numUsers);
@@ -105,7 +110,19 @@ const seedReviews = (numGames, numUsers) => {
     while (numReviews > 0) {
       const userId = arrayOfUserIds[Math.floor(Math.random() * arrayOfUserIds.length)];
       arrayOfUserIds.splice(userId - 1, 1);
-      const date = faker.date.between(releaseDates[startingGameId], '2021-01-18');
+
+      // added to generate more recent reviews since lack of is making one of my sections boring
+      const reviewType = Math.ceil(Math.random() * 10) > 4 ? 'recent' : 'normal';
+      let startDate;
+      if (reviewType === 'recent' && timestampTwoMonthsAgo < releaseDates[startingGameId]) {
+        startDate = releaseDates[startingGameId];
+      } else if (reviewType === 'recent') {
+        startDate = timestampTwoMonthsAgo;
+      } else {
+        startDate = releaseDates[startingGameId];
+      }
+
+      const date = faker.date.between(startDate, timestampToday);
       const year = date.getFullYear();
       const month = (date.getMonth() + 1).toString().length === 1 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
       const day = (date.getDay() + 1).toString().length === 1 ? `0${date.getDay() + 1}` : date.getDay() + 1;
@@ -113,8 +130,8 @@ const seedReviews = (numGames, numUsers) => {
       const data = {
         userId: userId,
         gameId: startingGameId,
-        reviewText: Math.floor(Math.random() * 11) > 5 ? `'${faker.lorem.paragraphs()}'` : `'${faker.lorem.paragraph()}'`,
-        isRecommended: Math.floor(Math.random() * 11) > 5,
+        reviewText: Math.ceil(Math.random() * 10) > 5 ? `'${faker.lorem.paragraphs()}'` : `'${faker.lorem.paragraph()}'`,
+        isRecommended: Math.ceil(Math.random() * 10) > 3,
         commentCount: Math.floor(Math.random() * 11),
         isHelpfulCount: Math.floor(Math.random() * 11),
         isFunnyCount: Math.floor(Math.random() * 11),
@@ -141,10 +158,10 @@ const seedReviews = (numGames, numUsers) => {
         gottaHaveItAwardCount: Math.floor(Math.random() * 6),
         michelangeloAwardCount: Math.floor(Math.random() * 6),
         madScinetistAwardCount: Math.floor(Math.random() * 6),
-        isEarlyAccessReview: Math.floor(Math.random() * 11) > 5,
-        isPurchasedOrActivatedViaSteamFlags: `'${['purchased', 'activated'][Math.floor(Math.random() * 2)]}'`,
+        isEarlyAccessReview: Math.ceil(Math.random() * 10) > 5,
+        isPurchasedOrActivatedViaSteamFlags: Math.ceil(Math.random() * 10) > 3 ? "'purchased'" : "'activated'",
         userHoursOnRecordAtTimeOfReview: (Math.random() * userHoursOnRecord[userId]).toFixed(1),
-        reviewLanguage: Math.floor(Math.random() * 11) > 8 ? otherLanguages[Math.floor(Math.random() * otherLanguages.length)] : "'EN'",
+        reviewLanguage: Math.ceil(Math.random() * 10) < 3 ? otherLanguages[Math.floor(Math.random() * otherLanguages.length)] : "'EN'",
         reviewDate: `'${year}-${month}-${day} 00:00:00'`,
       };
 

@@ -24,6 +24,12 @@
     "no-useless-constructor": "off",
     "prefer-template": "off",
     "no-underscore-dangle": "off",
-    "prefer-destructuring": "off"
+    "prefer-destructuring": "off",
+    "no-alert": "off",
+    "no-continue": "off",
+    "array-callback-return": "off",
+    "consistent-return": "off",
+    "react/no-array-index-key": "off",
+    "no-unneeded-ternary": "off"
   }
 }

@@ -109,7 +109,7 @@ class PlaytimeFilter extends React.Component {
       min = this.state.minimum;
       max = this.state.maximum;
     }
-    this.props.updateReviewFilters({ minimum: min, maximum: max }, 'playtime');
+    this.props.updateReviewFilters({ minimum: min, maximum: max }, 'playTime');
   }
 
   render() {

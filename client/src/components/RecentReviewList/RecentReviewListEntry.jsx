@@ -1,9 +1,9 @@
 import React from 'react';
 
-const MainReviewListEntry = ({ review }) => (
+const RecentReviewListEntry = ({ review }) => (
   <div>
     {JSON.stringify(review.userName)}
   </div>
 );
 
-export default MainReviewListEntry;
+export default RecentReviewListEntry;
