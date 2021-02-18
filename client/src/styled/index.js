@@ -32,6 +32,19 @@ export const ReviewsTitle = styled.h2`
   margin: 0px;
 `;
 
+export const BrowseAllReviewsText = styled.div`
+  margin-top: 20px;
+  margin-right: 300px;
+  margin-bottom: 100px;
+  cursor: pointer;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  &:hover {
+    color: #66c0f4;
+  }
+`;
+
 //----------------------------------------
 // ReveiwsBreakdown styled
 //----------------------------------------

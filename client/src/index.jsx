@@ -10,7 +10,7 @@ import MainReviewList from './components/MainReviewList/MainReviewList.jsx';
 import RecentReviewList from './components/RecentReviewList/RecentReviewList.jsx';
 import GlobalStyle from './styled/globalStyles.js';
 
-import { Reviews, CenterReviewsContainer, ReviewListContainer, ReviewsTitle } from './styled';
+import { Reviews, CenterReviewsContainer, ReviewListContainer, ReviewsTitle, BrowseAllReviewsText } from './styled';
 
 class CustomerReviews extends React.Component {
   constructor(props) {
@@ -441,6 +441,7 @@ class CustomerReviews extends React.Component {
               />
             </ReviewListContainer>
           </CenterReviewsContainer>
+          <BrowseAllReviewsText>{`Browse all ${reviews.reviewStats.totalReviewCount} reviews`}</BrowseAllReviewsText>
         </Reviews>
       );
     } else {
