@@ -1,9 +1,10 @@
 const mysql = require('mysql');
+const token = require('../database.config.js');
 
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: '',
+  user: token.user,
+  password: token.password,
   database: 'review_data',
 });
 
