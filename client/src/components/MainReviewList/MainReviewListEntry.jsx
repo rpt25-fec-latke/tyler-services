@@ -79,7 +79,6 @@ const MainReviewListEntry = ({ review, review: {
 }, thumbsUpLogo, thumbsDownLogo, purchasedViaSteamImage, activatedViaSteamImage, awardImages }) => {
   const awardList = {};
   Object.keys(review).map((key) => { key.toLowerCase().indexOf('award') !== -1 && review[key] ? awardList[key] = review[key] : null; });
-  console.log(awardList);
   return (
     <MainReviewListReviewBoxContainer>
       <MainReviewListUserInfo>
@@ -175,10 +174,9 @@ const MainReviewListEntry = ({ review, review: {
             </CommentCount>
           </IsHelpfulStatMessagesContainer>
           <AwardStats>
-            {Object.keys(awardList).map((award) => {
-              console.log(awardImages[award]);
+            {Object.keys(awardList).map((award, i) => {
               return (
-                <AwardStatButton>
+                <AwardStatButton key={i}>
                   <AwardImage src={awardImages[award]}></AwardImage>
                   {awardList[award] > 1 ? <AwardCount>{awardList[award]}</AwardCount> : null}
                 </AwardStatButton>

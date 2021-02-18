@@ -431,7 +431,14 @@ class CustomerReviews extends React.Component {
                 activatedViaSteamImage={activatedViaSteamImage}
                 awardImages={awardImages}
               />
-              <RecentReviewList recentReviewsList={recentReviewsList} displayAs={displayAs} />
+              <RecentReviewList
+                recentReviewsList={recentReviewsList}
+                displayAs={displayAs}
+                thumbsUpLogo={thumbsUpLogo}
+                thumbsDownLogo={thumbsDownLogo}
+                purchasedViaSteamImage={purchasedViaSteamImage}
+                activatedViaSteamImage={activatedViaSteamImage}
+              />
             </ReviewListContainer>
           </CenterReviewsContainer>
         </Reviews>

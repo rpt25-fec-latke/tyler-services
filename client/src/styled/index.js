@@ -1042,7 +1042,8 @@ export const ReviewText = styled.div`
   overflow-wrap: break-word;
   font-size: 13px;
   font-weight: 400;
-  font-family: rgb(172, 178, 184);
+  color: rgb(172, 178, 184);
+  font-family: "Motiva Sans", sans-serif;
   line-height: 17px;
   margin-right: 8px;
   overflow-x: hidden;
@@ -1316,4 +1317,110 @@ export const RecentReviewsSectionTitle = styled.div`
   font-weight: 400;
   padding-bottom: 5px;
   height: 20px;
+`;
+
+export const RecentReviewListBoxContainer = styled.div`
+  background-image: linear-gradient(to right, rgb(34, 50, 70) -1%, rgb(34, 50, 70) 0%, rgba(34, 50, 70, 0) 92%, rgba(34, 50, 70, 0) 100%);
+  margin-bottom: 26px;
+  opacity: 0.9;
+  color: rgb(198, 212, 223);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+`;
+
+export const RecentReviewsTopBar = styled.div`
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(129, 157, 184);
+  cursor: pointer;
+  height: 24px;
+  line-height: 15px;
+  margin-bottom: 6px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgb(102, 192, 244);
+  }
+`;
+
+export const RecentReviewsTopBarUserName = styled.div`
+  margin-top: 5px;
+  width: 120px;
+`;
+
+export const RecentReviewsTopBarTotalPlaytime = styled.div`
+  margin-top: 5px;
+  opacity: 0.5;
+  width: 133px;
+`;
+
+export const RecentReviewsPurchasedOrActivagedImage = styled.img`
+  height: 16px;
+  width: 17px;
+  color: rgb(255, 255, 255);
+  opacity: 0.5;
+  margin-top: 4px;
+`;
+
+export const RecentReviewReviewDateBar = styled.div`
+  display: flex;
+  margin-right: 4px;
+  margin-left: 4px;
+  padding-left: 4px;
+  margin-top: 1px;
+`;
+
+export const RecentReviewsReviewPostedDateText = styled.div`
+  color: #8091a2;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  padding-top: 2.5px;
+  margin-left: 4px;
+  font-style: normal;
+  opacity: 0.5;
+`;
+
+export const RecentReviewsReviewText = styled.div`
+  margin-left: 4px;
+  padding-left: 4px;
+  overflow-wrap: break-word;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: "Motiva Sans", sans-serif;
+  color: rgb(159, 180, 201);
+  line-height: 17px;
+  margin-right: 8px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+`;
+
+export const RecentReviewsBottomFiller = styled.div`
+  height: 11px;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.5);
+  margin-left: 8px;
+`;
+
+export const RecentReviewsIsReviewHelpfulText = styled.div`
+  color: rgb(128, 145, 162);
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0.6;
+  margin-top: 8px;
+  margin-left: 4px;
+  padding-left: 4px;
+`;
+
+export const RecentReviewsIsReviewHelpfulVoteButtonsContainer = styled.div`
+  display: flex;
+  padding-bottom: 5px;
+  padding-top: 10px;
+  margin-left: 4px;
+  padding-left: 4px;
+`;
+
+export const RecentReviewsStatMessagesContainer = styled.div`
+  padding-bottom: 8px;
+  margin-left: 4px;
+  padding-left: 4px;
 `;
