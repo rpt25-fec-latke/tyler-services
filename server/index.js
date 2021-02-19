@@ -58,6 +58,7 @@ app.get('/reviews', (req, res) => {
                           console.log('data pull complete');
                           const reviewStats = stats.calculateReviewStats(data6[0]);
                           responseData.reviewStats = reviewStats;
+                          console.log(responseData);
                           res.send(responseData);
                         }
                       });
