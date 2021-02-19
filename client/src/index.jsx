@@ -88,12 +88,11 @@ class CustomerReviews extends React.Component {
 
   componentDidMount() {
     const fullUrl = window.location.href;
-    const coreUrl = fullUrl.slice(0, fullUrl.indexOf(':3'));
     const id = fullUrl.indexOf('?id=') !== -1 ? fullUrl.slice(fullUrl.indexOf('?id=') + 4) : 1;
 
     $.ajax({
       method: 'GET',
-      url: `${coreUrl}:3001/reviews?id=${id}`,
+      url: `/reviews?id=${id}`,
       success: (data) => {
         console.log(data);
         const { reviewFilters, displayAs } = this.state;
