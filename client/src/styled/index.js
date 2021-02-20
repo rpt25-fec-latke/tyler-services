@@ -162,6 +162,31 @@ export const QuestionMarkImage = styled.img`
 `;
 
 //----------------------------------------
+// ReviewStatsChart styled
+//----------------------------------------
+
+export const ChartContainer = styled.div`
+  display: flex;
+  box-shadow: 2px 0 10px black, -2px 0 10px black;
+`;
+
+export const MainReviewListChartContainer = styled.div`
+  height: 250px;
+  width: 582px;
+  background-color: #2a475e;
+  padding: 10px;
+  box-shadow: 0 2px 10px black;
+`;
+
+export const RecentReviewListChartContainer = styled.div`
+  height: 250px;
+  width: 318px;
+  background-color: #416781;
+  padding: 10px;
+  box-shadow: 0 2px 10px black;
+`;
+
+//----------------------------------------
 // ReveiwsFilters styled
 //----------------------------------------
 
@@ -639,7 +664,16 @@ export const ShowGraphText = styled.span`
 
 export const ShowGraphArrow = styled.span`
   position: relative;
-  top: 5px;
+  top: ${({ showCharts }) => {
+    if (!showCharts) {
+      return '5px';
+    }
+  }};
+  bottom: ${({ showCharts }) => {
+    if (showCharts) {
+      return '2px';
+    }
+  }};
   left: 5px;
   font-size: 17px;
   color: #c6d4df;

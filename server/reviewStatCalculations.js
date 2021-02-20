@@ -27,6 +27,10 @@ const calculateRatingGroup = (percentPositive) => {
   return ratingGroupInfo;
 };
 
+const createChartData = (reviews) => {
+  // code
+};
+
 const calculateReviewStats = (initialReviewStats) => {
   const reviewStats = {};
 

@@ -5,6 +5,7 @@ import $ from 'jquery';
 import styled from 'styled-components';
 
 import ReviewsBreakdown from './components/ReviewsBreakdown/ReviewsBreakdown.jsx';
+import ReviewStatsCharts from './components/ReviewStatsCharts.jsx';
 import ReviewFilters from './components/ReviewFilters/ReviewFilters.jsx';
 import MainReviewList from './components/MainReviewList/MainReviewList.jsx';
 import RecentReviewList from './components/RecentReviewList/RecentReviewList.jsx';
@@ -17,6 +18,7 @@ class CustomerReviews extends React.Component {
     super(props);
     this.state = {
       reviews: {},
+      showCharts: false,
       mainReviewsList: [],
       recentReviewsList: [],
       displayAs: 'summary',
@@ -84,6 +86,7 @@ class CustomerReviews extends React.Component {
     this.updateDisplayAs = this.updateDisplayAs.bind(this);
     this.getFilteredReviewStats = this.getFilteredReviewStats.bind(this);
     this.getRatingGroup = this.getRatingGroup.bind(this);
+    this.toggleChartDisplay = this.toggleChartDisplay.bind(this);
   }
 
   componentDidMount() {
@@ -380,10 +383,18 @@ class CustomerReviews extends React.Component {
     });
   }
 
+  toggleChartDisplay() {
+    const { showCharts } = this.state;
+    this.setState({
+      showCharts: !showCharts,
+    });
+  }
+
   render() {
     if (this.state.reviews.allReviews) {
       const {
         reviews,
+        showCharts,
         questionMarkImage,
         steamLabsLogo,
         reviewFilterDisplayPills,
@@ -410,6 +421,7 @@ class CustomerReviews extends React.Component {
               totalType={reviews.reviewStats.overallRatingGroup.type}
               recentType={reviews.reviewStats.recentRatingGroup.type}
               questionMarkImage={questionMarkImage} />
+            {showCharts ? <ReviewStatsCharts /> : null}
             <ReviewFilters
               reviewStats={reviews.reviewStats}
               steamLabsLogo={steamLabsLogo}
@@ -419,7 +431,9 @@ class CustomerReviews extends React.Component {
               questionMarkImage={questionMarkImageDark}
               removeReviewFilterPill={this.removeReviewFilterPill}
               filteredReviewStats={filteredReviewStats}
-              numFilterPills={numFilterPills} />
+              numFilterPills={numFilterPills}
+              toggleChartDisplay={this.toggleChartDisplay}
+              showCharts={showCharts} />
             <ReviewListContainer>
               <MainReviewList
                 mainReviewsList={mainReviewsList}
