@@ -50,7 +50,6 @@ app.get('/reviews', (req, res) => {
                           res.status(500).send(`Error getting review stats for game ${gameId}`, err6);
                         } else {
                           const reviewStats = stats.calculateReviewStats(data6[0]);
-                          console.log(responseData);
                           responseData.reviewStats = reviewStats;
                           res.send(responseData);
                         }

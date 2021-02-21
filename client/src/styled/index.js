@@ -152,7 +152,7 @@ export const ToolTip = styled.span`
 
 export const ReviewCount = styled.span`
   color: rgb(139, 166, 182);
-  font-family: Arial, Helvetica, sans-serif ;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   padding-left: 5px;
   padding-right: 5px;
@@ -172,10 +172,13 @@ export const ChartContainer = styled.div`
 
 export const MainReviewListChartContainer = styled.div`
   height: 250px;
-  width: 582px;
+  width: 581px;
   background-color: #2a475e;
   padding: 10px;
   box-shadow: 0 2px 10px black;
+`;
+
+export const MainReviewListChart = styled.canvas`
 `;
 
 export const RecentReviewListChartContainer = styled.div`
@@ -184,6 +187,9 @@ export const RecentReviewListChartContainer = styled.div`
   background-color: #416781;
   padding: 10px;
   box-shadow: 0 2px 10px black;
+`;
+
+export const RecentReviewListChart = styled.canvas`
 `;
 
 //----------------------------------------
