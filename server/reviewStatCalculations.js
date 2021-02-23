@@ -97,8 +97,6 @@ const createChartData = (reviews) => {
     }
   });
 
-  console.log(positiveReviewCountsLastTwentyWeeks, negativeReviewCountsLastTwentyWeeks);
-
   chartData.reviewCountsLastTwentyWeeks = {
     positive: positiveReviewCountsLastTwentyWeeks,
     negative: negativeReviewCountsLastTwentyWeeks,

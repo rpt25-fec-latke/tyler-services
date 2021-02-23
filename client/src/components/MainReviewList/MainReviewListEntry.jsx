@@ -101,7 +101,7 @@ const MainReviewListEntry = ({ review, review: {
               </MainReviewListUserProfilePicHoverBox>
             </MainReviewListUserProfilePicContainer>
             <MainReviewListUserNameAndProductCount>
-              <MainReviewListUserName>
+              <MainReviewListUserName className="username">
                 {userName}
                 <MainReviewListUsernameHoverBox className="user_profile_hover_box_username">
                   <div>
@@ -117,12 +117,12 @@ const MainReviewListEntry = ({ review, review: {
                   </div>
                 </MainReviewListUsernameHoverBox>
               </MainReviewListUserName>
-              <MainReviewListProductCount>
+              <MainReviewListProductCount className="product_count">
                 {`${productsCount} products in account`}
               </MainReviewListProductCount>
             </MainReviewListUserNameAndProductCount>
           </MainReviewListUserInfoGeneral>
-          <MainReviewListReviewCount>
+          <MainReviewListReviewCount className="review_count">
             {`${reviewCount} reviews`}
           </MainReviewListReviewCount>
         </MainReviewListUserInfoContainer>
@@ -131,7 +131,7 @@ const MainReviewListEntry = ({ review, review: {
         <IsRecommendedTopBar>
           <RecommendedImage src={isRecommended ? thumbsUpLogo : thumbsDownLogo}></RecommendedImage>
           <RecommendedGeneralInfo>
-            <RecommendedTitle>{isRecommended ? 'Recommended' : 'Not Recommended'}</RecommendedTitle>
+            <RecommendedTitle className="is_recommended_text">{isRecommended ? 'Recommended' : 'Not Recommended'}</RecommendedTitle>
             <RecommendedPlayTimeInfo>{`${hoursOnRecord} hrs on record (${userHoursOnRecordAtTimeOfReview} hrs at review time)`}</RecommendedPlayTimeInfo>
           </RecommendedGeneralInfo>
           <PurchasedOrActivagedImage src={isPurchasedOrActivatedViaSteamFlags === 'purchased' ? purchasedViaSteamImage : activatedViaSteamImage}></PurchasedOrActivagedImage>
@@ -140,7 +140,7 @@ const MainReviewListEntry = ({ review, review: {
           {isEarlyAccessReview ? <EarlyAccessReviewPill>Early Access Review</EarlyAccessReviewPill> : null}
           <ReviewPostedDateText>{`Posted: ${(new Date(reviewDate)).toLocaleString('default', { month: 'long' })} ${(new Date(reviewDate)).getDate()}, ${(new Date(reviewDate)).getFullYear()}`}</ReviewPostedDateText>
         </ReviewDateBar>
-        <ReviewText>{reviewText}</ReviewText>
+        <ReviewText className="review_text">{reviewText}</ReviewText>
         <IsHelpfulVoteContainer>
           <IsReviewHelpfulText>Was this review helpful?</IsReviewHelpfulText>
           <IsReviewHelpfulVoteButtonsContainer>
@@ -165,11 +165,11 @@ const MainReviewListEntry = ({ review, review: {
         <IsHelpfulCountContainer>
           <IsHelpfulStatMessagesContainer>
             <StatMessagesContainer>
-              {isHelpfulCount ? <HelpfulMessageStat>{`${isHelpfulCount} people found this review helpful`}</HelpfulMessageStat> : null}
+              {isHelpfulCount ? <HelpfulMessageStat className="is_helpful_count">{`${isHelpfulCount} people found this review helpful`}</HelpfulMessageStat> : null}
               {isFunnyCount ? <FunnyMessageStat>{`${isFunnyCount} people found this review funny`}</FunnyMessageStat> : null}
             </StatMessagesContainer>
             <CommentCount>
-              {commentCount ? <CommentCountNumber>{commentCount}</CommentCountNumber> : null}
+              {commentCount ? <CommentCountNumber className="comment_count">{commentCount}</CommentCountNumber> : null}
               {commentCount ? <CommentCountImage src="https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/comment_box.png"></CommentCountImage> : null}
             </CommentCount>
           </IsHelpfulStatMessagesContainer>

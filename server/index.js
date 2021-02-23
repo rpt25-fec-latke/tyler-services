@@ -15,7 +15,6 @@ app.get('/reviews', (req, res) => {
   const gameId = req.query ? req.query.id : 1;
 
   if (gameId < 1 || gameId > 100) {
-    console.log('got here');
     res.status(500);
   }
 

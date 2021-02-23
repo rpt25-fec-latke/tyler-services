@@ -45,15 +45,15 @@ const RecentReviewListEntry = ({ review: {
   <RecentReviewListBoxContainer>
     <RecentReviewsTopBar>
       <RecommendedImage src={isRecommended ? thumbsUpLogo : thumbsDownLogo}></RecommendedImage>
-      <RecentReviewsTopBarUserName>{userName}</RecentReviewsTopBarUserName>
-      <RecentReviewsTopBarTotalPlaytime>{`${hoursOnRecord} hrs`}</RecentReviewsTopBarTotalPlaytime>
+      <RecentReviewsTopBarUserName className="username_recent">{userName}</RecentReviewsTopBarUserName>
+      <RecentReviewsTopBarTotalPlaytime className="hours_on_record_recent">{`${hoursOnRecord} hrs`}</RecentReviewsTopBarTotalPlaytime>
       <RecentReviewsPurchasedOrActivagedImage src={isPurchasedOrActivatedViaSteamFlags === 'purchased' ? purchasedViaSteamImage : activatedViaSteamImage}></RecentReviewsPurchasedOrActivagedImage>
     </RecentReviewsTopBar>
     <RecentReviewReviewDateBar>
       {isEarlyAccessReview ? <EarlyAccessReviewPill>Early Access Review</EarlyAccessReviewPill> : null}
       <RecentReviewsReviewPostedDateText>{`Posted: ${(new Date(reviewDate)).toLocaleString('default', { month: 'long' })} ${(new Date(reviewDate)).getDate()}`}</RecentReviewsReviewPostedDateText>
     </RecentReviewReviewDateBar>
-    <RecentReviewsReviewText>{reviewText}</RecentReviewsReviewText>
+    <RecentReviewsReviewText className="review_text_recent">{reviewText}</RecentReviewsReviewText>
     <RecentReviewsBottomFiller />
     <RecentReviewsIsReviewHelpfulText>Helpful?</RecentReviewsIsReviewHelpfulText>
     <RecentReviewsIsReviewHelpfulVoteButtonsContainer>
@@ -75,7 +75,7 @@ const RecentReviewListEntry = ({ review: {
       </AwardButtonContainer>
     </RecentReviewsIsReviewHelpfulVoteButtonsContainer>
     <RecentReviewsStatMessagesContainer>
-      {isHelpfulCount ? <HelpfulMessageStat>{`${isHelpfulCount} people found this review helpful`}</HelpfulMessageStat> : null}
+      {isHelpfulCount ? <HelpfulMessageStat className="is_helpful_count_recent">{`${isHelpfulCount} people found this review helpful`}</HelpfulMessageStat> : null}
     </RecentReviewsStatMessagesContainer>
   </RecentReviewListBoxContainer>
 );

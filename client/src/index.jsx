@@ -97,6 +97,7 @@ class CustomerReviews extends React.Component {
       method: 'GET',
       url: `/reviews?id=${id}`,
       success: (data) => {
+        console.log(data);
         const { reviewFilters, displayAs } = this.state;
         const { allReviewsOrderedHelpful, allReviewsRecentLastThirty } = data;
 
