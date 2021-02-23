@@ -97,7 +97,6 @@ class CustomerReviews extends React.Component {
       method: 'GET',
       url: `/reviews?id=${id}`,
       success: (data) => {
-        console.log(data);
         const { reviewFilters, displayAs } = this.state;
         const { allReviewsOrderedHelpful, allReviewsRecentLastThirty } = data;
 
@@ -421,7 +420,7 @@ class CustomerReviews extends React.Component {
               totalType={reviews.reviewStats.overallRatingGroup.type}
               recentType={reviews.reviewStats.recentRatingGroup.type}
               questionMarkImage={questionMarkImage} />
-            {showCharts ? <ReviewStatsCharts /> : null}
+            {showCharts ? <ReviewStatsCharts chartData={reviews.chartData} /> : null}
             <ReviewFilters
               reviewStats={reviews.reviewStats}
               steamLabsLogo={steamLabsLogo}
@@ -454,7 +453,7 @@ class CustomerReviews extends React.Component {
               />
             </ReviewListContainer>
           </CenterReviewsContainer>
-          <BrowseAllReviewsText>{`Browse all ${reviews.reviewStats.totalReviewCount} reviews`}</BrowseAllReviewsText>
+          {reviews.reviewStats.totalReviewCount ? <BrowseAllReviewsText>{`Browse all ${reviews.reviewStats.totalReviewCount} reviews`}</BrowseAllReviewsText> : null}
         </Reviews>
       );
     } else {

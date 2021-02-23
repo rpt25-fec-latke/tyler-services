@@ -15,6 +15,7 @@ app.get('/reviews', (req, res) => {
   const gameId = req.query ? req.query.id : 1;
 
   if (gameId < 1 || gameId > 100) {
+    console.log('got here');
     res.status(500);
   }
 
@@ -25,6 +26,8 @@ app.get('/reviews', (req, res) => {
       res.status(500).send(`Error getting all reviews for game ${gameId}`, err);
     } else {
       responseData.allReviews = data;
+      const chartData = stats.createChartData(data);
+      responseData.chartData = chartData;
       db.getAllReviewsOrderedByRecent(gameId, (err2, data2) => {
         if (err2) {
           res.status(500).send(`Error getting all reviews ordered by recent for game ${gameId}`, err2);
