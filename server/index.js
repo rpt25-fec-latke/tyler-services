@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
-const compression = require('compression')
+const compression = require('compression');
 const db = require('../database');
 const stats = require('./reviewStatCalculations');
 
