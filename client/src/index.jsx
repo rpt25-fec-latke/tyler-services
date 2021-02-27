@@ -5,22 +5,49 @@ import $ from 'jquery';
 import styled from 'styled-components';
 
 import ReviewsBreakdown from './components/ReviewsBreakdown/ReviewsBreakdown.jsx';
+import ReviewStatsCharts from './components/ReviewStatsCharts.jsx';
 import ReviewFilters from './components/ReviewFilters/ReviewFilters.jsx';
 import MainReviewList from './components/MainReviewList/MainReviewList.jsx';
 import RecentReviewList from './components/RecentReviewList/RecentReviewList.jsx';
 import GlobalStyle from './styled/globalStyles.js';
 
-import { Reviews, CenterReviewsContainer, ReviewListContainer, ReviewsTitle } from './styled';
+import { Reviews, CenterReviewsContainer, ReviewListContainer, ReviewsTitle, BrowseAllReviewsText } from './styled';
 
 class CustomerReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       reviews: {},
+      showCharts: false,
       mainReviewsList: [],
       recentReviewsList: [],
       displayAs: 'summary',
       reviewFilterDisplayPills: [null, 'Steam Purchasers', 'Your Languages', null, null],
+      awardImages: {
+        deepThoughtsAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/deep-thoughts.png',
+        extraHelpfulAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/extra-helpful.png',
+        fancyPantsAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/fancy-pants.png',
+        goldenUnicornAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/golden-unicorn.png',
+        gottaHaveItAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/gotta-have-it.png',
+        heartWarmingAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/heartwarming.png',
+        hilariousAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/hilarious.png',
+        hotTakeAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/hot-take.png',
+        isCleverAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/clever.png',
+        jesterAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/jester.png',
+        madScinetistAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/mad-scientist.png',
+        michelangeloAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/michelangelo.png',
+        mindBlownAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/mind-blown.png',
+        poetryAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/poetry.png',
+        saucyAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/saucy.png',
+        slowClapAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/slow-clap.png',
+        superStarAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/super-star.png',
+        takeMyPointsAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/take-my-points.png',
+        treasureAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/treasure.png',
+        warmBlanketAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/warm-blanket.png',
+        whoaAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/whoa.png',
+        wholesomeAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/wholesome.png',
+        wildAwardCount: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/page-widgets/wild.png',
+      },
       reviewFilters: {
         reviewType: null,
         purchaseType: 'steam',
@@ -46,6 +73,10 @@ class CustomerReviews extends React.Component {
       questionMarkImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_questionmark.png',
       questionMarkImageDark: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_questionmark_dark.png',
       steamLabsLogo: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/steam_labs_logo.svg',
+      thumbsUpLogo: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_thumbsUp_v6.png',
+      thumbsDownLogo: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_thumbsDown_v6.png',
+      purchasedViaSteamImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_review_steam.png',
+      activatedViaSteamImage: 'https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/icon_review_key.png',
     };
     this.updateReviewFilters = this.updateReviewFilters.bind(this);
     this.addReviewFilterPill = this.addReviewFilterPill.bind(this);
@@ -55,35 +86,40 @@ class CustomerReviews extends React.Component {
     this.updateDisplayAs = this.updateDisplayAs.bind(this);
     this.getFilteredReviewStats = this.getFilteredReviewStats.bind(this);
     this.getRatingGroup = this.getRatingGroup.bind(this);
+    this.toggleChartDisplay = this.toggleChartDisplay.bind(this);
   }
 
   componentDidMount() {
     const fullUrl = window.location.href;
-    const coreUrl = fullUrl.slice(0, fullUrl.indexOf(':3'));
     const id = fullUrl.indexOf('?id=') !== -1 ? fullUrl.slice(fullUrl.indexOf('?id=') + 4) : 1;
 
-    $.ajax({
-      method: 'GET',
-      url: `${coreUrl}:3001/reviews?id=${id}`,
-      success: (data) => {
-        const { reviewFilters, displayAs } = this.state;
-        const { allReviewsOrderedHelpful, allReviewsRecentLastThirty } = data;
+    if (id < 1 || id > 100) {
+      window.alert('Invalid game ID, please enter another ID');
+    } else {
+      $.ajax({
+        method: 'GET',
+        url: `/reviews?id=${id}`,
+        success: (data) => {
+          console.log(data);
+          const { reviewFilters, displayAs } = this.state;
+          const { allReviewsOrderedHelpful, allReviewsRecentLastThirty } = data;
 
-        const starterMainReviewsList = this.filterReviews(reviewFilters, displayAs, allReviewsOrderedHelpful);
-        const starterRecentReviewList = this.filterReviews(reviewFilters, 'recentLastThirty', allReviewsRecentLastThirty);
-        const filteredReviewStats = this.getFilteredReviewStats(starterMainReviewsList);
+          const starterMainReviewsList = this.filterReviews(reviewFilters, displayAs, allReviewsOrderedHelpful);
+          const starterRecentReviewList = this.filterReviews(reviewFilters, 'recentLastThirty', allReviewsRecentLastThirty);
+          const filteredReviewStats = this.getFilteredReviewStats(starterMainReviewsList);
 
-        this.setState({
-          reviews: data,
-          mainReviewsList: starterMainReviewsList,
-          recentReviewsList: starterRecentReviewList,
-          filteredReviewStats: filteredReviewStats,
-        });
-      },
-      error: (err) => {
-        window.alert('Invalid game ID, please enter another ID');
-      },
-    });
+          this.setState({
+            reviews: data,
+            mainReviewsList: starterMainReviewsList,
+            recentReviewsList: starterRecentReviewList,
+            filteredReviewStats: filteredReviewStats,
+          });
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 
   getRatingGroup(percentPositive) {
@@ -351,9 +387,32 @@ class CustomerReviews extends React.Component {
     });
   }
 
+  toggleChartDisplay() {
+    const { showCharts } = this.state;
+    this.setState({
+      showCharts: !showCharts,
+    });
+  }
+
   render() {
     if (this.state.reviews.allReviews) {
-      const { reviews, questionMarkImage, steamLabsLogo, reviewFilterDisplayPills, questionMarkImageDark, filteredReviewStats, mainReviewsList, recentReviewsList } = this.state;
+      const {
+        reviews,
+        showCharts,
+        questionMarkImage,
+        steamLabsLogo,
+        reviewFilterDisplayPills,
+        questionMarkImageDark,
+        filteredReviewStats,
+        mainReviewsList,
+        recentReviewsList,
+        displayAs,
+        thumbsUpLogo,
+        thumbsDownLogo,
+        purchasedViaSteamImage,
+        activatedViaSteamImage,
+        awardImages,
+      } = this.state;
       let numFilterPills = 0;
       reviewFilterDisplayPills.map((pill) => { pill !== null ? numFilterPills++ : null; });
       return (
@@ -366,6 +425,7 @@ class CustomerReviews extends React.Component {
               totalType={reviews.reviewStats.overallRatingGroup.type}
               recentType={reviews.reviewStats.recentRatingGroup.type}
               questionMarkImage={questionMarkImage} />
+            {showCharts ? <ReviewStatsCharts chartData={reviews.chartData} /> : null}
             <ReviewFilters
               reviewStats={reviews.reviewStats}
               steamLabsLogo={steamLabsLogo}
@@ -375,12 +435,30 @@ class CustomerReviews extends React.Component {
               questionMarkImage={questionMarkImageDark}
               removeReviewFilterPill={this.removeReviewFilterPill}
               filteredReviewStats={filteredReviewStats}
-              numFilterPills={numFilterPills} />
+              numFilterPills={numFilterPills}
+              toggleChartDisplay={this.toggleChartDisplay}
+              showCharts={showCharts} />
             <ReviewListContainer>
-              <MainReviewList mainReviewsList={mainReviewsList} />
-              <RecentReviewList recentReviewsList={recentReviewsList} />
+              <MainReviewList
+                mainReviewsList={mainReviewsList}
+                displayAs={displayAs}
+                thumbsUpLogo={thumbsUpLogo}
+                thumbsDownLogo={thumbsDownLogo}
+                purchasedViaSteamImage={purchasedViaSteamImage}
+                activatedViaSteamImage={activatedViaSteamImage}
+                awardImages={awardImages}
+              />
+              <RecentReviewList
+                recentReviewsList={recentReviewsList}
+                displayAs={displayAs}
+                thumbsUpLogo={thumbsUpLogo}
+                thumbsDownLogo={thumbsDownLogo}
+                purchasedViaSteamImage={purchasedViaSteamImage}
+                activatedViaSteamImage={activatedViaSteamImage}
+              />
             </ReviewListContainer>
           </CenterReviewsContainer>
+          {reviews.reviewStats.totalReviewCount ? <BrowseAllReviewsText>{`Browse all ${reviews.reviewStats.totalReviewCount} reviews`}</BrowseAllReviewsText> : null}
         </Reviews>
       );
     } else {

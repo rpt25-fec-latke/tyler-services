@@ -4,12 +4,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
+const compression = require('compression');
 const db = require('../database');
 const stats = require('./reviewStatCalculations');
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(compression());
 
 app.get('/reviews', (req, res) => {
   const gameId = req.query ? req.query.id : 1;
@@ -25,6 +27,8 @@ app.get('/reviews', (req, res) => {
       res.status(500).send(`Error getting all reviews for game ${gameId}`, err);
     } else {
       responseData.allReviews = data;
+      const chartData = stats.createChartData(data);
+      responseData.chartData = chartData;
       db.getAllReviewsOrderedByRecent(gameId, (err2, data2) => {
         if (err2) {
           res.status(500).send(`Error getting all reviews ordered by recent for game ${gameId}`, err2);

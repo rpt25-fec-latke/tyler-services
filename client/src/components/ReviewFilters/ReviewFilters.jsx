@@ -22,7 +22,19 @@ import {
   ReviewFilterPillsTitle,
 } from '../../styled';
 
-const ReviewFilters = ({ reviewStats, updateReviewFilters, updateDisplayAs, steamLabsLogo, questionMarkImage, reviewFilterDisplayPills, removeReviewFilterPill, filteredReviewStats, numFilterPills }) => (
+const ReviewFilters = ({
+  reviewStats,
+  updateReviewFilters,
+  updateDisplayAs,
+  steamLabsLogo,
+  questionMarkImage,
+  reviewFilterDisplayPills,
+  removeReviewFilterPill,
+  filteredReviewStats,
+  numFilterPills,
+  toggleChartDisplay,
+  showCharts,
+}) => (
   <ReviewFiltersContainer>
     <MenuOptions>
       <ReviewTypeFilter reviewStats={reviewStats} updateReviewFilters={updateReviewFilters} />
@@ -39,10 +51,10 @@ const ReviewFilters = ({ reviewStats, updateReviewFilters, updateDisplayAs, stea
           <option value="funny">Funny</option>
         </DisplayAsOptions>
       </DisplayAsContainer>
-      <ShowGraphContainer>
+      <ShowGraphContainer onClick={toggleChartDisplay}>
         <ShowGraphText>
           Show graph
-          <ShowGraphArrow className="show_graph_arrow">&#65086;</ShowGraphArrow>
+          <ShowGraphArrow showCharts={showCharts} className="show_graph_arrow">{!showCharts ? '︾' : '︽'}</ShowGraphArrow>
         </ShowGraphText>
       </ShowGraphContainer>
     </MenuOptions>

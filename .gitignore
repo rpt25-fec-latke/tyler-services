@@ -1,3 +1,5 @@
 node_modules
 database.test.js
 api_tests.test.js
+database.config.js
+.env

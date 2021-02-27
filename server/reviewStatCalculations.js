@@ -27,6 +27,88 @@ const calculateRatingGroup = (percentPositive) => {
   return ratingGroupInfo;
 };
 
+const createChartData = (reviews) => {
+  const chartData = {};
+
+  const currentDate = new Date();
+  const timeZoneOffset = currentDate.getTimezoneOffset();
+  currentDate.setMinutes(currentDate.getMinutes() - timeZoneOffset);
+
+  const twentyWeeksAgo = new Date();
+  twentyWeeksAgo.setDate(currentDate.getDate() - 140);
+  twentyWeeksAgo.setMinutes(twentyWeeksAgo.getMinutes() - timeZoneOffset);
+
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(currentDate.getDate() - 30);
+  thirtyDaysAgo.setMinutes(thirtyDaysAgo.getMinutes() - timeZoneOffset);
+
+  const positiveReviewCountsLastTwentyWeeks = {};
+  const negativeReviewCountsLastTwentyWeeks = {};
+  const positiveReviewCountsLastThirtyDays = {};
+  const negativeReviewCountsLastThirtyDays = {};
+
+  let startingTwentyWeeksAgo = new Date();
+  startingTwentyWeeksAgo.setDate(currentDate.getDate() - 140);
+  startingTwentyWeeksAgo.setMinutes(startingTwentyWeeksAgo.getMinutes() - timeZoneOffset);
+  startingTwentyWeeksAgo = new Date(startingTwentyWeeksAgo.getFullYear(), startingTwentyWeeksAgo.getMonth(), startingTwentyWeeksAgo.getDate());
+
+  while (startingTwentyWeeksAgo <= currentDate) {
+    positiveReviewCountsLastTwentyWeeks[startingTwentyWeeksAgo] = 0;
+    negativeReviewCountsLastTwentyWeeks[startingTwentyWeeksAgo] = 0;
+    startingTwentyWeeksAgo.setDate(startingTwentyWeeksAgo.getDate() + 7);
+  }
+
+  let startingThirtyDaysAgo = new Date();
+  startingThirtyDaysAgo.setDate(currentDate.getDate() - 30);
+  startingThirtyDaysAgo.setMinutes(startingThirtyDaysAgo.getMinutes() - timeZoneOffset);
+  startingThirtyDaysAgo = new Date(startingThirtyDaysAgo.getFullYear(), startingThirtyDaysAgo.getMonth(), startingThirtyDaysAgo.getDate());
+
+  while (startingThirtyDaysAgo <= currentDate) {
+    positiveReviewCountsLastThirtyDays[startingThirtyDaysAgo] = 0;
+    negativeReviewCountsLastThirtyDays[startingThirtyDaysAgo] = 0;
+    startingThirtyDaysAgo.setDate(startingThirtyDaysAgo.getDate() + 1);
+  }
+
+  reviews.map((review) => {
+    const { reviewDate, isRecommended } = review;
+
+    if (reviewDate > twentyWeeksAgo) {
+      const reviewCountsLastTwentyKeys = Object.keys(positiveReviewCountsLastTwentyWeeks);
+      reviewCountsLastTwentyKeys.map((key, i) => {
+        const keyDate = new Date(key);
+        if (reviewDate > keyDate && reviewDate <= new Date(reviewCountsLastTwentyKeys[i + 1]) && isRecommended) {
+          positiveReviewCountsLastTwentyWeeks[key]++;
+        } else if (reviewDate > keyDate && reviewDate <= new Date(reviewCountsLastTwentyKeys[i + 1]) && !isRecommended) {
+          negativeReviewCountsLastTwentyWeeks[key]--;
+        }
+      });
+    }
+
+    if (reviewDate > thirtyDaysAgo) {
+      const reviewCountsLastThirtyKeys = Object.keys(positiveReviewCountsLastThirtyDays);
+      reviewCountsLastThirtyKeys.map((key) => {
+        const keyDate = new Date(key);
+        if (keyDate.getMonth() === reviewDate.getMonth() && keyDate.getDate() === reviewDate.getDate() && isRecommended) {
+          positiveReviewCountsLastThirtyDays[key]++;
+        } else if (keyDate.getMonth() === reviewDate.getMonth() && keyDate.getDate() === reviewDate.getDate() && !isRecommended) {
+          negativeReviewCountsLastThirtyDays[key]--;
+        }
+      });
+    }
+  });
+
+  chartData.reviewCountsLastTwentyWeeks = {
+    positive: positiveReviewCountsLastTwentyWeeks,
+    negative: negativeReviewCountsLastTwentyWeeks,
+  };
+  chartData.reviewCountsLastThirtyDays = {
+    positive: positiveReviewCountsLastThirtyDays,
+    negative: negativeReviewCountsLastThirtyDays,
+  };
+
+  return chartData;
+};
+
 const calculateReviewStats = (initialReviewStats) => {
   const reviewStats = {};
 
@@ -84,3 +166,4 @@ const calculateReviewStats = (initialReviewStats) => {
 };
 
 module.exports.calculateReviewStats = calculateReviewStats;
+module.exports.createChartData = createChartData;

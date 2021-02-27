@@ -12,16 +12,8 @@ export const Reviews = styled.div`
   align-items: center;
 `;
 
-export const LeftReviewsContainer = styled.div`
-  width: 475px;
-`;
-
 export const CenterReviewsContainer = styled.div`
   width: 940px;
-`;
-
-export const RightReviewsContainer = styled.div`
-  width: 320px;
 `;
 
 export const ReviewListContainer = styled.div`
@@ -38,6 +30,19 @@ export const ReviewsTitle = styled.h2`
   padding-top: 2px;
   padding-bottom: 4px;
   margin: 0px;
+`;
+
+export const BrowseAllReviewsText = styled.div`
+  margin-top: 20px;
+  margin-right: 300px;
+  margin-bottom: 100px;
+  cursor: pointer;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  &:hover {
+    color: #66c0f4;
+  }
 `;
 
 //----------------------------------------
@@ -147,13 +152,44 @@ export const ToolTip = styled.span`
 
 export const ReviewCount = styled.span`
   color: rgb(139, 166, 182);
-  font-family: Arial, Helvetica, sans-serif ;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   padding-left: 5px;
   padding-right: 5px;
 `;
 
 export const QuestionMarkImage = styled.img`
+`;
+
+//----------------------------------------
+// ReviewStatsChart styled
+//----------------------------------------
+
+export const ChartContainer = styled.div`
+  display: flex;
+  box-shadow: 2px 0 10px black, -2px 0 10px black;
+`;
+
+export const MainReviewListChartContainer = styled.div`
+  height: 250px;
+  width: 581px;
+  background-color: #2a475e;
+  padding: 10px;
+  box-shadow: 0 2px 10px black;
+`;
+
+export const MainReviewListChart = styled.canvas`
+`;
+
+export const RecentReviewListChartContainer = styled.div`
+  height: 250px;
+  width: 318px;
+  background-color: #416781;
+  padding: 10px;
+  box-shadow: 0 2px 10px black;
+`;
+
+export const RecentReviewListChart = styled.canvas`
 `;
 
 //----------------------------------------
@@ -170,7 +206,7 @@ export const SteamLabsImage = styled.img`
 `;
 
 export const SteamLabsText = styled.span`
-  white-space: no-wrap;
+  white-space: nowrap;
   font-size: 12px;
   text-transform: none;
   position: relative;
@@ -544,6 +580,7 @@ export const FlyoutMenuText = styled.span`
   line-height: 20px;
   color: #596b76;
   text-transform: none;
+  margin-left: 3px;
 `;
 
 export const FlyoutMenuStat = styled.span`
@@ -634,7 +671,16 @@ export const ShowGraphText = styled.span`
 
 export const ShowGraphArrow = styled.span`
   position: relative;
-  top: 5px;
+  top: ${({ showCharts }) => {
+    if (!showCharts) {
+      return '5px';
+    }
+  }};
+  bottom: ${({ showCharts }) => {
+    if (showCharts) {
+      return '2px';
+    }
+  }};
   left: 5px;
   font-size: 17px;
   color: #c6d4df;
@@ -724,10 +770,711 @@ export const MainReviewListContainer = styled.div`
   width: 616px;
 `;
 
+export const MainReviewsSectionTitle = styled.div`
+  font-family: "Motiva Sans", Sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: white;
+  letter-spacing: 2px;
+  font-weight: 400;
+  padding-bottom: 5px;
+  height: 20px;
+`;
+
+export const MainReviewListReviewBoxContainer = styled.div`
+  display: flex;
+  background-color: rgba( 0, 0, 0, 0.2 );
+  background-image: url('https://fec-latke-steam-reviews.s3-us-west-1.amazonaws.com/maincol_gradient_rule.png');
+  background-position-x: 0%;
+  background-position-y: 0%;
+  margin-bottom: 26px;
+  background-position: top left;
+  color: #c6d4df;
+  background-repeat: no-repeat;
+  &:hover .user_info_container {
+    opacity: 1;
+  }
+`;
+
+export const MainReviewListUserInfo = styled.div`
+  width: 184px;
+`;
+
+export const MainReviewListUserInfoContainer = styled.div`
+  padding: 8px;
+  height: 48px;
+  opacity: .7;
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+export const MainReviewListUserInfoGeneral = styled.div`
+  display: flex;
+`;
+
+export const MainReviewListUserProfilePicContainer = styled.div`
+  padding-right: 8px;
+  margin-left: -2px;
+  height: 32px;
+  width: 38px;
+  &:hover .user_profile_hover_box_profile_pic {
+    visibility: visible;
+  }
+`;
+
+export const MainReviewListUserProfilePic = styled.img`
+  height: 32px;
+  width: 32px;
+  border: 2.5px solid;
+  margin: 1px;
+  object-fit: cover;
+  border-image-source: ${({ online }) => {
+    if (online === 1) {
+      return 'linear-gradient(rgb(65, 119, 143) 5%, rgb(61, 105, 123) 95%)';
+    } else {
+      return 'linear-gradient(rgb(81, 81, 81) 5%, rgb(71, 71, 71) 95%)';
+    }
+  }};
+  border-image-slice: 1;
+  cursor: pointer;
+`;
+
+export const MainReviewListUserNameAndProductCount = styled.div`
+  width: 125px;
+`;
+
+export const MainReviewListUserName = styled.div`
+  color: #c1dbf4;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  height: 15px;
+  &:hover .user_profile_hover_box_username {
+    visibility: visible;
+  }
+`;
+
+export const MainReviewListProductCount = styled.div`
+  color: #c1dbf4;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 17px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 5px;
+  &:hover {
+    color: #67c1f5;
+  }
+`;
+
+export const MainReviewListReviewCount = styled.div`
+  color: #c1dbf4;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 17px;
+  width: 55px;
+  font-family: Arial, Helvetica, sans-serif;
+  &:hover {
+    color: #67c1f5;
+  }
+`;
+
+export const MainReviewListUserProfilePicHoverBox = styled.div`
+  position: relative;
+  display: flex;
+  background: rgb(100,96,96);
+  background: linear-gradient(0deg, rgba(100,96,96,1) 14%, rgba(34,37,43,1) 40%, rgba(100,96,96,1) 40%, rgba(93,90,91,1) 61%);
+  height: 100px;
+  width: 100px;
+  right: 336px;
+  bottom: 50px;
+  width: 330px;
+  height: 169px;
+  visibility: hidden;
+  z-index: 1;
+  padding-left: 15px;
+  padding-top: 15px;
+  overflow: hidden;
+`;
+
+export const MainReviewListUsernameHoverBox = styled.div`
+  position: relative;
+  display: flex;
+  background: rgb(100,96,96);
+  background: linear-gradient(0deg, rgba(100,96,96,1) 14%, rgba(34,37,43,1) 40%, rgba(100,96,96,1) 40%, rgba(93,90,91,1) 61%);
+  height: 100px;
+  width: 100px;
+  right: 336px;
+  bottom: 40px;
+  width: 330px;
+  height: 169px;
+  visibility: hidden;
+  z-index: 1;
+  padding-left: 15px;
+  padding-top: 15px;
+  overflow: hidden;
+`;
+
+export const UserInfoHoverBoxProfilePic = styled.img`
+  height: 110px;
+  width: 110px;
+  border: 5px solid;
+  border-image-source: ${({ online }) => {
+    if (online === 1) {
+      return 'linear-gradient(rgb(65, 119, 143) 5%, rgb(61, 105, 123) 95%)';
+    } else {
+      return 'linear-gradient(rgb(81, 81, 81) 5%, rgb(71, 71, 71) 95%)';
+    }
+  }};
+  border-image-slice: 1;
+`;
+
+export const UserInfoHoverBoxUsername = styled.div`
+  color: ${({ online }) => {
+    if (online === 1) {
+      return '#66c0f4';
+    } else {
+      return '#807e7e';
+    }
+  }};
+  text-shadow: 2px 2px 5px black;
+  font-weight: normal;
+  font-size: 25px;
+  padding-top: 25px;
+  padding-left: 10px;
+`;
+
+export const UserInfoHoverBoxOnlineStatus = styled.div`
+  color: ${({ online }) => {
+    if (online === 1) {
+      return '#66c0f4';
+    } else {
+      return '#807e7e';
+    }
+  }};
+  text-shadow: 2px 2px 5px black;
+  font-size: 12px;
+  font-weight: normal;
+  padding-left: 10px;
+  padding-top: 5px;
+`;
+
+export const UserInfoHoverBoxSteamLevel = styled.div`
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 10px;
+  width: 23px;
+  height: 20px;
+  text-align: center;
+  padding-top: 3px;
+  border: 2px solid;
+  border-color: ${({ steamLevel }) => {
+    if (steamLevel < 10) {
+      return '#999999';
+    } else if (steamLevel < 20 && steamLevel >= 10) {
+      return '#bd2d48';
+    } else if (steamLevel < 30 && steamLevel >= 20) {
+      return '#d25d48';
+    } else if (steamLevel < 40 && steamLevel >= 30) {
+      return '#fad129';
+    } else if (steamLevel < 50 && steamLevel >= 40) {
+      return '#67895c';
+    } else if (steamLevel < 60 && steamLevel >= 50) {
+      return '#548dd9';
+    } else if (steamLevel < 70 && steamLevel >= 60) {
+      return '#7953c4';
+    } else if (steamLevel < 80 && steamLevel >= 70) {
+      return '#bc56c6';
+    } else if (steamLevel < 90 && steamLevel >= 80) {
+      return '#4f2239';
+    } else if (steamLevel < 100 && steamLevel >= 90) {
+      return '#977b53';
+    }
+  }};
+  border-radius: 50%;
+  color: white;
+  font-size: 16px;
+  font-weight: normal;
+`;
+
+export const UserInfoHoverBoxSteamLevelText = styled.div`
+  position: relative;
+  left: 60px;
+  bottom: 22px;
+  color: #b5b5b5;
+  font-size: 16px;
+  font-weight: normal;
+`;
+
+export const MainReviewListReviewInfo = styled.div`
+`;
+
+export const IsRecommendedTopBar = styled.div`
+  display: flex;
+  height: 40px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-bottom: 13px;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin-top: 8px;
+  width: 400px;
+  margin-right: 0;
+  margin-left: 30px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+`;
+
+export const RecommendedImage = styled.img`
+  margin-right: 10px;
+`;
+
+export const RecommendedGeneralInfo = styled.div`
+`;
+
+export const RecommendedTitle = styled.div`
+  font-family: "Motiva Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(214, 215, 216);
+  line-height: 19px;
+  padding-top: 3px;
+  width: 328px;
+`;
+
+export const RecommendedPlayTimeInfo = styled.div`
+  color: rgb(128, 145, 162);
+  font-size: 11px;
+  font-family: "Motiva Sans", sans-serif;
+  opacity: 0.6;
+`;
+
+export const PurchasedOrActivagedImage = styled.img`
+  height: 16px;
+  width: 17px;
+  margin-top: 10px;
+  color: rgb(255, 255, 255);
+  opacity: 0.5;
+`;
+
+export const ReviewDateBar = styled.div`
+  display: flex;
+  margin-left: 30px;
+`;
+
+export const EarlyAccessReviewPill = styled.div`
+  background-color: rgb(77, 108, 139);
+  border: solid 1px rgb(119, 154, 188);
+  color: rgb(154, 199, 243);
+  font-size: 11px;
+  margin-right: 4px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  line-height: 13px;
+  white-space: nowrap;
+  padding-left: 4px;
+  padding-right: 4px;
+  margin-right: 4px;
+  padding-top: 1px;
+`;
+
+export const ReviewPostedDateText = styled.div`
+  color: rgb(128, 145, 162);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-style: normal;
+  margin-bottom: 8px;
+  opacity: 0.6;
+  text-transform: uppercase;
+  padding-top: 2.5px;
+  margin-left: 4px;
+`;
+
+export const ReviewText = styled.div`
+  max-height: 225px;
+  overflow-wrap: break-word;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgb(172, 178, 184);
+  font-family: "Motiva Sans", sans-serif;
+  line-height: 17px;
+  margin-right: 8px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin-left: 30px;
+  padding-bottom: 11px;
+  border-bottom: solid 1px #363f4c;
+`;
+
+export const IsHelpfulVoteContainer = styled.div`
+  margin-left: 30px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+`;
+
+export const IsReviewHelpfulText = styled.div`
+  color: rgb(128, 145, 162);
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0.6;
+`;
+
+export const IsReviewHelpfulVoteButtonsContainer = styled.div`
+  display: flex;
+  padding-bottom: 5px;
+  padding-top: 10px;
+`;
+
+export const YesButtonContainer = styled.div`
+  padding-left: 4px;
+  width: 48.7031px;
+  height: 20px;
+  padding: 1px;
+  margin: 1px;
+  background-color: rgb(33, 44, 61);
+  color: rgb(102, 192, 244);
+  border-radius: 2px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(102, 192, 244);
+    color: white;
+  }
+  &:hover .yes_button_image {
+    opacity: 1;
+  }
+`;
+
+export const YesButtonImage = styled.img`
+  position: relative;
+  top: 3px;
+  opacity: 0.6;
+  margin-left: 4px;
+  margin-bottom: 1px;
+`;
+
+export const YesButtonText = styled.span`
+  position: relative;
+  bottom: 3px;
+  font-size: 12px;
+  margin-left: 4px;
+  margin-bottom: 2px;
+`;
+
+export const NoButtonContainer = styled.div`
+  padding-left: 4px;
+  width: 44.6875px;
+  height: 20px;
+  padding: 1px;
+  margin: 1px;
+  background-color: rgb(33, 44, 61);
+  color: rgb(102, 192, 244);
+  border-radius: 2px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(102, 192, 244);
+    color: white;
+  }
+  &:hover .no_button_image {
+    opacity: 1;
+  }
+`;
+
+export const NoButtonImage = styled.img`
+  position: relative;
+  top: 3px;
+  opacity: 0.6;
+  margin-left: 4px;
+  margin-bottom: 1px;
+`;
+
+export const NoButtonText = styled.span`
+  position: relative;
+  bottom: 3px;
+  font-size: 12px;
+  margin-left: 4px;
+`;
+
+export const FunnyButtonContainer = styled.div`
+  padding-left: 4px;
+  width: 62.6875px;
+  height: 20px;
+  padding: 1px;
+  margin: 1px;
+  background-color: rgb(33, 44, 61);
+  color: rgb(102, 192, 244);
+  border-radius: 2px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(102, 192, 244);
+    color: white;
+  }
+  &:hover .funny_button_image {
+    opacity: 1;
+  }
+`;
+
+export const FunnyButtonImage = styled.img`
+  position: relative;
+  top: 3px;
+  opacity: 0.6;
+  margin-left: 4px;
+  margin-bottom: 1px;
+`;
+
+export const FunnyButtonText = styled.span`
+  position: relative;
+  left: 2px;
+  font-size: 12px;
+  margin-left: 4x;
+`;
+
+export const AwardButtonContainer = styled.div`
+  padding-left: 4px;
+  width: 56.3594px;
+  height: 20px;
+  padding: 1px;
+  margin: 1px;
+  background-color: rgb(33, 44, 61);
+  color: rgb(102, 192, 244);
+  border-radius: 2px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(102, 192, 244);
+    color: white;
+  }
+  &:hover .award_button_image {
+    opacity: 1;
+  }
+`;
+
+export const AwardButtonImage = styled.img`
+  position: relative;
+  top: 3px;
+  opacity: 0.6;
+  height: 16px;
+  margin-left: 4px;
+  margin-bottom: 1px;
+`;
+
+export const AwardButtonText = styled.span`
+  position: relative;
+  bottom: 3px;
+  font-size: 12px;
+  margin-left: 4px;
+`;
+
+export const IsHelpfulCountContainer = styled.div`
+  margin-left: 30px;
+  margin-bottom: 10px;
+`;
+
+export const IsHelpfulStatMessagesContainer = styled.div`
+  display: flex;
+  margin-bottom: 5px;
+`;
+
+export const StatMessagesContainer = styled.div`
+`;
+
+export const HelpfulMessageStat = styled.div`
+  color: rgb(100, 117, 128);
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+`;
+
+export const FunnyMessageStat = styled.div`
+  color: rgb(100, 117, 128);
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+`;
+
+export const CommentCount = styled.div`
+  position: relative;
+  left: 185px;
+  cursor: pointer;
+  color: rgb(102, 192, 244);
+  &:hover {
+    color: white;
+  }
+`;
+
+export const CommentCountNumber = styled.span`
+  position: relative;
+  font-size: 12px;
+  margin-right: 4px;
+  bottom: 6px;
+`;
+
+export const CommentCountImage = styled.img`
+`;
+
+export const AwardStats = styled.div`
+  display: inline;
+  overflow: hidden;
+`;
+
+export const AwardStatButton = styled.div`
+  display: inline-block;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 20px;
+  color: rgb(102, 192, 244);
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  &:hover .award_stat_info_hover_box {
+    display: initial;
+  }
+`;
+
+export const AwardStatInfoHoverBox = styled.span`
+  display: none;
+  position: relative;
+  bottom: 100px;
+  z-index: 1;
+  background-color: white;
+`;
+
+export const AwardImage = styled.img`
+  height: 20px;
+`;
+
+export const AwardCount = styled.span`
+  position: relative;
+  bottom: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 5px;
+`;
+
 //----------------------------------------
 // RecentReviewList styled
 //----------------------------------------
 
 export const RecentReviewListContainer = styled.div`
   width: 308px;
+  margin-left: 14px;
+`;
+
+export const RecentReviewsSectionTitle = styled.div`
+  font-family: "Motiva Sans", Sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: white;
+  letter-spacing: 2px;
+  font-weight: 400;
+  padding-bottom: 5px;
+  height: 20px;
+`;
+
+export const RecentReviewListBoxContainer = styled.div`
+  background-image: linear-gradient(to right, rgb(34, 50, 70) -1%, rgb(34, 50, 70) 0%, rgba(34, 50, 70, 0) 92%, rgba(34, 50, 70, 0) 100%);
+  margin-bottom: 26px;
+  opacity: 0.9;
+  color: rgb(198, 212, 223);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+`;
+
+export const RecentReviewsTopBar = styled.div`
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(129, 157, 184);
+  cursor: pointer;
+  height: 24px;
+  line-height: 15px;
+  margin-bottom: 6px;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgb(102, 192, 244);
+  }
+`;
+
+export const RecentReviewsTopBarUserName = styled.div`
+  margin-top: 5px;
+  width: 120px;
+`;
+
+export const RecentReviewsTopBarTotalPlaytime = styled.div`
+  margin-top: 5px;
+  opacity: 0.5;
+  width: 133px;
+`;
+
+export const RecentReviewsPurchasedOrActivagedImage = styled.img`
+  height: 16px;
+  width: 17px;
+  color: rgb(255, 255, 255);
+  opacity: 0.5;
+  margin-top: 4px;
+`;
+
+export const RecentReviewReviewDateBar = styled.div`
+  display: flex;
+  margin-right: 4px;
+  margin-left: 4px;
+  padding-left: 4px;
+  margin-top: 1px;
+`;
+
+export const RecentReviewsReviewPostedDateText = styled.div`
+  color: #8091a2;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  padding-top: 2.5px;
+  margin-left: 4px;
+  font-style: normal;
+  opacity: 0.5;
+`;
+
+export const RecentReviewsReviewText = styled.div`
+  margin-left: 4px;
+  padding-left: 4px;
+  overflow-wrap: break-word;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: "Motiva Sans", sans-serif;
+  color: rgb(159, 180, 201);
+  line-height: 17px;
+  margin-right: 8px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+`;
+
+export const RecentReviewsBottomFiller = styled.div`
+  height: 11px;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.5);
+  margin-left: 8px;
+`;
+
+export const RecentReviewsIsReviewHelpfulText = styled.div`
+  color: rgb(128, 145, 162);
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0.6;
+  margin-top: 8px;
+  margin-left: 4px;
+  padding-left: 4px;
+`;
+
+export const RecentReviewsIsReviewHelpfulVoteButtonsContainer = styled.div`
+  display: flex;
+  padding-bottom: 5px;
+  padding-top: 10px;
+  margin-left: 4px;
+  padding-left: 4px;
+`;
+
+export const RecentReviewsStatMessagesContainer = styled.div`
+  padding-bottom: 8px;
+  margin-left: 4px;
+  padding-left: 4px;
 `;
