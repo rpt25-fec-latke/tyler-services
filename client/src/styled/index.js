@@ -580,6 +580,7 @@ export const FlyoutMenuText = styled.span`
   line-height: 20px;
   color: #596b76;
   text-transform: none;
+  margin-left: 3px;
 `;
 
 export const FlyoutMenuStat = styled.span`

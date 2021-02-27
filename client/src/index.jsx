@@ -93,29 +93,33 @@ class CustomerReviews extends React.Component {
     const fullUrl = window.location.href;
     const id = fullUrl.indexOf('?id=') !== -1 ? fullUrl.slice(fullUrl.indexOf('?id=') + 4) : 1;
 
-    $.ajax({
-      method: 'GET',
-      url: `/reviews?id=${id}`,
-      success: (data) => {
-        console.log(data);
-        const { reviewFilters, displayAs } = this.state;
-        const { allReviewsOrderedHelpful, allReviewsRecentLastThirty } = data;
+    if (id < 1 || id > 100) {
+      window.alert('Invalid game ID, please enter another ID');
+    } else {
+      $.ajax({
+        method: 'GET',
+        url: `/reviews?id=${id}`,
+        success: (data) => {
+          console.log(data);
+          const { reviewFilters, displayAs } = this.state;
+          const { allReviewsOrderedHelpful, allReviewsRecentLastThirty } = data;
 
-        const starterMainReviewsList = this.filterReviews(reviewFilters, displayAs, allReviewsOrderedHelpful);
-        const starterRecentReviewList = this.filterReviews(reviewFilters, 'recentLastThirty', allReviewsRecentLastThirty);
-        const filteredReviewStats = this.getFilteredReviewStats(starterMainReviewsList);
+          const starterMainReviewsList = this.filterReviews(reviewFilters, displayAs, allReviewsOrderedHelpful);
+          const starterRecentReviewList = this.filterReviews(reviewFilters, 'recentLastThirty', allReviewsRecentLastThirty);
+          const filteredReviewStats = this.getFilteredReviewStats(starterMainReviewsList);
 
-        this.setState({
-          reviews: data,
-          mainReviewsList: starterMainReviewsList,
-          recentReviewsList: starterRecentReviewList,
-          filteredReviewStats: filteredReviewStats,
-        });
-      },
-      error: (err) => {
-        window.alert('Invalid game ID, please enter another ID');
-      },
-    });
+          this.setState({
+            reviews: data,
+            mainReviewsList: starterMainReviewsList,
+            recentReviewsList: starterRecentReviewList,
+            filteredReviewStats: filteredReviewStats,
+          });
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 
   getRatingGroup(percentPositive) {
