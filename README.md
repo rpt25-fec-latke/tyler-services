@@ -1,6 +1,6 @@
-# Project Name
+# Steam Game Page - Reviews Microservice
 
-> Customer Reviews Service
+> An application which allows users to find, purchase, and review games
 
 ## Related Projects
 
@@ -19,7 +19,7 @@
 > 1) A file titled "database.config.js" - in this file add your MySQL credentials in this format -
 >   const token = {
 >     user: 'username_here',
->     password: 'password_here',
+>     password: 'password_here'
 >   };
 >
 >   module.exports = token;
@@ -48,6 +48,8 @@
   ```
 ## Requirements
 
+An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
+
 - Node 6.13.0
 - MySQL 2.18.1
 
@@ -58,6 +60,7 @@
 From within the root directory:
 
 ```sh
-npm install
+npm install -g webpack
 npm install -g nodemon
+npm install
 ```
