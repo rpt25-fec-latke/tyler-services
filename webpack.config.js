@@ -26,7 +26,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, '/client/dist'),
     port: 3001,
   },
-  mode: 'production',
+  mode: 'development',
   plugins: [
     new S3Plugin({
       s3Options: {

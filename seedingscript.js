@@ -94,7 +94,6 @@ const seedReviews = (numGames, numUsers) => {
 
   deleteAllFromTable('reviews');
 
-  // have to generate release dates since don't have access to that data yet. When assemble to proxy, can query for it so that review dates don't precede release date of game
   const releaseDates = generateReleaseDates(numGames);
   const otherLanguages = ["'ZH'", "'ES'", "'AR'", "'HI'", "'BN'", "'PT'", "'RU'", "'JA'"];
   let startingGameId = 1;
@@ -111,7 +110,6 @@ const seedReviews = (numGames, numUsers) => {
       const userId = arrayOfUserIds[Math.floor(Math.random() * arrayOfUserIds.length)];
       arrayOfUserIds.splice(userId - 1, 1);
 
-      // added to generate more recent reviews since lack of is making one of my sections boring
       const reviewType = Math.ceil(Math.random() * 10) > 4 ? 'recent' : 'normal';
       let startDate;
       if (reviewType === 'recent' && timestampTwoMonthsAgo < releaseDates[startingGameId]) {
